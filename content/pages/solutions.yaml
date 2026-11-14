@@ -1,0 +1,105 @@
+# ════════════════════════════════════════════════════════════════
+#  SOLUTIONS — the business areas. Used on the Solutions page and the Home page.
+#  • show: false  hides an area everywhere.
+#  • icon: name from https://lucide.dev/icons (e.g. layers, sparkles, network, globe)
+#  • Order on the page = order in this list.
+#  Keep the same list order in en: and ar:.
+# ════════════════════════════════════════════════════════════════
+
+areas:
+  - id: digital-solutions
+    icon: layers
+    show: true
+  - id: technology-innovation
+    icon: sparkles
+    show: true
+  - id: business-connectivity
+    icon: network
+    show: true
+  # Trade areas are switched off: AXYRA is presenting itself as a technology solutions company.
+  - id: international-trade
+    icon: globe
+    show: false
+  - id: global-trading
+    icon: arrow-left-right
+    show: false
+
+en:
+  seo:
+    title: "Solutions"
+    description: "Digital solutions, technology and innovation, and business connectivity from AXYRA."
+  hero:
+    eyebrow: "Solutions"
+    title: "Technology, made practical."
+    lead: "We design, build and run digital products that solve real problems — clearly, reliably, in Arabic and English."
+  areas:
+    - title: "Digital Solutions"
+      summary: "Apps and digital products designed around real workflows, and built to be reliable from day one."
+      details: "We take an idea or a daily pain point and turn it into a product people actually use: web apps, mobile apps and desktop tools that share one clear design and one source of truth."
+      points:
+        - "Web, mobile and desktop apps"
+        - "Clear, bilingual interfaces (Arabic and English)"
+        - "Ongoing support and improvement after launch"
+    - title: "Technology & Innovation"
+      summary: "Applying modern technology — including AI where it genuinely helps — to make everyday work simpler, faster and more accurate."
+      details: "Innovation is only useful when it removes effort. We use AI and modern tools where they save time or reduce errors — and keep the experience simple for the people using them."
+      points:
+        - "Smart automation inside real products"
+        - "Less manual work, fewer errors"
+        - "Cloud-based, always-available systems"
+    - title: "Business Connectivity"
+      summary: "Connecting businesses, partners and customers through secure digital channels."
+      details: "Value grows when the right people are connected. We build the links between them — from verified digital records that partners can trust, to instant messages that reach customers where they already are."
+      points:
+        - "Verified digital documents (for example, QR verification)"
+        - "Messaging and reminders that reach people instantly"
+        - "Shared, secure access for teams and partners"
+    - title: "International Trade"
+      summary: "[[EDIT: One sentence about international trade — only if this becomes an active service.]]"
+      details: "[[EDIT: Short paragraph.]]"
+      points: []
+    - title: "Global Trading Solutions"
+      summary: "[[EDIT: One sentence about global trading solutions — only if this becomes an active service.]]"
+      details: "[[EDIT: Short paragraph.]]"
+      points: []
+  cta:
+    title: "Have a challenge in mind?"
+    lead: "Tell us what slows you down. We'll tell you honestly whether technology can help."
+    button: "Talk to us"
+
+ar:
+  seo:
+    title: "حلولنا"
+    description: "حلول رقمية، وتقنية وابتكار، وربط الأعمال من AXYRA."
+  hero:
+    eyebrow: "حلولنا"
+    title: "تقنية عملية، بكل بساطة."
+    lead: "نصمّم ونبني ونشغّل منتجات رقمية تحل مشكلات حقيقية — بوضوح وموثوقية، وبالعربية والإنجليزية."
+  areas:
+    - title: "الحلول الرقمية"
+      summary: "تطبيقات ومنتجات رقمية مصمّمة حول سير العمل الحقيقي، ومبنية لتكون موثوقة من اليوم الأول."
+      details: "نحوّل الفكرة أو المشكلة اليومية إلى منتج يستخدمه الناس فعلًا: تطبيقات ويب وجوال وسطح مكتب بتصميم واضح ومصدر بيانات واحد."
+      points:
+        - "تطبيقات ويب وجوال وسطح مكتب"
+        - "واجهات واضحة ثنائية اللغة (العربية والإنجليزية)"
+        - "دعم وتطوير مستمر بعد الإطلاق"
+    - title: "التقنية والابتكار"
+      summary: "نوظّف التقنيات الحديثة — ومنها الذكاء الاصطناعي حيث يفيد فعلًا — لجعل العمل اليومي أبسط وأسرع وأدق."
+      details: "الابتكار مفيد فقط عندما يوفّر الجهد. نستخدم الذكاء الاصطناعي والأدوات الحديثة حيث توفّر الوقت أو تقلّل الأخطاء، مع الحفاظ على تجربة بسيطة لمستخدميها."
+      points:
+        - "أتمتة ذكية داخل منتجات حقيقية"
+        - "عمل يدوي أقل وأخطاء أقل"
+        - "أنظمة سحابية متاحة دائمًا"
+    - title: "ربط الأعمال"
+      summary: "نربط الشركات بشركائها وعملائها عبر قنوات رقمية آمنة."
+      details: "تنمو القيمة عندما يتواصل الأشخاص المناسبون. نبني الروابط بينهم — من السجلات الرقمية الموثّقة التي يثق بها الشركاء، إلى الرسائل الفورية التي تصل إلى العملاء حيث هم."
+      points:
+        - "مستندات رقمية موثّقة (مثل التحقق برمز QR)"
+        - "رسائل وتذكيرات تصل فورًا"
+        - "وصول مشترك وآمن للفرق والشركاء"
+    - title: "التجارة الدولية"
+    - title: "حلول التجارة العالمية"
+  cta:
+    title: "لديك تحدٍّ في ذهنك؟"
+    lead: "أخبرنا بما يبطئ عملك، وسنخبرك بصدق إن كانت التقنية قادرة على المساعدة."
+    button: "تحدّث معنا"

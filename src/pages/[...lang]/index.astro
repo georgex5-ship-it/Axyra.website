@@ -1,0 +1,234 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import AnimatedLogo from '../../components/AnimatedLogo.astro';
+import DrAssistantLogo from '../../components/DrAssistantLogo.astro';
+import PhoneFrame from '../../components/PhoneFrame.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import {
+  readYaml, loadLocalized, loadProducts, langPaths, localePath, settings, pageEnabled,
+  productExternalUrl, isFilled, type Lang,
+} from '../../lib/content';
+import { productImage } from '../../lib/images';
+
+export function getStaticPaths() { return langPaths('home'); }
+const { lang } = Astro.props as { lang: Lang };
+
+const raw = readYaml('pages/home.yaml');
+const show = raw.sections ?? {};
+const t = loadLocalized('pages/home.yaml', lang);
+const about = loadLocalized('pages/about.yaml', lang);
+const solRaw = readYaml('pages/solutions.yaml');
+const sol = loadLocalized('pages/solutions.yaml', lang);
+const areas = (solRaw.areas ?? [])
+  .map((a: any, i: number) => ({ ...a, ...(sol.areas?.[i] ?? {}) }))
+  .filter((a: any) => a.show !== false && isFilled(a.title) && isFilled(a.summary));
+const product = loadProducts(lang).find((p) => p.slug === raw.spotlightProduct);
+const p = product?.text;
+const visitUrl = product ? productExternalUrl(product) : undefined;
+const phone = productImage(product?.images?.phone);
+const desktop = productImage(product?.images?.desktop);
+const productHref = product?.hasPage !== false && pageEnabled('products') ? localePath(lang, `/products/${product?.slug}/`) : undefined;
+const whyIcons = (readYaml('pages/home.yaml').en?.whyAxyra?.points ?? []).map((x: any) => x.icon);
+---
+<Base lang={lang} path="/" title={t.seo?.title || undefined} description={t.seo?.description}>
+
+  {show.hero !== false && (
+    <section class="hero theme-dark">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container center hero-inner">
+        <div class="hero-logo"><AnimatedLogo label={settings.company.name} /></div>
+        <h1 class="hero-slogan" lang="en">{settings.company.slogan}</h1>
+        <p class="lead hero-lead measure-wide">{t.hero.lead}</p>
+        <div class="actions">
+          {pageEnabled('solutions') && <a class="btn" href={localePath(lang, '/solutions/')}>{t.hero.primaryButton}</a>}
+          {productHref && <a class="link-arrow" href={productHref}>{t.hero.secondaryLink} <Icon name="arrow-right" /></a>}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {show.whatWeDo !== false && areas.length > 0 && (
+    <section class="section" id="what-we-do">
+      <div class="container">
+        <header class="section-head center reveal">
+          <span class="eyebrow">{t.whatWeDo.eyebrow}</span>
+          <h2 class="title">{t.whatWeDo.title}</h2>
+          <p class="lead measure-wide">{t.whatWeDo.lead}</p>
+        </header>
+        <div class="grid grid-3">
+          {areas.map((a: any, i: number) => (
+            <a class="tile tile--link reveal" style={`--delay:${i * 0.08}s`}
+              href={pageEnabled('solutions') ? localePath(lang, `/solutions/#${a.id}`) : undefined}>
+              <div class="tile-icon"><Icon name={a.icon} /></div>
+              <h3>{a.title}</h3>
+              <p>{a.summary}</p>
+            </a>
+          ))}
+        </div>
+        {pageEnabled('solutions') && (
+          <p class="center reveal" style="margin-top:48px">
+            <a class="link-arrow" href={localePath(lang, '/solutions/')}>{t.whatWeDo.link} <Icon name="arrow-right" /></a>
+          </p>
+        )}
+      </div>
+    </section>
+  )}
+
+  {show.productSpotlight !== false && product && (
+    <section class="section spotlight theme-dark" aria-labelledby="spotlight-title">
+      <div class="spot-glow" aria-hidden="true"></div>
+      <div class="container center">
+        <div class="reveal">
+          <span class="eyebrow dra-eyebrow">{t.spotlight.eyebrow}</span>
+          <h2 id="spotlight-title" class="spot-logo"><DrAssistantLogo size="clamp(44px, 9vw, 92px)" /></h2>
+          <p class="lead measure-wide spot-lead">{p.summary}</p>
+          <div class="actions">
+            {productHref && <a class="btn btn--dra" href={productHref}>{t.spotlight.primaryButton}</a>}
+            {visitUrl && (
+              <a class="link-arrow dra-link" href={visitUrl} target="_blank" rel="noopener">
+                {t.spotlight.secondaryButton} <Icon name="arrow-up-right" />
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div class="devices reveal">
+          {desktop && (
+            <div class="laptop">
+              <Picture src={desktop} alt={`${p.name} — sign-in screen on desktop`} formats={['avif', 'webp']}
+                widths={[640, 960, 1440, 1920]} sizes="(max-width: 1100px) 92vw, 1000px" loading="lazy" decoding="async" />
+            </div>
+          )}
+          {phone && <PhoneFrame src={phone} alt={`${p.name} — sign-in screen on a phone`} class="phone-over" />}
+        </div>
+
+        <ul class="highlights" role="list">
+          {(p.highlights ?? []).map((h: any, i: number) => (
+            <li class="reveal" style={`--delay:${i * 0.06}s`}>
+              <Icon name={(product.en?.highlights?.[i]?.icon) || 'check'} />
+              <strong>{h.title}</strong>
+              <span>{h.text}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {show.missionVision !== false && (
+    <section class="section section--alt mv">
+      <div class="container">
+        <div class="grid grid-2">
+          <div class="reveal">
+            <span class="eyebrow">{about.mission.label}</span>
+            <p class="subtitle mv-text">{about.mission.text}</p>
+          </div>
+          <div class="reveal" style="--delay:.1s">
+            <span class="eyebrow">{about.vision.label}</span>
+            <p class="subtitle mv-text">{about.vision.text}</p>
+          </div>
+        </div>
+        {pageEnabled('about') && (
+          <p class="reveal" style="margin-top:56px">
+            <a class="link-arrow" href={localePath(lang, '/about/')}>{t.missionVision.link} <Icon name="arrow-right" /></a>
+          </p>
+        )}
+      </div>
+    </section>
+  )}
+
+  {show.whyAxyra !== false && (
+    <section class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">{t.whyAxyra.eyebrow}</span>
+          <h2 class="title measure">{t.whyAxyra.title}</h2>
+        </header>
+        <div class="why">
+          {(t.whyAxyra.points ?? []).map((pt: any, i: number) => (
+            <div class="why-item reveal" style={`--delay:${(i % 2) * 0.08}s`}>
+              <div class="tile-icon"><Icon name={pt.icon || whyIcons[i] || 'check'} /></div>
+              <h3>{pt.title}</h3>
+              <p class="muted">{pt.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {show.contactCta !== false && pageEnabled('contact') && (
+    <CtaBand title={t.contactCta.title} lead={t.contactCta.lead} button={t.contactCta.button} href={localePath(lang, '/contact/')} />
+  )}
+</Base>
+
+<style>
+  /* ── Hero ── */
+  .hero { position: relative; overflow: hidden; min-height: min(calc(100svh - var(--header-h)), 920px, 160vw); display: grid; align-items: center; padding-block: clamp(72px, 10vw, 120px); }
+  .hero-inner { position: relative; }
+  .hero-logo { width: min(860px, 100%); margin-inline: auto; }
+  .hero-slogan {
+    margin-top: clamp(20px, 3vw, 36px); font-size: clamp(.95rem, 2.3vw, 1.6rem); font-weight: 300;
+    letter-spacing: .32em; line-height: 1.5; color: #C7CDE6; text-transform: uppercase; font-family: var(--font-latin);
+    margin-inline-end: -.32em; /* optical centring of tracked caps */
+  }
+  .hero-lead { margin-top: clamp(28px, 4vw, 44px); color: var(--text-muted); }
+  .hero-glow {
+    position: absolute; inset: -20% -10% auto; height: 120%; pointer-events: none;
+    background:
+      radial-gradient(40% 45% at 38% 42%, rgba(139, 77, 242, .28), transparent 70%),
+      radial-gradient(38% 40% at 62% 40%, rgba(34, 208, 245, .20), transparent 70%);
+    filter: blur(10px);
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-glow { animation: glowDrift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+      .hero-inner { animation: heroOut linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    }
+  }
+  @keyframes glowDrift { to { transform: translateY(18%) scale(1.08); opacity: .4; } }
+  @keyframes heroOut { to { transform: translateY(60px); opacity: .25; } }
+  [dir='rtl'] .hero-slogan { margin-inline-end: 0; margin-inline-start: -.32em; }
+
+  /* ── Product spotlight ── */
+  .spotlight { overflow: hidden; }
+  .spot-glow {
+    position: absolute; inset: auto -10% -10%; height: 70%; pointer-events: none;
+    background: radial-gradient(50% 55% at 50% 60%, rgba(56, 189, 248, .16), transparent 70%),
+                radial-gradient(35% 40% at 70% 70%, rgba(52, 211, 153, .12), transparent 70%);
+  }
+  .dra-eyebrow { color: #5FD4A8; }
+  .spot-logo { display: flex; justify-content: center; margin: 8px 0 28px; font-weight: inherit; }
+  .spot-lead { color: #CBD5E1; }
+  .btn--dra { background: linear-gradient(90deg, #38BDF8, #34D399); color: #062018; }
+  .dra-link { color: #7DD3FC; }
+  .devices { position: relative; margin: clamp(56px, 8vw, 96px) auto 0; max-width: 1000px; padding-inline-end: clamp(0px, 6vw, 80px); }
+  .laptop {
+    border-radius: clamp(14px, 2vw, 24px); overflow: hidden; border: 1px solid rgba(255,255,255,.1);
+    box-shadow: 0 50px 100px -30px rgba(0,0,0,.7), 0 0 80px -20px rgba(56,189,248,.25);
+  }
+  .laptop :global(img) { width: 100%; height: auto; }
+  .devices :global(.phone-over) { position: absolute; inset-inline-end: 0; bottom: -40px; width: clamp(120px, 22vw, 240px); }
+  @media (max-width: 640px) {
+    .laptop { display: none; }
+    .devices { padding-inline-end: 0; }
+    .devices :global(.phone-over) { position: static; margin-inline: auto; width: min(72vw, 290px); }
+  }
+  .highlights { list-style: none; padding: 0; margin: clamp(80px, 10vw, 120px) 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 32px 24px; text-align: start; }
+  .highlights li { display: grid; gap: 6px; align-content: start; }
+  .highlights :global(.icon) { width: 26px; height: 26px; color: #5FD4A8; margin-bottom: 8px; }
+  .highlights strong { font-size: 1.0625rem; }
+  .highlights span { color: var(--text-muted); font-size: .9375rem; line-height: 1.55; }
+
+  /* ── Mission & vision ── */
+  .mv .grid { gap: clamp(40px, 6vw, 96px); }
+  .mv-text { font-size: clamp(1.5rem, 2.8vw, 2.25rem); line-height: 1.3; font-weight: 600; }
+  [dir='rtl'] .mv-text { line-height: 1.6; }
+
+  /* ── Why AXYRA ── */
+  .why { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: clamp(40px, 5vw, 64px) clamp(32px, 6vw, 96px); }
+  .why-item h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); letter-spacing: -.02em; margin-bottom: 10px; }
+  .why-item .tile-icon { margin-bottom: 20px; }
+</style>

@@ -1,0 +1,92 @@
+# ════════════════════════════════════════════════════════════════
+#  HOME PAGE
+#  Each section has   show: true / false   to turn it on or off.
+#  The business areas come from solutions.yaml, Mission & Vision
+#  from about.yaml, and the featured product from content/products/.
+# ════════════════════════════════════════════════════════════════
+
+sections:
+  hero: true
+  whatWeDo: true
+  productSpotlight: true
+  missionVision: true
+  whyAxyra: true
+  contactCta: true
+
+# Which product to feature (file name in content/products/ without .yaml)
+spotlightProduct: "dr-assistant"
+
+en:
+  seo:
+    title: ""   # empty = "AXYRA — INNOVATING A BRIGHTER TOMORROW"
+    description: "AXYRA is a technology solutions company building apps and digital products — including Dr. Assistant, a smart prescription platform for clinics."
+  hero:
+    lead: "A technology solutions company. We build apps and digital products that make work simpler and smarter."
+    primaryButton: "Explore our solutions"
+    secondaryLink: "Meet Dr. Assistant"
+  whatWeDo:
+    eyebrow: "What we do"
+    title: "Technology, made practical."
+    lead: "We design, build and run digital products that solve real problems — clearly, reliably, in Arabic and English."
+    link: "Explore all solutions"
+  spotlight:
+    eyebrow: "Featured product"
+    primaryButton: "Discover Dr. Assistant"
+    secondaryButton: "Visit Dr. Assistant"
+  missionVision:
+    link: "More about AXYRA"
+  whyAxyra:
+    eyebrow: "Why AXYRA"
+    title: "Built with care. Built to last."
+    points:
+      - icon: users
+        title: "Built around real work"
+        text: "We start from how people actually work, then shape the technology to fit — not the other way round."
+      - icon: languages
+        title: "Arabic and English, by design"
+        text: "Right-to-left and left-to-right are treated as equals from the very first sketch."
+      - icon: sparkles
+        title: "Practical innovation"
+        text: "We use AI and modern tools where they save time or reduce errors — never just for show."
+      - icon: shield-check
+        title: "Local roots, global standards"
+        text: "Based in Palestine, building with the care, security and quality the world expects."
+  contactCta:
+    title: "Let's build what's next."
+    lead: "Tell us about your idea or your challenge. We'll get back to you."
+    button: "Get in touch"
+
+ar:
+  seo:
+    description: "AXYRA شركة حلول تقنية تبني التطبيقات والمنتجات الرقمية — ومنها Dr. Assistant، منصة ذكية للوصفات الطبية للعيادات."
+  hero:
+    lead: "شركة حلول تقنية. نبني تطبيقات ومنتجات رقمية تجعل العمل أبسط وأذكى."
+    primaryButton: "استكشف حلولنا"
+    secondaryLink: "تعرّف على Dr. Assistant"
+  whatWeDo:
+    eyebrow: "ما نقوم به"
+    title: "تقنية عملية، بكل بساطة."
+    lead: "نصمّم ونبني ونشغّل منتجات رقمية تحل مشكلات حقيقية — بوضوح وموثوقية، وبالعربية والإنجليزية."
+    link: "استكشف جميع الحلول"
+  spotlight:
+    eyebrow: "منتج مميز"
+    primaryButton: "اكتشف Dr. Assistant"
+    secondaryButton: "زيارة Dr. Assistant"
+  missionVision:
+    link: "المزيد عن AXYRA"
+  whyAxyra:
+    eyebrow: "لماذا AXYRA"
+    title: "نبني بعناية. ونبني ليدوم."
+    points:
+      - title: "مبني حول العمل الحقيقي"
+        text: "نبدأ من الطريقة التي يعمل بها الناس فعلًا، ثم نصمّم التقنية لتناسبها — لا العكس."
+      - title: "العربية والإنجليزية في صميم التصميم"
+        text: "الكتابة من اليمين إلى اليسار ومن اليسار إلى اليمين متساويتان منذ الرسمة الأولى."
+      - title: "ابتكار عملي"
+        text: "نستخدم الذكاء الاصطناعي والأدوات الحديثة حيث توفّر الوقت أو تقلّل الأخطاء — لا للاستعراض."
+      - title: "جذور محلية، ومعايير عالمية"
+        text: "من فلسطين، نبني بالعناية والأمان والجودة التي يتوقعها العالم."
+  contactCta:
+    title: "لنبنِ ما هو قادم."
+    lead: "أخبرنا عن فكرتك أو التحدي الذي تواجهه، وسنعود إليك."
+    button: "تواصل معنا"

@@ -1,0 +1,76 @@
+# ════════════════════════════════════════════════════════════════
+#  TERMS OF USE — DRAFT TEMPLATE.
+#  ⚠ Must be reviewed by a qualified lawyer before you rely on it,
+#    in particular the "Governing law" section.
+#  {company} = company name   {contact} = your email (or the contact page)
+#  {country} = country from settings.yaml
+# ════════════════════════════════════════════════════════════════
+
+lastUpdated: "2026-11-14"
+showDraftNotice: true
+
+en:
+  seo:
+    title: "Terms of Use"
+    description: "The terms that apply when you use the AXYRA website."
+  title: "Terms of Use"
+  updatedLabel: "Last updated"
+  intro: "These terms apply to your use of this website, operated by {company}. By using the website you agree to them. Our products, such as Dr. Assistant, have their own terms."
+  sections:
+    - heading: "Use of the website"
+      paragraphs:
+        - "You may browse and use this website for lawful purposes. You must not misuse it — for example, by trying to break its security, overload it, or send spam through the contact form."
+    - heading: "Information on this website"
+      paragraphs:
+        - "We work to keep the information on this website accurate and up to date, but it is provided for general information only and may change without notice. It is not professional, medical or legal advice."
+    - heading: "Intellectual property"
+      paragraphs:
+        - "The AXYRA name, logo, Dr. Assistant name and logo, and the content and design of this website belong to {company} unless stated otherwise. You may not copy or reuse them without our written permission."
+    - heading: "Links to other websites"
+      paragraphs:
+        - "This website links to other websites, including our product websites. We are not responsible for the content or practices of websites we do not control."
+    - heading: "Limitation of liability"
+      paragraphs:
+        - "To the extent permitted by law, {company} is not liable for any loss arising from your use of this website or reliance on its content."
+    - heading: "Governing law"
+      paragraphs:
+        - "These terms are governed by the laws applicable in {country}. Your lawyer should confirm the exact wording for your company's registration."
+    - heading: "Changes"
+      paragraphs:
+        - "We may update these terms. The date at the top shows when they were last changed."
+    - heading: "Contact"
+      paragraphs:
+        - "Questions about these terms? Contact {company} at {contact}."
+
+ar:
+  seo:
+    title: "شروط الاستخدام"
+    description: "الشروط التي تنطبق عند استخدامك لموقع AXYRA."
+  title: "شروط الاستخدام"
+  updatedLabel: "آخر تحديث"
+  intro: "تنطبق هذه الشروط على استخدامك لهذا الموقع الذي تديره {company}. باستخدامك للموقع فإنك توافق عليها. لمنتجاتنا، مثل Dr. Assistant، شروطها الخاصة."
+  sections:
+    - heading: "استخدام الموقع"
+      paragraphs:
+        - "يمكنك تصفّح هذا الموقع واستخدامه لأغراض مشروعة. لا يجوز إساءة استخدامه — مثل محاولة اختراق أمانه أو إثقاله أو إرسال رسائل مزعجة عبر نموذج التواصل."
+    - heading: "المعلومات على هذا الموقع"
+      paragraphs:
+        - "نحرص على أن تكون المعلومات على هذا الموقع دقيقة ومحدّثة، لكنها مقدّمة لأغراض المعلومات العامة فقط وقد تتغير دون إشعار. وهي ليست استشارة مهنية أو طبية أو قانونية."
+    - heading: "الملكية الفكرية"
+      paragraphs:
+        - "اسم AXYRA وشعارها، واسم Dr. Assistant وشعاره، ومحتوى هذا الموقع وتصميمه مملوكة لـ {company} ما لم يُذكر خلاف ذلك. لا يجوز نسخها أو إعادة استخدامها دون إذن كتابي منا."
+    - heading: "روابط لمواقع أخرى"
+      paragraphs:
+        - "يحتوي هذا الموقع على روابط لمواقع أخرى، منها مواقع منتجاتنا. لسنا مسؤولين عن محتوى أو ممارسات المواقع التي لا نتحكم بها."
+    - heading: "حدود المسؤولية"
+      paragraphs:
+        - "إلى الحد الذي يسمح به القانون، لا تتحمل {company} المسؤولية عن أي خسارة تنشأ عن استخدامك لهذا الموقع أو اعتمادك على محتواه."
+    - heading: "القانون الحاكم"
+      paragraphs:
+        - "تخضع هذه الشروط للقوانين المعمول بها في {country}. يجب أن يؤكد محاميك الصياغة الدقيقة بما يتوافق مع تسجيل شركتك."
+    - heading: "التغييرات"
+      paragraphs:
+        - "قد نحدّث هذه الشروط، ويوضّح التاريخ في أعلى الصفحة آخر تعديل."
+    - heading: "التواصل"
+      paragraphs:
+        - "لديك أسئلة حول هذه الشروط؟ تواصل مع {company} عبر {contact}."

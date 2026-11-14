@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="78 370 868 290"><defs>
+<linearGradient id="gA" gradientUnits="userSpaceOnUse" x1="190" y1="632" x2="527" y2="392"><stop offset="0" stop-color="#8B4DF2"/><stop offset=".45" stop-color="#2F7BFF"/><stop offset="1" stop-color="#22D0F5"/></linearGradient>
+<linearGradient id="gB" gradientUnits="userSpaceOnUse" x1="218" y1="430" x2="522" y2="632"><stop offset="0" stop-color="#8B4DF2"/><stop offset=".5" stop-color="#3A5BF0"/><stop offset="1" stop-color="#1FC3F2"/></linearGradient>
+<linearGradient id="gs" gradientUnits="userSpaceOnUse" x1="97" y1="0" x2="927" y2="0"><stop offset="0" stop-color="#8493D6"/><stop offset="1" stop-color="#9C90D8"/></linearGradient>
+<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<g id="lt"><path d="M97 570 L151 468 Q172 448 193 468 L247 570 H216 L172 490 L128 570 Z"/><path d="M507 460 H541 L574 508 L607 460 H640 L588 540 V570 H560 V540 Z"/><path fill-rule="evenodd" d="M652 460 H730 Q764 460 764 493 Q764 523 738 530 L772 570 H736 L704 532 H680 V570 H652 Z M680 486 V506 H724 Q736 506 736 496 Q736 486 724 486 Z"/><path d="M777 570 L831 468 Q852 448 873 468 L927 570 H896 L852 490 L808 570 Z"/></g>
+<path id="pB" d="M218 430 C290 425 345 450 392 505 C440 560 470 615 522 632 C450 636 400 600 350 545 C305 495 270 445 218 430Z"/>
+<path id="pA" d="M190 632 C260 628 330 580 380 520 C430 460 480 405 527 392 C440 392 390 430 340 490 C290 555 250 600 190 632Z"/>
+<g id="xx"><use href="#pB" fill="url(#gB)"/><use href="#pA" fill="url(#gA)"/></g>
+<g id="xm"><use href="#pB"/><use href="#pA"/></g>
+</defs><use href="#lt" fill="url(#gs)"/><g filter="url(#glow)"><use href="#xx"/></g></svg>

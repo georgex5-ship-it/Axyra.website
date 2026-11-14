@@ -1,0 +1,16 @@
+---
+interface Props { eyebrow?: string; title: string; lead?: string; dark?: boolean }
+const { eyebrow, title, lead, dark = false } = Astro.props;
+---
+<section class:list={['page-hero', { 'theme-dark': dark }]}>
+  <div class="container center">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1 class="headline">{title}</h1>
+    {lead && <p class="lead measure-wide">{lead}</p>}
+    <slot />
+  </div>
+</section>
+<style>
+  .page-hero { padding-block: clamp(80px, 12vw, 160px) clamp(56px, 8vw, 104px); }
+  .lead { margin-top: 24px; }
+</style>

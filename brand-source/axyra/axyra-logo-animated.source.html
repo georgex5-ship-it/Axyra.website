@@ -1,0 +1,43 @@
+<!-- Extracted verbatim from axyra-dr-assistant.web.app (rxdoc bundle). Animated AXYRA logo: shared defs + animated svg template + CSS. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<linearGradient id="axgA" gradientUnits="userSpaceOnUse" x1="190" y1="632" x2="527" y2="392"><stop offset="0" stop-color="#8B4DF2"/><stop offset=".45" stop-color="#2F7BFF"/><stop offset="1" stop-color="#22D0F5"/></linearGradient>
+<linearGradient id="axgB" gradientUnits="userSpaceOnUse" x1="218" y1="430" x2="522" y2="632"><stop offset="0" stop-color="#8B4DF2"/><stop offset=".5" stop-color="#3A5BF0"/><stop offset="1" stop-color="#1FC3F2"/></linearGradient>
+<linearGradient id="axgs" gradientUnits="userSpaceOnUse" x1="97" y1="0" x2="927" y2="0"><stop offset="0" stop-color="#8493D6"/><stop offset="1" stop-color="#9C90D8"/></linearGradient>
+<linearGradient id="axgsw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<filter id="axglow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<g id="axlt"><path d="M97 570 L151 468 Q172 448 193 468 L247 570 H216 L172 490 L128 570 Z"/><path d="M507 460 H541 L574 508 L607 460 H640 L588 540 V570 H560 V540 Z"/><path fill-rule="evenodd" d="M652 460 H730 Q764 460 764 493 Q764 523 738 530 L772 570 H736 L704 532 H680 V570 H652 Z M680 486 V506 H724 Q736 506 736 496 Q736 486 724 486 Z"/><path d="M777 570 L831 468 Q852 448 873 468 L927 570 H896 L852 490 L808 570 Z"/></g>
+<path id="axpB" d="M218 430 C290 425 345 450 392 505 C440 560 470 615 522 632 C450 636 400 600 350 545 C305 495 270 445 218 430Z"/>
+<path id="axpA" d="M190 632 C260 628 330 580 380 520 C430 460 480 405 527 392 C440 392 390 430 340 490 C290 555 250 600 190 632Z"/>
+</defs></svg>
+<svg class="ax-anim" viewBox="${t?"85 350 855 390":"85 360 855 300"}" role="img" aria-label="${a}" style="display:block;width:100%;height:auto;overflow:visible">
+<defs>
+<mask id="axmA${y}" maskUnits="userSpaceOnUse" x="100" y="340" width="480" height="340"><path class="ax-r1" pathLength="1" d="M190 632 L527 392" stroke="#fff" stroke-width="150" stroke-linecap="round" fill="none"/></mask>
+<mask id="axmB${y}" maskUnits="userSpaceOnUse" x="100" y="340" width="480" height="340"><path class="ax-r2" pathLength="1" d="M218 430 L522 632" stroke="#fff" stroke-width="150" stroke-linecap="round" fill="none"/></mask>
+<mask id="axmX${y}" maskUnits="userSpaceOnUse" x="100" y="340" width="480" height="340"><use href="#axpB" fill="#fff"/><use href="#axpA" fill="#fff"/></mask>
+</defs>
+<path class="ax-streak" pathLength="1" d="M150 668 L570 360" stroke="url(#axgA)" stroke-width="4" fill="none"/>
+<use class="ax-lt" href="#axlt" fill="url(#axgs)"/>
+<g filter="url(#axglow)"><use href="#axpB" fill="url(#axgB)" mask="url(#axmB${y})"/><use href="#axpA" fill="url(#axgA)" mask="url(#axmA${y})"/></g>
+<g mask="url(#axmX${y})"><path class="ax-sweep" d="M165 330 H235 L195 700 H125 Z" fill="url(#axgsw)"/></g>
+${t?'<text class="ax-slg" x="512" y="712" text-anchor="middle" textLength="760" lengthAdjust="spacing" font-family="Sora,sans-serif" font-size="26" font-weight="300" fill="#9AA6C9">INNOVATING A BRIGHTER TOMORROW</text>':""}
+</svg>
+<style>
+.ax-anim .ax-r1,.ax-anim .ax-r2,.ax-anim .ax-streak{stroke-dasharray:1;stroke-dashoffset:1}
+.ax-anim .ax-lt,.ax-anim .ax-slg,.ax-anim .ax-sweep,.ax-anim .ax-streak{opacity:0}
+.ax-anim.ax-play .ax-streak{animation:axStreak 1.1s 0s ease-out forwards}
+.ax-anim.ax-play .ax-r1{animation:axDraw 1.1s .6s ease-out forwards}
+.ax-anim.ax-play .ax-r2{animation:axDraw 1.1s 1s ease-out forwards}
+.ax-anim.ax-play .ax-lt{animation:axFade 1.3s 2.3s ease-out forwards}
+.ax-anim.ax-play .ax-slg{animation:axFade 1.3s 3.7s ease-out forwards}
+.ax-anim.ax-play .ax-sweep{animation:axSweep 1.5s 5s ease-in-out forwards}
+.ax-static .ax-anim .ax-r1,.ax-static .ax-anim .ax-r2{stroke-dashoffset:0}
+.ax-static .ax-anim .ax-lt,.ax-static .ax-anim .ax-slg{opacity:1}
+@keyframes axDraw{to{stroke-dashoffset:0}}
+@keyframes axFade{to{opacity:1}}
+@keyframes axStreak{0%{opacity:0;stroke-dashoffset:1}40%{opacity:1;stroke-dashoffset:0}to{opacity:0;stroke-dashoffset:0}}
+@keyframes axSweep{0%{opacity:0;transform:translate(0)}25%{opacity:.85}to{opacity:0;transform:translate(420px)}}
+.ax-anim *{animation:none!important}
+.ax-anim .ax-r1,.ax-anim .ax-r2{stroke-dashoffset:0!important}
+.ax-anim .ax-lt,.ax-anim .ax-slg{opacity:1!important}
+.ax-anim .ax-streak,.ax-anim .ax-sweep{opacity:0!important}
+</style>

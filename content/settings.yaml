@@ -1,0 +1,79 @@
+# ════════════════════════════════════════════════════════════════
+#  AXYRA WEBSITE — GLOBAL SETTINGS
+#  This is the one file for company-wide values.
+#  Rules:
+#   • Change only the text after the colon ( : ).
+#   • Keep the quotes "..." around text.
+#   • Anything that still says [[EDIT: ...]] is a placeholder.
+#     Placeholders are HIDDEN on the live site automatically.
+#   • true = show / on      false = hide / off
+# ════════════════════════════════════════════════════════════════
+
+company:
+  name: "AXYRA"                                   # Always in capitals.
+  slogan: "INNOVATING A BRIGHTER TOMORROW"        # Official slogan. Do not change wording.
+  legalName: "[[EDIT: Registered legal company name, e.g. AXYRA for Technology Solutions Ltd.]]"
+  foundedYear: "[[EDIT: Year founded, e.g. 2025 (leave as is to hide)]]"
+
+contact:
+  email: "[[EDIT: Business email, e.g. hello@yourdomain.com]]"
+  phone: "[[EDIT: Phone with country code, e.g. +970 59 000 0000]]"
+  whatsapp: "[[EDIT: WhatsApp number, digits only with country code, e.g. 970590000000]]"
+  city: "[[EDIT: City, e.g. Ramallah]]"
+  cityAr: "[[EDIT: City in Arabic, e.g. رام الله]]"
+  country: "Palestine"
+  countryAr: "فلسطين"
+  address: "[[EDIT: Street address (optional — leave as is to show city only)]]"
+  addressAr: "[[EDIT: Street address in Arabic (optional)]]"
+  # Link that opens your location in Google Maps (optional).
+  mapsUrl: "[[EDIT: Google Maps share link]]"
+
+# Social links. Leave a placeholder to hide that icon.
+social:
+  linkedin: "[[EDIT: https://www.linkedin.com/company/...]]"
+  instagram: "[[EDIT: https://www.instagram.com/...]]"
+  facebook: "[[EDIT: https://www.facebook.com/...]]"
+  x: "[[EDIT: https://x.com/...]]"
+  youtube: "[[EDIT: https://www.youtube.com/@...]]"
+  tiktok: "[[EDIT: https://www.tiktok.com/@...]]"
+
+products:
+  # The standalone Dr. Assistant website/app. The "Visit Dr. Assistant" buttons use this.
+  drAssistantUrl: "https://axyra-dr-assistant.web.app"
+
+site:
+  # Your final website address, without a slash at the end.
+  # Until you have a domain, leave the placeholder.
+  url: "[[EDIT: https://www.yourdomain.com]]"
+  # Allow Google and other search engines to list the site?
+  # Keep false until your real domain is connected, then set to true.
+  allowIndexing: false
+  # Shows a dashed yellow outline around any [[EDIT]] text while you preview the site.
+  # Placeholders are hidden anyway on the live site; this only affects preview (npm run dev).
+  highlightPlaceholdersInPreview: true
+
+languages:
+  english: true
+  arabic: true          # false = turn off the Arabic version and the language switch.
+
+# Which pages exist. false = the page is not published and disappears from menus.
+pages:
+  about: true
+  solutions: true
+  products: true
+  contact: true
+  privacy: true
+  terms: true
+  news: false           # Optional — not ready yet.
+  careers: false        # Optional — not ready yet.
+  partners: false       # Optional — not ready yet.
+
+contactForm:
+  # Free form service: https://web3forms.com — enter your email there, they send you an "Access Key".
+  # Paste it here. Until then, the form falls back to opening the visitor's email app.
+  web3formsAccessKey: "[[EDIT: Web3Forms access key]]"
+
+analytics:
+  # Off by default. Options: "none" or "cloudflare" (privacy-friendly, no cookies, no banner needed).
+  provider: "none"
+  cloudflareToken: "[[EDIT: Cloudflare Web Analytics token]]"

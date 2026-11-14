@@ -1,0 +1,79 @@
+# ════════════════════════════════════════════════════════════════
+#  CONTACT PAGE — texts. Your email, phone, address and social links
+#  are set in content/settings.yaml (they are hidden until filled in).
+# ════════════════════════════════════════════════════════════════
+
+sections:
+  form: true
+  details: true
+  map: true            # Location card. Shows only if a city is filled in settings.yaml.
+
+en:
+  seo:
+    title: "Contact"
+    description: "Get in touch with AXYRA about apps, digital products or Dr. Assistant."
+  hero:
+    eyebrow: "Contact"
+    title: "Let's talk."
+    lead: "Tell us about your idea, your challenge or your question. We read every message."
+  form:
+    title: "Send us a message"
+    name: "Full name"
+    email: "Email"
+    company: "Company (optional)"
+    message: "How can we help?"
+    submit: "Send message"
+    sending: "Sending…"
+    success: "Thank you. Your message has been sent — we'll get back to you soon."
+    error: "Sorry, your message couldn't be sent. Please try again, or email us directly."
+    errorRequired: "Please fill in your name, a valid email and a message."
+    tooFast: "That was quick! Please take a moment and try again."
+    fallback: "Your email app will open with your message ready to send."
+    notConfigured: "The contact form isn't connected yet. Please use the contact details on this page."
+    privacyNote: "We use your details only to reply to you. See our"
+    privacyLink: "Privacy Policy"
+    subject: "New message from the AXYRA website"
+  details:
+    title: "Contact details"
+    email: "Email"
+    phone: "Phone"
+    whatsapp: "WhatsApp"
+    location: "Location"
+    social: "Follow us"
+  map:
+    openInMaps: "Open in Maps"
+
+ar:
+  seo:
+    title: "تواصل معنا"
+    description: "تواصل مع AXYRA بخصوص التطبيقات أو المنتجات الرقمية أو Dr. Assistant."
+  hero:
+    eyebrow: "تواصل معنا"
+    title: "لنتحدّث."
+    lead: "أخبرنا عن فكرتك أو التحدي الذي تواجهه أو سؤالك. نقرأ كل رسالة."
+  form:
+    title: "أرسل لنا رسالة"
+    name: "الاسم الكامل"
+    email: "البريد الإلكتروني"
+    company: "الشركة (اختياري)"
+    message: "كيف يمكننا مساعدتك؟"
+    submit: "إرسال الرسالة"
+    sending: "جارٍ الإرسال…"
+    success: "شكرًا لك. تم إرسال رسالتك — وسنعود إليك قريبًا."
+    error: "عذرًا، تعذّر إرسال رسالتك. حاول مرة أخرى، أو راسلنا مباشرة عبر البريد الإلكتروني."
+    errorRequired: "يرجى إدخال الاسم وبريد إلكتروني صحيح ورسالة."
+    tooFast: "كان ذلك سريعًا! يرجى المحاولة مرة أخرى بعد لحظة."
+    fallback: "سيُفتح تطبيق البريد لديك مع رسالتك جاهزة للإرسال."
+    notConfigured: "نموذج التواصل غير مفعّل بعد. يرجى استخدام بيانات التواصل في هذه الصفحة."
+    privacyNote: "نستخدم بياناتك فقط للرد عليك. اطّلع على"
+    privacyLink: "سياسة الخصوصية"
+    subject: "رسالة جديدة من موقع AXYRA"
+  details:
+    title: "بيانات التواصل"
+    email: "البريد الإلكتروني"
+    phone: "الهاتف"
+    whatsapp: "واتساب"
+    location: "الموقع"
+    social: "تابعنا"
+  map:
+    openInMaps: "افتح في الخرائط"

@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Icon from '../../components/Icon.astro';
+import { readYaml, loadLocalized, langPaths, settings, filled, place as placeOf, type Lang } from '../../lib/content';
+
+export function getStaticPaths() { return langPaths('contact'); }
+const { lang } = Astro.props as { lang: Lang };
+const show = readYaml('pages/contact.yaml').sections ?? {};
+const t = loadLocalized('pages/contact.yaml', lang);
+const c = settings.contact ?? {};
+const email = filled(c.email), phone = filled(c.phone), wa = filled(c.whatsapp);
+const loc = placeOf(lang);
+const city = loc.city, maps = filled(c.mapsUrl);
+const place = [loc.address, loc.city, loc.country].filter(Boolean).join(lang === 'ar' ? '، ' : ', ');
+const socialDefs = [
+  ['linkedin', 'LinkedIn'], ['instagram', 'Instagram'], ['facebook', 'Facebook'], ['x', 'X'], ['youtube', 'YouTube'], ['tiktok', 'TikTok'],
+];
+const socials = socialDefs.filter(([k]) => filled(settings.social?.[k])).map(([k, label]) => ({ k, label, href: settings.social[k] }));
+const hasDetails = email || phone || wa || city || socials.length > 0;
+---
+<Base lang={lang} path="/contact/" title={t.seo.title} description={t.seo.description}>
+  <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} lead={t.hero.lead} />
+
+  <section class="section" style="padding-top:0">
+    <div class:list={['container', 'layout', { solo: !(show.details !== false && hasDetails) }]}>
+      {show.form !== false && (
+        <div class="panel reveal">
+          <h2 class="subtitle" style="margin-bottom:28px">{t.form.title}</h2>
+          <ContactForm t={t.form} lang={lang} />
+        </div>
+      )}
+
+      {show.details !== false && hasDetails && (
+        <aside class="side reveal" style="--delay:.08s">
+          <h2 class="subtitle" style="margin-bottom:24px">{t.details.title}</h2>
+          <ul class="details" role="list">
+            {email && <li><Icon name="mail" /><div><span class="k">{t.details.email}</span><a href={`mailto:${email}`}>{email}</a></div></li>}
+            {phone && <li><Icon name="phone" /><div><span class="k">{t.details.phone}</span><a href={`tel:${String(phone).replace(/\s/g, '')}`} dir="ltr">{phone}</a></div></li>}
+            {wa && <li><Icon name="whatsapp" brand /><div><span class="k">{t.details.whatsapp}</span><a href={`https://wa.me/${String(wa).replace(/\D/g, '')}`} target="_blank" rel="noopener" dir="ltr">+{String(wa).replace(/\D/g, '')}</a></div></li>}
+            {city && <li><Icon name="map-pin" /><div><span class="k">{t.details.location}</span><span>{place}</span></div></li>}
+          </ul>
+          {socials.length > 0 && (
+            <>
+              <h3 class="k" style="margin-top:28px">{t.details.social}</h3>
+              <ul class="soc" role="list">
+                {socials.map((s) => <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>)}
+              </ul>
+            </>
+          )}
+          {show.map !== false && city && (
+            <div class="map" role="img" aria-label={`${t.details.location}: ${place}`}>
+              <img src="/brand/axyra-x-mark.svg" alt="" width="417" height="320" loading="lazy" />
+              <span>{place}</span>
+              {maps && <a class="link-arrow" href={maps} target="_blank" rel="noopener">{t.map.openInMaps} <Icon name="arrow-up-right" /></a>}
+            </div>
+          )}
+        </aside>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
+  .layout.solo { grid-template-columns: minmax(0, 760px); justify-content: center; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .panel { background: var(--bg-alt); border-radius: var(--radius-lg); padding: clamp(28px, 4vw, 56px); }
+  .side { padding-top: clamp(0px, 2vw, 28px); }
+  .details { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+  .details li { display: flex; gap: 14px; align-items: flex-start; }
+  .details :global(.icon) { color: var(--link); margin-top: 3px; }
+  .details div { display: grid; gap: 2px; }
+  .k { color: var(--text-muted); font-size: .875rem; font-weight: 600; }
+  .soc { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .soc a { display: inline-block; padding: 8px 14px; border: 1px solid var(--line); border-radius: var(--radius-pill); color: var(--text); font-weight: 600; font-size: .9375rem; }
+  .map {
+    margin-top: 32px; aspect-ratio: 4 / 3; border-radius: var(--radius-lg); display: grid; place-content: center; justify-items: center; gap: 12px;
+    background: radial-gradient(60% 60% at 50% 45%, color-mix(in srgb, var(--brand-violet) 16%, transparent), transparent 70%), var(--bg-alt);
+    border: 1px solid var(--line); text-align: center; padding: 24px;
+  }
+  .map img { width: 64px; }
+  .map span { font-weight: 700; }
+</style>

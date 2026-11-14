@@ -1,0 +1,14 @@
+# CAREERS — hidden until you set  pages: careers: true  in settings.yaml.
+en:
+  seo: { title: "Careers", description: "Work with AXYRA." }
+  hero: { eyebrow: "Careers", title: "Build what's next with us.", lead: "We're a small team that cares about clear, useful technology." }
+  empty: "There are no open positions right now. You're welcome to send us your CV through the contact page."
+  items:
+    - title: "[[EDIT: Job title]]"
+      date: "[[EDIT: Location / Remote]]"
+      text: "[[EDIT: Short description of the role.]]"
+      link: "[[EDIT: Link to apply or mailto:]]"
+ar:
+  seo: { title: "الوظائف", description: "اعمل مع AXYRA." }
+  hero: { eyebrow: "الوظائف", title: "ابنِ المستقبل معنا.", lead: "فريق صغير يهتم بالتقنية الواضحة والمفيدة." }
+  empty: "لا توجد وظائف شاغرة حاليًا. يمكنك إرسال سيرتك الذاتية عبر صفحة التواصل."

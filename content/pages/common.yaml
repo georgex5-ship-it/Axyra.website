@@ -1,0 +1,73 @@
+# ════════════════════════════════════════════════════════════════
+#  SHARED TEXT — menu, footer, buttons, small labels used on every page.
+#  en: = English     ar: = Arabic
+#  If an Arabic line is missing, the English one is used instead.
+# ════════════════════════════════════════════════════════════════
+
+en:
+  skipToContent: "Skip to content"
+  nav:
+    home: "Home"
+    about: "About"
+    solutions: "Solutions"
+    products: "Products"
+    contact: "Contact"
+    news: "Insights"
+    careers: "Careers"
+    partners: "Partners"
+    privacy: "Privacy Policy"
+    terms: "Terms of Use"
+  menuOpen: "Open menu"
+  menuClose: "Close menu"
+  themeToggle: "Switch light or dark appearance"
+  languageSwitch: "العربية"
+  languageSwitchLabel: "Read this page in Arabic"
+  footer:
+    tagline: "A technology solutions company building apps and digital products."
+    columns:
+      company: "Company"
+      products: "Products"
+      connect: "Connect"
+      legal: "Legal"
+    rights: "All rights reserved."
+    madeIn: "Palestine"
+  buttons:
+    learnMore: "Learn more"
+    getInTouch: "Get in touch"
+    visit: "Visit"
+    viewAllProducts: "View all products"
+  legalDraftNotice: "Draft template — needs review by a qualified lawyer before publishing."
+
+ar:
+  skipToContent: "انتقل إلى المحتوى"
+  nav:
+    home: "الرئيسية"
+    about: "من نحن"
+    solutions: "حلولنا"
+    products: "منتجاتنا"
+    contact: "تواصل معنا"
+    news: "رؤى"
+    careers: "الوظائف"
+    partners: "الشركاء"
+    privacy: "سياسة الخصوصية"
+    terms: "شروط الاستخدام"
+  menuOpen: "فتح القائمة"
+  menuClose: "إغلاق القائمة"
+  themeToggle: "التبديل بين المظهر الفاتح والداكن"
+  languageSwitch: "English"
+  languageSwitchLabel: "Read this page in English"
+  footer:
+    tagline: "شركة حلول تقنية تبني التطبيقات والمنتجات الرقمية."
+    columns:
+      company: "الشركة"
+      products: "المنتجات"
+      connect: "تواصل"
+      legal: "قانوني"
+    rights: "جميع الحقوق محفوظة."
+    madeIn: "فلسطين"
+  buttons:
+    learnMore: "اعرف المزيد"
+    getInTouch: "تواصل معنا"
+    visit: "زيارة"
+    viewAllProducts: "عرض جميع المنتجات"
+  legalDraftNotice: "مسودة نموذجية — يجب مراجعتها من قبل محامٍ مختص قبل النشر."

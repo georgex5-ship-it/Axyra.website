@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import { readYaml, loadLocalized, settings, filled, localePath, pageEnabled, type Lang } from '../lib/content';
+interface Props { lang: Lang; doc: 'privacy' | 'terms' }
+const { lang, doc } = Astro.props;
+const raw = readYaml(`legal/${doc}.yaml`);
+const t = loadLocalized(`legal/${doc}.yaml`, lang);
+const common = loadLocalized('pages/common.yaml', lang);
+const email = filled(settings.contact?.email);
+const contactHtml = email
+  ? `<a href="mailto:${email}">${email}</a>`
+  : pageEnabled('contact') ? `<a href="${localePath(lang, '/contact/')}">${common.nav.contact}</a>` : settings.company.name;
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const fill = (s: string) => esc(s)
+  .replaceAll('{company}', esc(settings.company.name))
+  .replaceAll('{country}', esc((lang === 'ar' ? settings.contact?.countryAr : '') || settings.contact?.country || ''))
+  .replaceAll('{contact}', contactHtml);
+const date = new Date(raw.lastUpdated);
+const dateText = isNaN(+date) ? raw.lastUpdated : date.toLocaleDateString(lang === 'ar' ? 'ar-u-nu-latn' : 'en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Base lang={lang} path={`/${doc}/`} title={t.seo.title} description={t.seo.description}>
+  <article class="section section--tight">
+    <div class="container container--narrow">
+      {raw.showDraftNotice !== false && <p class="notice"><Icon name="circle-alert" /> {common.legalDraftNotice}</p>}
+      <h1 class="headline" style="margin-top:40px">{t.title}</h1>
+      <p class="muted small" style="margin-top:12px">{t.updatedLabel}: {dateText}</p>
+      <div class="prose" style="margin-top:40px">
+        <p class="lead" set:html={fill(t.intro)} />
+        {(t.sections ?? []).map((s: any) => (
+          <section>
+            <h2>{s.heading}</h2>
+            {(s.paragraphs ?? []).map((p: string) => <p set:html={fill(p)} />)}
+          </section>
+        ))}
+      </div>
+    </div>
+  </article>
+</Base>

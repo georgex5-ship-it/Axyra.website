@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+interface Props { title: string; lead?: string; button: string; href: string }
+const { title, lead, button, href } = Astro.props;
+---
+<section class="section cta">
+  <div class="container center reveal">
+    <img class="mark" src="/brand/axyra-x-mark.svg" alt="" width="417" height="320" loading="lazy" />
+    <h2 class="headline">{title}</h2>
+    {lead && <p class="lead measure-wide" style="margin-top:20px">{lead}</p>}
+    <div class="actions"><a class="btn" href={href}>{button} <Icon name="arrow-right" class="icon--dir" /></a></div>
+  </div>
+</section>
+<style>
+  .cta { background: var(--bg-alt); overflow: hidden; }
+  .mark { width: 72px; margin: 0 auto 32px; }
+</style>

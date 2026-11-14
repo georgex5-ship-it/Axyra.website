@@ -1,0 +1,104 @@
+---
+import Icon from './Icon.astro';
+import { loadLocalized, loadProducts, localePath, pageEnabled, settings, filled, place as placeOf, type Lang } from '../lib/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = loadLocalized('pages/common.yaml', lang);
+const products = loadProducts(lang);
+const year = new Date().getFullYear();
+const c = settings.contact ?? {};
+
+const company = ['about', 'solutions', 'news', 'careers', 'partners']
+  .filter(pageEnabled).map((k) => ({ href: localePath(lang, `/${k}/`), label: t.nav[k] }));
+const legal = ['privacy', 'terms'].filter(pageEnabled).map((k) => ({ href: localePath(lang, `/${k}/`), label: t.nav[k] }));
+const socialDefs: { key: string; icon: string; label: string }[] = [
+  { key: 'linkedin', icon: '', label: 'LinkedIn' },
+  { key: 'instagram', icon: 'instagram', label: 'Instagram' },
+  { key: 'facebook', icon: 'facebook', label: 'Facebook' },
+  { key: 'x', icon: 'x', label: 'X' },
+  { key: 'youtube', icon: 'youtube', label: 'YouTube' },
+  { key: 'tiktok', icon: 'tiktok', label: 'TikTok' },
+];
+const socials = socialDefs.filter((s) => filled(settings.social?.[s.key])).map((s) => ({ ...s, href: settings.social[s.key] }));
+const email = filled(c.email);
+const phone = filled(c.phone);
+const loc = placeOf(lang);
+const place = [loc.city, loc.country].filter(Boolean).join(lang === 'ar' ? '، ' : ', ');
+---
+<footer class="site-footer">
+  <div class="container container--wide">
+    <div class="top">
+      <div class="intro">
+        <img class="logo" src="/brand/axyra-logo-color-tight.svg" alt="AXYRA" width="868" height="290" loading="lazy" />
+        <p class="slogan">{settings.company.slogan}</p>
+        <p class="muted small tagline">{t.footer.tagline}</p>
+      </div>
+      <nav class="cols" aria-label="Footer">
+        <div>
+          <h2>{t.footer.columns.company}</h2>
+          <ul>{company.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        </div>
+        {pageEnabled('products') && products.length > 0 && (
+          <div>
+            <h2>{t.footer.columns.products}</h2>
+            <ul>
+              {products.map((p) => <li><a href={localePath(lang, `/products/${p.slug}/`)}>{p.text.name}</a></li>)}
+            </ul>
+          </div>
+        )}
+        <div>
+          <h2>{t.footer.columns.connect}</h2>
+          <ul>
+            {pageEnabled('contact') && <li><a href={localePath(lang, '/contact/')}>{t.nav.contact}</a></li>}
+            {email && <li><a href={`mailto:${email}`}>{email}</a></li>}
+            {phone && <li><a href={`tel:${String(phone).replace(/\s/g, '')}`} dir="ltr">{phone}</a></li>}
+            {place && <li class="muted">{place}</li>}
+          </ul>
+        </div>
+        {legal.length > 0 && (
+          <div>
+            <h2>{t.footer.columns.legal}</h2>
+            <ul>{legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+          </div>
+        )}
+      </nav>
+    </div>
+    <div class="bottom">
+      <p class="small muted">© {year} {settings.company.name}. {t.footer.rights}</p>
+      {socials.length > 0 && (
+        <ul class="social" aria-label="Social media">
+          {socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                {s.icon ? <Icon name={s.icon} brand /> : <span class="in" aria-hidden="true">in</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--bg-alt); border-top: 1px solid var(--line); padding: 72px 0 32px; font-size: .9375rem; }
+  .top { display: grid; grid-template-columns: minmax(240px, 1.1fr) 2fr; gap: 48px; }
+  .logo { height: 34px; width: auto; }
+  .slogan { margin-top: 18px; font-size: .75rem; font-weight: 600; letter-spacing: .18em; color: var(--text-muted); }
+  .tagline { margin-top: 10px; max-width: 32ch; }
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 32px; }
+  h2 { font-size: .8125rem; font-weight: 700; letter-spacing: .02em; margin-bottom: 14px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li + li { margin-top: 10px; }
+  .cols a { color: var(--text-muted); }
+  .cols a:hover { color: var(--text); }
+  .bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+  .social { display: flex; gap: 6px; }
+  .social li + li { margin-top: 0; }
+  .social a { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; color: var(--text-muted); }
+  .social a:hover { color: var(--text); background: color-mix(in srgb, var(--text) 8%, transparent); }
+  .social :global(.icon) { width: 18px; height: 18px; }
+  .in { font-weight: 800; font-size: 1rem; letter-spacing: -.04em; font-family: var(--font-latin); }
+  [dir='rtl'] .slogan { letter-spacing: .12em; }
+  @media (max-width: 760px) { .top { grid-template-columns: 1fr; } }
+</style>

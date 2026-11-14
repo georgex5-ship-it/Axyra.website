@@ -1,0 +1,20 @@
+---
+// Icons: Lucide (ISC licence) for UI icons, Simple Icons (CC0) for social brand icons.
+// Usage: <Icon name="arrow-right" />   or   <Icon name="instagram" brand />
+import fs from 'node:fs';
+import path from 'node:path';
+interface Props { name: string; brand?: boolean; class?: string; label?: string }
+const { name, brand = false, class: cls = '', label } = Astro.props;
+const file = brand
+  ? path.resolve('node_modules/simple-icons/icons', `${name}.svg`)
+  : path.resolve('node_modules/lucide-static/icons', `${name}.svg`);
+let svg = '';
+try { svg = fs.readFileSync(file, 'utf8'); } catch { svg = ''; }
+svg = svg
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/<title>[\s\S]*?<\/title>/, '')
+  .replace(/\s(width|height|class|role)="[^"]*"/g, '')
+  .replace('<svg', `<svg class="icon ${cls}" ${label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"'} focusable="false"${brand ? ' fill="currentColor"' : ''}`)
+  .trim();
+---
+<Fragment set:html={svg} />

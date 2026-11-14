@@ -1,0 +1,10 @@
+# The "page not found" (404) page. Shown in both languages at once,
+# because the website can't know which language the visitor wanted.
+en:
+  title: "This page took a different path."
+  lead: "The page you're looking for doesn't exist or has moved."
+  button: "Back to home"
+ar:
+  title: "هذه الصفحة سلكت طريقًا آخر."
+  lead: "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+  button: "العودة إلى الرئيسية"

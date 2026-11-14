@@ -1,0 +1,15 @@
+# INSIGHTS / NEWS — hidden until you set  pages: news: true  in settings.yaml.
+# Add one item per article or announcement (newest first).
+en:
+  seo: { title: "Insights", description: "News and insights from AXYRA." }
+  hero: { eyebrow: "Insights", title: "News from AXYRA.", lead: "Product updates, announcements and ideas." }
+  empty: "No posts yet. Check back soon."
+  items:
+    - title: "[[EDIT: Post title]]"
+      date: "[[EDIT: 2026-12-01]]"
+      text: "[[EDIT: Two-sentence summary.]]"
+      link: "[[EDIT: Optional link to the full article]]"
+ar:
+  seo: { title: "رؤى", description: "أخبار ورؤى من AXYRA." }
+  hero: { eyebrow: "رؤى", title: "أخبار AXYRA.", lead: "تحديثات المنتجات والإعلانات والأفكار." }
+  empty: "لا توجد منشورات بعد. تابعنا قريبًا."

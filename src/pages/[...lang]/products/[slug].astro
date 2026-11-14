@@ -1,0 +1,288 @@
+---
+// Product page template — one page per file in content/products/ (with hasPage: true).
+import { Picture } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import DrAssistantLogo from '../../../components/DrAssistantLogo.astro';
+import Icon from '../../../components/Icon.astro';
+import {
+  loadProducts, languages, pageEnabled, localePath, productExternalUrl, onlyFilled, isFilled, type Lang,
+} from '../../../lib/content';
+import { productImage } from '../../../lib/images';
+
+export function getStaticPaths() {
+  if (!pageEnabled('products')) return [];
+  return languages().flatMap((lang) =>
+    loadProducts(lang).filter((p) => p.hasPage !== false).map((product) => ({
+      params: { lang: lang === 'en' ? undefined : lang, slug: product.slug },
+      props: { lang, product },
+    })));
+}
+const { lang, product } = Astro.props as { lang: Lang; product: any };
+const t = product.text;
+const s = product.sections ?? {};
+const visit = productExternalUrl(product);
+const isDra = product.theme === 'dr-assistant';
+const img = (k: string) => productImage(product.images?.[k]);
+const hero = img('desktop');
+const phone = img('phone');
+const enText = product.en ?? {};
+const showcase = (t.showcase ?? []).map((x: any, i: number) => ({ ...x, src: img(enText.showcase?.[i]?.image || x.image) }))
+  .filter((x: any) => x.src && isFilled(x.title));
+const faq = onlyFilled(t.faq?.items, ['q', 'a']);
+const contactHref = pageEnabled('contact') ? localePath(lang, '/contact/') : undefined;
+const productLd = {
+  '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: t.name,
+  applicationCategory: 'MedicalApplication', operatingSystem: 'Web, Windows, Android',
+  description: t.summary, publisher: { '@type': 'Organization', name: 'AXYRA' }, ...(visit ? { url: visit } : {}),
+};
+---
+<Base lang={lang} path={`/products/${product.slug}/`} title={t.seo?.title || t.name} description={t.seo?.description || t.summary} ogImage={product.ogImage} bodyClass={isDra ? 'dra' : ''}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(productLd)} />
+
+  <!-- HERO -->
+  <section class="p-hero theme-dark">
+    <div class="p-glow" aria-hidden="true"></div>
+    <div class="container center">
+      <span class="eyebrow dra-eyebrow">{t.hero.eyebrow}</span>
+      <div class="p-logo">{isDra ? <DrAssistantLogo size="clamp(52px, 11vw, 120px)" /> : <p class="display">{t.name}</p>}</div>
+      <h1 class="p-slogan">{t.slogan}</h1>
+      <p class="lead measure-wide p-lead">{t.hero.lead}</p>
+      <div class="actions">
+        {visit && (
+          <a class="btn btn--dra" href={visit} target="_blank" rel="noopener">
+            {t.visitButton} <Icon name="arrow-up-right" />
+          </a>
+        )}
+        {contactHref && <a class="btn btn--ghost" href={contactHref}>{t.cta?.secondaryButton}</a>}
+      </div>
+      {hero && (
+        <div class="p-shot reveal">
+          <Picture src={hero} alt={`${t.name} — ${t.highlights?.[0]?.title ?? ''}`} formats={['avif', 'webp']}
+            widths={[640, 960, 1400, 2000]} sizes="(max-width: 1200px) 94vw, 1120px" loading="eager" fetchpriority="high" />
+          {phone && (
+            <div class="p-phone" aria-hidden="true">
+              <Picture src={phone} alt="" formats={['avif', 'webp']} widths={[300, 600]} sizes="240px" loading="lazy" />
+            </div>
+          )}
+        </div>
+      )}
+      {t.screenshotNote && <p class="small shot-note">{t.screenshotNote}</p>}
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  {s.features !== false && (
+    <section class="section">
+      <div class="container">
+        <header class="section-head center reveal">
+          <span class="eyebrow">{t.features.eyebrow}</span>
+          <h2 class="title">{t.features.title}</h2>
+        </header>
+        <ul class="feats" role="list">
+          {(t.highlights ?? []).map((h: any, i: number) => (
+            <li class="reveal" style={`--delay:${i * 0.06}s`}>
+              <div class="f-icon"><Icon name={h.icon || 'check'} /></div>
+              <h3>{h.title}</h3>
+              <p class="muted">{h.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- SHOWCASE -->
+  {s.showcase !== false && showcase.map((sc: any, i: number) => (
+    <section class:list={['section', 'show', { 'section--alt': i % 2 === 0 }]}>
+      <div class:list={['container', 'container--wide', 'show-grid', { flip: i % 2 === 1 }]}>
+        <div class="show-text reveal">
+          <h2 class="title">{sc.title}</h2>
+          <p class="lead" style="margin-top:20px">{sc.text}</p>
+        </div>
+        <div class="show-img reveal" style="--delay:.08s">
+          <Picture src={sc.src} alt={sc.title} formats={['avif', 'webp']} widths={[600, 900, 1300]} sizes="(max-width: 900px) 92vw, 720px" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- WHO IT'S FOR -->
+  {s.audience !== false && t.audience && (
+    <section class="section">
+      <div class="container">
+        <header class="section-head center reveal">
+          <span class="eyebrow">{t.audience.eyebrow}</span>
+          <h2 class="title">{t.audience.title}</h2>
+        </header>
+        <div class="grid grid-3">
+          {(t.audience.items ?? []).map((a: any, i: number) => (
+            <div class="tile reveal" style={`--delay:${i * 0.07}s`}>
+              <div class="tile-icon dra-icon"><Icon name={a.icon || 'users'} /></div>
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- HOW IT WORKS -->
+  {s.howItWorks !== false && t.howItWorks && (
+    <section class="section theme-dark how">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow dra-eyebrow">{t.howItWorks.eyebrow}</span>
+          <h2 class="title">{t.howItWorks.title}</h2>
+        </header>
+        <ol class="steps" role="list">
+          {(t.howItWorks.steps ?? []).map((st: any, i: number) => (
+            <li class="reveal" style={`--delay:${i * 0.07}s`}>
+              <span class="num" aria-hidden="true">{i + 1}</span>
+              <h3>{st.title}</h3>
+              <p class="muted">{st.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <!-- BENEFITS -->
+  {s.benefits !== false && t.benefits && (
+    <section class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">{t.benefits.eyebrow}</span>
+          <h2 class="title measure">{t.benefits.title}</h2>
+        </header>
+        <div class="benefits">
+          {(t.benefits.items ?? []).map((b: any, i: number) => (
+            <div class="reveal" style={`--delay:${(i % 2) * 0.07}s`}>
+              <h3><Icon name="circle-check" /> {b.title}</h3>
+              <p class="muted">{b.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- PLATFORMS -->
+  {s.platforms !== false && t.platforms && (
+    <section class="section section--alt">
+      <div class="container">
+        <header class="section-head center reveal">
+          <span class="eyebrow">{t.platforms.eyebrow}</span>
+          <h2 class="title">{t.platforms.title}</h2>
+        </header>
+        <div class="grid grid-3">
+          {(t.platforms.items ?? []).map((pl: any, i: number) => (
+            <div class="tile center reveal" style={`--delay:${i * 0.07}s`}>
+              <div class="tile-icon dra-icon" style="margin-inline:auto"><Icon name={pl.icon || 'monitor'} /></div>
+              <h3>{pl.title}</h3>
+              <p>{pl.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  {s.faq !== false && faq.length > 0 && (
+    <section class="section">
+      <div class="container container--narrow">
+        <header class="section-head center reveal">
+          <span class="eyebrow">{t.faq.eyebrow}</span>
+          <h2 class="title">{t.faq.title}</h2>
+        </header>
+        <div class="faq">
+          {faq.map((f: any) => (
+            <details class="reveal">
+              <summary>{f.q}<Icon name="chevron-down" /></summary>
+              <p class="muted">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  {s.cta !== false && t.cta && (
+    <section class="section theme-dark p-cta">
+      <div class="p-glow" aria-hidden="true"></div>
+      <div class="container center reveal">
+        <h2 class="headline">{t.cta.title}</h2>
+        <p class="lead measure-wide" style="margin-top:20px">{t.cta.lead}</p>
+        <div class="actions">
+          {visit && <a class="btn btn--dra" href={visit} target="_blank" rel="noopener">{t.visitButton} <Icon name="arrow-up-right" /></a>}
+          {contactHref && <a class="btn btn--ghost" href={contactHref}>{t.cta.secondaryButton}</a>}
+        </div>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .dra-eyebrow { color: #5FD4A8; }
+  :global(body.dra) .eyebrow:not(.dra-eyebrow) { color: #047857; }
+  :global(:root[data-theme='dark'] body.dra) .eyebrow { color: #5FD4A8; }
+  @media (prefers-color-scheme: dark) { :global(:root:not([data-theme='light']) body.dra) .eyebrow { color: #5FD4A8; } }
+  .btn--dra { background: linear-gradient(90deg, #38BDF8, #34D399); color: #062018; }
+
+  .p-hero { position: relative; overflow: hidden; padding-block: clamp(72px, 10vw, 128px) clamp(56px, 8vw, 96px); }
+  .p-glow { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(45% 40% at 35% 30%, rgba(56,189,248,.18), transparent 70%), radial-gradient(40% 40% at 70% 35%, rgba(52,211,153,.14), transparent 70%); }
+  .p-hero .container { position: relative; }
+  .p-logo { display: flex; justify-content: center; margin: 12px 0 36px; }
+  .p-slogan { font-size: clamp(1.75rem, 4.6vw, 3.5rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; max-width: 20ch; margin-inline: auto; }
+  [dir='rtl'] .p-slogan { letter-spacing: 0; line-height: 1.4; }
+  .p-lead { margin-top: 24px; color: #CBD5E1; }
+  .p-shot { position: relative; margin: clamp(56px, 8vw, 96px) auto 0; max-width: 1120px; }
+  .p-shot > :global(picture img) { width: 100%; height: auto; border-radius: clamp(12px, 1.6vw, 22px); border: 1px solid rgba(255,255,255,.1);
+    box-shadow: 0 60px 120px -40px rgba(0,0,0,.8), 0 0 100px -30px rgba(56,189,248,.35); }
+  .p-phone { position: absolute; inset-inline-end: clamp(-12px, -2vw, -32px); bottom: clamp(-40px, -4vw, -64px); width: clamp(110px, 20vw, 230px);
+    border-radius: 32px; overflow: hidden; border: 8px solid #1b1e38; box-shadow: 0 30px 60px -10px rgba(0,0,0,.7); background: #0A0B1E; }
+  .p-phone :global(img) { width: 100%; height: auto; display: block; }
+  .shot-note { margin-top: clamp(56px, 7vw, 88px); color: #8B93B8; }
+  @media (max-width: 640px) { .p-phone { display: none; } .shot-note { margin-top: 24px; } }
+
+  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 40px 28px; }
+  .f-icon { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 20px; color: #fff;
+    background: linear-gradient(135deg, #38BDF8, #34D399); box-shadow: 0 14px 30px -12px rgba(52,211,153,.6); }
+  .f-icon :global(.icon) { width: 26px; height: 26px; }
+  .feats h3 { font-size: 1.1875rem; margin-bottom: 8px; letter-spacing: -.015em; }
+  .feats p { font-size: .9688rem; }
+
+  .show-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .show-grid.flip .show-text { order: 2; }
+  @media (max-width: 900px) { .show-grid { grid-template-columns: 1fr; } .show-grid.flip .show-text { order: 0; } }
+  .show-img :global(img) { width: 100%; height: auto; border-radius: clamp(12px, 1.6vw, 20px); box-shadow: var(--shadow); border: 1px solid var(--line); }
+
+  .dra-icon { background: color-mix(in srgb, #34D399 16%, transparent); color: #047857; }
+  :global(:root[data-theme='dark']) .dra-icon { color: #5FD4A8; }
+  @media (prefers-color-scheme: dark) { :global(:root:not([data-theme='light'])) .dra-icon { color: #5FD4A8; } }
+
+  .how { overflow: hidden; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: clamp(32px, 4vw, 48px); counter-reset: s; }
+  .steps li { position: relative; padding-top: 28px; border-top: 1px solid var(--line); }
+  .num { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; margin-bottom: 20px; font-weight: 800;
+    background: linear-gradient(135deg, #38BDF8, #34D399); color: #062018; }
+  .steps h3 { font-size: 1.3125rem; margin-bottom: 8px; }
+
+  .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 40px clamp(32px, 6vw, 96px); }
+  .benefits h3 { display: flex; gap: 10px; align-items: center; font-size: 1.3125rem; margin-bottom: 8px; }
+  .benefits h3 :global(.icon) { color: #10B981; width: 24px; height: 24px; }
+
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 0; font-weight: 600; font-size: 1.125rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary :global(.icon) { transition: transform .3s var(--ease); flex: none; }
+  .faq details[open] summary :global(.icon) { transform: rotate(180deg); }
+  .faq details p { padding-bottom: 24px; max-width: 60ch; }
+
+  .p-cta { position: relative; overflow: hidden; }
+  .p-cta .container { position: relative; }
+</style>

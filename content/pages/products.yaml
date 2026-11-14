@@ -1,0 +1,28 @@
+# ════════════════════════════════════════════════════════════════
+#  PRODUCTS PAGE — the intro text. The products themselves are the
+#  files in content/products/ (one file per product).
+# ════════════════════════════════════════════════════════════════
+
+en:
+  seo:
+    title: "Products"
+    description: "Apps and digital products built by AXYRA, including Dr. Assistant."
+  hero:
+    eyebrow: "Products"
+    title: "Built by AXYRA."
+    lead: "Focused products that solve one real problem very well."
+  card:
+    learnMore: "Learn more"
+    comingSoon: "More products are on the way."
+
+ar:
+  seo:
+    title: "منتجاتنا"
+    description: "تطبيقات ومنتجات رقمية من تطوير AXYRA، ومنها Dr. Assistant."
+  hero:
+    eyebrow: "منتجاتنا"
+    title: "من صُنع AXYRA."
+    lead: "منتجات مركّزة تحل مشكلة حقيقية واحدة بإتقان."
+  card:
+    learnMore: "اعرف المزيد"
+    comingSoon: "المزيد من المنتجات في الطريق."

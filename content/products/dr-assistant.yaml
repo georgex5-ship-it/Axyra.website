@@ -1,0 +1,253 @@
+# ════════════════════════════════════════════════════════════════
+#  PRODUCT: Dr. Assistant
+#  One file = one product. To add a product, copy this file,
+#  rename it (e.g. my-app.yaml) and change the text.
+#  Images go in: src/assets/products/<slug>/
+#  Feature text below is taken from the Dr. Assistant app itself.
+# ════════════════════════════════════════════════════════════════
+
+slug: "dr-assistant"          # web address: /products/dr-assistant/
+order: 1                       # position in the product list (1 = first)
+show: true                     # false = hide this product everywhere
+hasPage: true                  # false = card only, no product page
+
+# Button "Visit Dr. Assistant" — the address is set once in settings.yaml (products.drAssistantUrl).
+# For other products you can write the address directly:  externalUrl: "https://..."
+externalUrlFromSettings: "drAssistantUrl"
+
+theme: "dr-assistant"          # uses the Dr. Assistant colours (sky → emerald)
+ogImage: "/og/dr-assistant-og.jpg"   # picture shown when the page is shared on WhatsApp, LinkedIn, etc. (1200×630, in public/og/)
+
+# Screenshots were taken from the Dr. Assistant TEST environment (fake data only).
+images:
+  icon: "dr-assistant/app-icon.png"
+  phone: "dr-assistant/screen-new-prescription-phone.png"
+  desktop: "dr-assistant/screen-new-prescription-desktop.png"
+  patients: "dr-assistant/screen-patients-desktop.png"
+  appointments: "dr-assistant/screen-appointments-desktop.png"
+  prescription: "dr-assistant/prescription-document.png"
+
+# Product page sections. false = hidden until the content is ready.
+sections:
+  showcase: true
+  features: true
+  audience: true
+  howItWorks: true
+  benefits: true
+  platforms: true
+  faq: true
+  cta: true
+
+en:
+  name: "Dr. Assistant"
+  category: "Healthcare"
+  slogan: "Smarter Prescriptions. Better Care. For a Healthier Tomorrow."
+  summary: "A smart prescription management platform for doctors, clinics and pharmacists."
+  seo:
+    title: "Dr. Assistant — Smart prescription platform"
+    description: "Dr. Assistant by AXYRA: e-prescriptions, patient records, appointments and QR verification for doctors, clinics and pharmacists — in Arabic and English."
+  visitButton: "Visit Dr. Assistant"
+  screenshotNote: "Screens show sample test data."
+  hero:
+    eyebrow: "Dr. Assistant by AXYRA"
+    lead: "Palestine's smart clinical e-prescription & patient management platform."
+  highlights:
+    - icon: file-text
+      title: "E-Prescriptions in seconds"
+      text: "Drugs, labs, imaging, eyeglasses and notes on one branded prescription."
+    - icon: users
+      title: "Complete patient records"
+      text: "Allergies, history and every past prescription, one tap away."
+    - icon: calendar-check
+      title: "Smart appointments"
+      text: "Daily schedule with WhatsApp reminders for your patients."
+    - icon: qr-code
+      title: "QR verification"
+      text: "Pharmacies scan the code to confirm a prescription is genuine."
+    - icon: languages
+      title: "Arabic & English"
+      text: "Full right-to-left Arabic interface and prescriptions."
+  showcase:
+    - image: prescription
+      title: "One prescription. Everything on it."
+      text: "Drugs, labs, imaging, eyeglasses and notes on one branded prescription — with a QR code pharmacies scan to confirm it's genuine."
+    - image: patients
+      title: "Every patient, one tap away."
+      text: "Allergies, history and every past prescription — ready before you prescribe."
+    - image: appointments
+      title: "A calmer day at the clinic."
+      text: "See the day's schedule at a glance, with WhatsApp reminders for your patients."
+  features:
+    eyebrow: "Features"
+    title: "Everything a clinic needs. Nothing it doesn't."
+  audience:
+    eyebrow: "Who it's for"
+    title: "Made for the whole prescription journey."
+    items:
+      - icon: stethoscope
+        title: "Doctors"
+        text: "Write clear, complete prescriptions in seconds and see each patient's full history before you prescribe."
+      - icon: building-2
+        title: "Clinics"
+        text: "Run patient records, appointments and the team from one shared workspace."
+      - icon: pill
+        title: "Pharmacists"
+        text: "Scan the QR code on a prescription to confirm it is genuine before dispensing."
+  howItWorks:
+    eyebrow: "How it works"
+    title: "From visit to verified prescription."
+    steps:
+      - title: "Select or add the patient"
+        text: "Search by name, ID number or phone — or register a new patient in moments."
+      - title: "Build the prescription"
+        text: "Add drugs, lab tests, imaging, eyeglass lenses and a doctor's note on one page."
+      - title: "Issue and share"
+        text: "Print it, save it as a PDF or send it to the patient — branded with your clinic's details."
+      - title: "Verify at the pharmacy"
+        text: "The pharmacist scans the QR code to confirm the prescription is genuine."
+  benefits:
+    eyebrow: "Benefits"
+    title: "Better care starts with clearer prescriptions."
+    items:
+      - title: "Legible, complete prescriptions"
+        text: "Typed, structured prescriptions remove guesswork from handwriting."
+      - title: "Less time on paperwork"
+        text: "Patient details and past prescriptions are already there when you need them."
+      - title: "More trust between clinic and pharmacy"
+        text: "QR verification helps pharmacies confirm a prescription is genuine."
+      - title: "Patients who show up"
+        text: "Appointment reminders reach patients on WhatsApp."
+  platforms:
+    eyebrow: "Available on"
+    title: "Use it wherever you work."
+    items:
+      - icon: globe
+        title: "Web"
+        text: "Works in the browser and can be installed as an app."
+      - icon: monitor
+        title: "Windows"
+        text: "A desktop app for the clinic computer."
+      - icon: smartphone
+        title: "Android"
+        text: "Your clinic in your pocket."
+  faq:
+    eyebrow: "FAQ"
+    title: "Questions, answered."
+    items:
+      - q: "Who is Dr. Assistant for?"
+        a: "Doctors, clinics and pharmacists. Doctors and clinics use it to write prescriptions and manage patients and appointments; pharmacists use the QR code to verify prescriptions."
+      - q: "Does it work in Arabic?"
+        a: "Yes. Dr. Assistant has a full right-to-left Arabic interface, and prescriptions can be issued in Arabic or English."
+      - q: "What can I include in a prescription?"
+        a: "Drugs, lab tests, X-ray and imaging requests, eyeglass lenses and a doctor's note — on one branded prescription."
+      - q: "How do pharmacies verify a prescription?"
+        a: "Each prescription carries a QR code. The pharmacist scans it to confirm the prescription is genuine."
+      - q: "Which devices does it run on?"
+        a: "It runs in the web browser, and there are apps for Windows and Android."
+      - q: "How much does it cost?"
+        a: "[[EDIT: Pricing or 'Contact us for pricing' — this question is hidden until you fill it in.]]"
+      - q: "How is patient data protected?"
+        a: "[[EDIT: Describe hosting, access control and backups accurately — this question is hidden until you fill it in. Have it reviewed; do not make claims you cannot prove.]]"
+  cta:
+    title: "See Dr. Assistant in action."
+    lead: "Open the platform, or talk to us about bringing it to your clinic."
+    secondaryButton: "Contact AXYRA"
+
+ar:
+  name: "Dr. Assistant"
+  category: "الرعاية الصحية"
+  slogan: "وصفات أذكى. رعاية أفضل. من أجل غدٍ أكثر صحة."
+  summary: "منصة ذكية لإدارة الوصفات الطبية للأطباء والعيادات والصيادلة."
+  seo:
+    title: "Dr. Assistant — منصة الوصفات الطبية الذكية"
+    description: "Dr. Assistant من AXYRA: وصفات إلكترونية وسجلات مرضى ومواعيد وتحقق برمز QR للأطباء والعيادات والصيادلة — بالعربية والإنجليزية."
+  visitButton: "زيارة Dr. Assistant"
+  screenshotNote: "الصور تعرض بيانات تجريبية."
+  hero:
+    eyebrow: "Dr. Assistant من AXYRA"
+    lead: "منصة فلسطين الذكية للوصفات الطبية الإلكترونية وإدارة المرضى."
+  highlights:
+    - title: "وصفات إلكترونية خلال ثوانٍ"
+      text: "أدوية وفحوصات وأشعة ونظارات وملاحظات في وصفة واحدة بهويتك."
+    - title: "سجلات مرضى كاملة"
+      text: "الحساسية والتاريخ وكل الوصفات السابقة بلمسة واحدة."
+    - title: "مواعيد ذكية"
+      text: "جدول يومي مع تذكيرات واتساب لمرضاك."
+    - title: "تحقق برمز QR"
+      text: "تمسح الصيدليات الرمز للتأكد من أن الوصفة أصلية."
+    - title: "عربي وإنجليزي"
+      text: "واجهة ووصفات عربية كاملة من اليمين إلى اليسار."
+  showcase:
+    - title: "وصفة واحدة. وكل شيء فيها."
+      text: "أدوية وفحوصات وأشعة ونظارات وملاحظات في وصفة واحدة بهويتك — مع رمز QR تمسحه الصيدليات للتأكد من أصالتها."
+    - title: "كل مريض بلمسة واحدة."
+      text: "الحساسية والتاريخ وكل الوصفات السابقة — جاهزة قبل أن تكتب الوصفة."
+    - title: "يوم أهدأ في العيادة."
+      text: "اطّلع على جدول اليوم بنظرة واحدة، مع تذكيرات واتساب لمرضاك."
+  features:
+    eyebrow: "الميزات"
+    title: "كل ما تحتاجه العيادة. ولا شيء زائد."
+  audience:
+    eyebrow: "لمن صُمّم"
+    title: "مصمّم لرحلة الوصفة الطبية كاملة."
+    items:
+      - title: "الأطباء"
+        text: "اكتب وصفات واضحة وكاملة خلال ثوانٍ، واطّلع على التاريخ الكامل لكل مريض قبل الوصف."
+      - title: "العيادات"
+        text: "أدِر سجلات المرضى والمواعيد والفريق من مساحة عمل مشتركة واحدة."
+      - title: "الصيادلة"
+        text: "امسح رمز QR على الوصفة للتأكد من أنها أصلية قبل صرفها."
+  howItWorks:
+    eyebrow: "كيف يعمل"
+    title: "من الزيارة إلى وصفة موثّقة."
+    steps:
+      - title: "اختر المريض أو أضفه"
+        text: "ابحث بالاسم أو رقم الهوية أو الهاتف — أو سجّل مريضًا جديدًا خلال لحظات."
+      - title: "أنشئ الوصفة"
+        text: "أضف الأدوية والفحوصات المخبرية والأشعة وعدسات النظارات وملاحظة الطبيب في صفحة واحدة."
+      - title: "أصدرها وشاركها"
+        text: "اطبعها أو احفظها PDF أو أرسلها للمريض — بهوية عيادتك."
+      - title: "التحقق في الصيدلية"
+        text: "يمسح الصيدلي رمز QR للتأكد من أن الوصفة أصلية."
+  benefits:
+    eyebrow: "الفوائد"
+    title: "الرعاية الأفضل تبدأ بوصفة أوضح."
+    items:
+      - title: "وصفات مقروءة وكاملة"
+        text: "الوصفات المطبوعة والمنظّمة تزيل الالتباس الناتج عن خط اليد."
+      - title: "وقت أقل للأوراق"
+        text: "بيانات المريض ووصفاته السابقة جاهزة عندما تحتاجها."
+      - title: "ثقة أكبر بين العيادة والصيدلية"
+        text: "يساعد التحقق برمز QR الصيدليات على التأكد من أصالة الوصفة."
+      - title: "مرضى يلتزمون بمواعيدهم"
+        text: "تصل تذكيرات المواعيد إلى المرضى عبر واتساب."
+  platforms:
+    eyebrow: "متوفر على"
+    title: "استخدمه أينما تعمل."
+    items:
+      - title: "الويب"
+        text: "يعمل في المتصفح ويمكن تثبيته كتطبيق."
+      - title: "ويندوز"
+        text: "تطبيق سطح مكتب لحاسوب العيادة."
+      - title: "أندرويد"
+        text: "عيادتك في جيبك."
+  faq:
+    eyebrow: "الأسئلة الشائعة"
+    title: "أسئلة وأجوبة."
+    items:
+      - q: "لمن صُمّم Dr. Assistant؟"
+        a: "للأطباء والعيادات والصيادلة. يستخدمه الأطباء والعيادات لكتابة الوصفات وإدارة المرضى والمواعيد، ويستخدم الصيادلة رمز QR للتحقق من الوصفات."
+      - q: "هل يعمل باللغة العربية؟"
+        a: "نعم. لدى Dr. Assistant واجهة عربية كاملة من اليمين إلى اليسار، ويمكن إصدار الوصفات بالعربية أو الإنجليزية."
+      - q: "ماذا يمكنني أن أضيف إلى الوصفة؟"
+        a: "الأدوية والفحوصات المخبرية وطلبات الأشعة والتصوير وعدسات النظارات وملاحظة الطبيب — في وصفة واحدة بهويتك."
+      - q: "كيف تتحقق الصيدليات من الوصفة؟"
+        a: "تحمل كل وصفة رمز QR، ويمسحه الصيدلي للتأكد من أن الوصفة أصلية."
+      - q: "على أي أجهزة يعمل؟"
+        a: "يعمل في متصفح الويب، وتتوفر تطبيقات لويندوز وأندرويد."
+      - q: "كم التكلفة؟"
+      - q: "كيف تتم حماية بيانات المرضى؟"
+  cta:
+    title: "شاهد Dr. Assistant أثناء العمل."
+    lead: "افتح المنصة، أو تحدّث معنا عن استخدامها في عيادتك."
+    secondaryButton: "تواصل مع AXYRA"

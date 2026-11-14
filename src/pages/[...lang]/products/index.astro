@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { loadLocalized, loadProducts, langPaths, type Lang } from '../../../lib/content';
+
+export function getStaticPaths() { return langPaths('products'); }
+const { lang } = Astro.props as { lang: Lang };
+const t = loadLocalized('pages/products.yaml', lang);
+const products = loadProducts(lang);
+---
+<Base lang={lang} path="/products/" title={t.seo.title} description={t.seo.description}>
+  <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} lead={t.hero.lead} />
+  <section class="section" style="padding-top:0">
+    <div class="container container--wide">
+      <div class="grid grid-2 list">
+        {products.map((p, i) => <ProductCard product={p} lang={lang} learnMore={t.card.learnMore} featured={i === 0} />)}
+      </div>
+      {products.length < 3 && <p class="center muted reveal" style="margin-top:56px">{t.card.comingSoon}</p>}
+    </div>
+  </section>
+</Base>
+<style>
+  .list > :global(.featured) { grid-column: 1 / -1; }
+</style>

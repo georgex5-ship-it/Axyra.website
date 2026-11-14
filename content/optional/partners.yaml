@@ -1,0 +1,15 @@
+# PARTNERS — hidden until you set  pages: partners: true  in settings.yaml.
+# Only list real partners who have agreed to be named.
+en:
+  seo: { title: "Partners", description: "Organisations AXYRA works with." }
+  hero: { eyebrow: "Partners", title: "Better together.", lead: "The organisations we work with." }
+  empty: "Partner announcements coming soon."
+  items:
+    - title: "[[EDIT: Partner name]]"
+      date: "[[EDIT: Type of partnership]]"
+      text: "[[EDIT: One sentence about the partnership.]]"
+      link: "[[EDIT: Partner website]]"
+ar:
+  seo: { title: "الشركاء", description: "المؤسسات التي تعمل معها AXYRA." }
+  hero: { eyebrow: "الشركاء", title: "معًا أفضل.", lead: "المؤسسات التي نعمل معها." }
+  empty: "سنعلن عن شركائنا قريبًا."

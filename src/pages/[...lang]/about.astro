@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { readYaml, loadLocalized, langPaths, localePath, pageEnabled, onlyFilled, type Lang } from '../../lib/content';
+
+export function getStaticPaths() { return langPaths('about'); }
+const { lang } = Astro.props as { lang: Lang };
+const show = readYaml('pages/about.yaml').sections ?? {};
+const t = loadLocalized('pages/about.yaml', lang);
+const facts = onlyFilled(t.facts?.items, ['label', 'value']);
+---
+<Base lang={lang} path="/about/" title={t.seo.title} description={t.seo.description}>
+  <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} lead={t.hero.lead} />
+
+  {show.story !== false && (
+    <section class="section section--tight">
+      <div class="container story">
+        <header class="reveal">
+          <span class="eyebrow">{t.story.eyebrow}</span>
+          <h2 class="title">{t.story.title}</h2>
+        </header>
+        <div class="stack reveal" style="--stack:22px">
+          {(t.story.paragraphs ?? []).map((para: string) => <p class="story-p">{para}</p>)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {show.facts && facts.length > 0 && (
+    <section class="section--tight">
+      <div class="container">
+        <dl class="facts reveal">
+          {facts.map((f: any) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  {show.missionVision !== false && (
+    <section class="section theme-dark mv">
+      <div class="mv-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="mv-block reveal">
+          <span class="eyebrow">{t.mission.label}</span>
+          <p class="mv-text">{t.mission.text}</p>
+        </div>
+        <div class="x-divider reveal" aria-hidden="true"><img src="/brand/axyra-x-mark.svg" alt="" width="417" height="320" loading="lazy" /></div>
+        <div class="mv-block reveal">
+          <span class="eyebrow">{t.vision.label}</span>
+          <p class="mv-text">{t.vision.text}</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {show.values !== false && (
+    <section class="section">
+      <div class="container">
+        <header class="section-head center reveal">
+          <span class="eyebrow">{t.values.eyebrow}</span>
+          <h2 class="title">{t.values.title}</h2>
+        </header>
+        <div class="grid grid-4">
+          {(t.values.items ?? []).map((v: any, i: number) => (
+            <div class="tile reveal" style={`--delay:${i * 0.07}s`}>
+              <div class="tile-icon"><Icon name={v.icon || 'check'} /></div>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {show.approach !== false && (
+    <section class="section section--alt">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="eyebrow">{t.approach.eyebrow}</span>
+          <h2 class="title">{t.approach.title}</h2>
+        </header>
+        <ol class="steps" role="list">
+          {(t.approach.steps ?? []).map((s: any, i: number) => (
+            <li class="reveal" style={`--delay:${i * 0.07}s`}>
+              <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.title}</h3>
+              <p class="muted">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  {show.cta !== false && pageEnabled('contact') && (
+    <CtaBand title={t.cta.title} lead={t.cta.lead} button={t.cta.button} href={localePath(lang, '/contact/')} />
+  )}
+</Base>
+
+<style>
+  .story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .story-p { font-size: clamp(1.125rem, 1.6vw, 1.3125rem); line-height: 1.6; color: var(--text-muted); }
+  .story-p:first-child { color: var(--text); font-weight: 500; }
+  @media (max-width: 800px) { .story { grid-template-columns: 1fr; } }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+  .facts dt { color: var(--text-muted); font-size: .875rem; }
+  .facts dd { margin: 4px 0 0; font-size: 1.5rem; font-weight: 700; }
+
+  .mv { overflow: hidden; }
+  .mv-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(40% 50% at 50% 50%, rgba(139,77,242,.18), transparent 70%); }
+  .mv .container { position: relative; max-width: calc(980px + var(--gutter) * 2); text-align: center; }
+  .mv-text { font-size: clamp(1.75rem, 3.6vw, 3rem); font-weight: 700; line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
+  [dir='rtl'] .mv-text { letter-spacing: 0; line-height: 1.5; }
+  .mv .x-divider { margin-block: clamp(48px, 7vw, 88px); color: rgba(255,255,255,.14); }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(32px, 4vw, 48px); }
+  .steps li { border-top: 2px solid var(--line); padding-top: 24px; }
+  .num { display: block; font-size: .875rem; font-weight: 700; letter-spacing: .1em; margin-bottom: 18px; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; width: max-content; }
+  .steps h3 { font-size: 1.375rem; margin-bottom: 8px; }
+</style>

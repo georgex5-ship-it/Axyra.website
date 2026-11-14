@@ -1,0 +1,134 @@
+# ════════════════════════════════════════════════════════════════
+#  ABOUT — company story, mission, vision, values, approach.
+#  Mission & Vision here are also shown on the Home page.
+#  Alternative wordings to choose from: content/mission-vision-options.md
+#  sections: true/false shows or hides each block.
+# ════════════════════════════════════════════════════════════════
+
+sections:
+  story: true
+  missionVision: true
+  values: true
+  approach: true
+  facts: false        # Turn on once you fill in the real facts below (founded, team, location).
+  cta: true
+
+en:
+  seo:
+    title: "About"
+    description: "AXYRA is a technology solutions company from Palestine, building apps and digital products for people and businesses."
+  hero:
+    eyebrow: "About AXYRA"
+    title: "We build technology that makes work simpler."
+    lead: "AXYRA is a technology solutions company from Palestine. We design and build apps and digital products for people and businesses — with an international outlook."
+  story:
+    eyebrow: "Our story"
+    title: "It starts with a simple question."
+    paragraphs:
+      - "Why is so much everyday work still slow, manual and hard to trust? That question is where AXYRA begins."
+      - "Our first answer is Dr. Assistant — a platform that replaces handwritten prescriptions with clear, verifiable digital ones, in Arabic and English."
+      - "The same thinking guides everything we build next: understand the real work, remove the friction, and keep it simple."
+  mission:
+    label: "Our mission"
+    text: "To build practical apps and digital products that make work simpler and smarter for people and businesses — starting in Palestine, built for the world."
+  vision:
+    label: "Our vision"
+    text: "A future where technology from our region helps every business and community grow with confidence, toward a brighter tomorrow."
+  values:
+    eyebrow: "Our values"
+    title: "What we stand for."
+    items:
+      - icon: eye
+        title: "Clarity"
+        text: "Simple products, plain language, honest answers."
+      - icon: shield-check
+        title: "Integrity"
+        text: "We only promise what we can deliver — and then we deliver it."
+      - icon: heart-handshake
+        title: "Care"
+        text: "Behind every screen is a person with real work to do. We design for them."
+      - icon: gem
+        title: "Craft"
+        text: "Details matter. We build things to work well and to last."
+  approach:
+    eyebrow: "Our approach"
+    title: "How we work."
+    steps:
+      - title: "Understand"
+        text: "We start with the people and the work — not with the technology."
+      - title: "Design"
+        text: "We shape a clear, bilingual experience before writing a line of code."
+      - title: "Build"
+        text: "We build in small, tested steps, so you see real progress early."
+      - title: "Support"
+        text: "We stay after launch, improving the product as needs grow."
+  facts:
+    eyebrow: "At a glance"
+    items:
+      - label: "Founded"
+        value: "[[EDIT: Year]]"
+      - label: "Headquarters"
+        value: "[[EDIT: City, Palestine]]"
+      - label: "Focus"
+        value: "Technology solutions"
+  cta:
+    title: "Let's work together."
+    lead: "Have an idea, a challenge or a question? We'd like to hear it."
+    button: "Get in touch"
+
+ar:
+  seo:
+    title: "من نحن"
+    description: "AXYRA شركة حلول تقنية من فلسطين، تبني التطبيقات والمنتجات الرقمية للأفراد والشركات."
+  hero:
+    eyebrow: "عن AXYRA"
+    title: "نبني تقنية تجعل العمل أبسط."
+    lead: "AXYRA شركة حلول تقنية من فلسطين. نصمّم ونبني تطبيقات ومنتجات رقمية للأفراد والشركات — بنظرة عالمية."
+  story:
+    eyebrow: "قصتنا"
+    title: "تبدأ بسؤال بسيط."
+    paragraphs:
+      - "لماذا لا يزال الكثير من العمل اليومي بطيئًا ويدويًا ويصعب الوثوق به؟ من هذا السؤال تبدأ AXYRA."
+      - "إجابتنا الأولى هي Dr. Assistant — منصة تستبدل الوصفات المكتوبة بخط اليد بوصفات رقمية واضحة يمكن التحقق منها، بالعربية والإنجليزية."
+      - "ويوجّه التفكير نفسه كل ما نبنيه بعد ذلك: أن نفهم العمل الحقيقي، ونزيل العوائق، ونحافظ على البساطة."
+  mission:
+    label: "رسالتنا"
+    text: "أن نبني تطبيقات ومنتجات رقمية عملية تجعل العمل أبسط وأذكى للأفراد والشركات — انطلاقًا من فلسطين، وبمعايير تليق بالعالم."
+  vision:
+    label: "رؤيتنا"
+    text: "مستقبلٌ تساعد فيه التقنيةُ النابعة من منطقتنا كلَّ شركة ومجتمع على النمو بثقة، نحو غدٍ أكثر إشراقًا."
+  values:
+    eyebrow: "قيمنا"
+    title: "ما نؤمن به."
+    items:
+      - title: "الوضوح"
+        text: "منتجات بسيطة، ولغة واضحة، وإجابات صادقة."
+      - title: "النزاهة"
+        text: "لا نعد إلا بما نستطيع تحقيقه — ثم نحققه."
+      - title: "العناية"
+        text: "خلف كل شاشة إنسان لديه عمل حقيقي. نصمّم من أجله."
+      - title: "الإتقان"
+        text: "التفاصيل مهمة. نبني ليعمل جيدًا ويدوم."
+  approach:
+    eyebrow: "منهجنا"
+    title: "كيف نعمل."
+    steps:
+      - title: "نفهم"
+        text: "نبدأ بالناس وبالعمل — لا بالتقنية."
+      - title: "نصمّم"
+        text: "نرسم تجربة واضحة ثنائية اللغة قبل كتابة أي سطر برمجي."
+      - title: "نبني"
+        text: "نبني بخطوات صغيرة ومختبرة، لترى تقدمًا حقيقيًا مبكرًا."
+      - title: "ندعم"
+        text: "نبقى بعد الإطلاق، ونطوّر المنتج مع نمو الاحتياجات."
+  facts:
+    eyebrow: "لمحة سريعة"
+    items:
+      - label: "سنة التأسيس"
+      - label: "المقر الرئيسي"
+      - label: "مجال العمل"
+        value: "حلول تقنية"
+  cta:
+    title: "لنعمل معًا."
+    lead: "لديك فكرة أو تحدٍّ أو سؤال؟ يسعدنا أن نسمعه."
+    button: "تواصل معنا"

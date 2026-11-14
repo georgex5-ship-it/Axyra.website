@@ -1,0 +1,136 @@
+---
+import Icon from './Icon.astro';
+import { loadLocalized, localePath, pageEnabled, languages, type Lang } from '../lib/content';
+interface Props { lang: Lang; path: string }
+const { lang, path } = Astro.props;
+const t = loadLocalized('pages/common.yaml', lang);
+const otherLang: Lang = lang === 'en' ? 'ar' : 'en';
+const hasOther = languages().includes(otherLang) && !['/404/', '/styleguide/'].includes(path);
+const items = ['about', 'solutions', 'products', 'news', 'careers', 'partners', 'contact']
+  .filter(pageEnabled)
+  .map((k) => ({ key: k, href: localePath(lang, `/${k}/`), label: t.nav[k] }));
+const isCurrent = (href: string) => {
+  const p = localePath(lang, path);
+  return p === href || (href !== localePath(lang, '/') && p.startsWith(href));
+};
+---
+<header class="site-header" data-header>
+  <div class="container container--wide bar">
+    <a class="brand" href={localePath(lang, '/')} aria-label="AXYRA — home">
+      <img src="/brand/axyra-logo-color-tight.svg" alt="AXYRA" width="868" height="290" />
+    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        {items.map((i) => (
+          <li><a href={i.href} aria-current={isCurrent(i.href) ? 'page' : undefined}>{i.label}</a></li>
+        ))}
+      </ul>
+      {hasOther && (
+        <a class="lang-mobile" href={localePath(otherLang, path)} hreflang={otherLang} lang={otherLang}>
+          <Icon name="globe" /> {t.languageSwitch}
+        </a>
+      )}
+    </nav>
+
+    <div class="tools">
+      {hasOther && (
+        <a class="lang" href={localePath(otherLang, path)} hreflang={otherLang} lang={otherLang} title={t.languageSwitchLabel}>
+          {t.languageSwitch}
+        </a>
+      )}
+      <button class="icon-btn" type="button" data-theme-toggle aria-label={t.themeToggle}>
+        <Icon name="sun" class="i-sun" /><Icon name="moon" class="i-moon" />
+      </button>
+      <button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false"
+        data-label-open={t.menuOpen} data-label-close={t.menuClose} aria-label={t.menuOpen}>
+        <Icon name="menu" class="i-menu" /><Icon name="x" class="i-close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50; height: var(--header-h);
+    background: var(--header-bg);
+    -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid transparent; transition: border-color .3s var(--ease);
+  }
+  .site-header.is-scrolled { border-bottom-color: var(--line); }
+  .bar { height: 100%; display: flex; align-items: center; gap: 24px; }
+  .brand { display: flex; align-items: center; flex: none; margin-inline-start: -6px; }
+  .brand img { height: 30px; width: auto; }
+  .nav { margin-inline-start: auto; }
+  .nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .nav a { display: block; padding: 8px 12px; font-size: .875rem; font-weight: 500; color: var(--text); opacity: .82; border-radius: 8px; transition: opacity .2s; }
+  .nav a:hover { opacity: 1; text-decoration: none; }
+  .nav a[aria-current='page'] { opacity: 1; font-weight: 700; }
+  .lang-mobile { display: none !important; }
+  .tools { display: flex; align-items: center; gap: 4px; }
+  .lang { font-size: .875rem; font-weight: 600; color: var(--text); padding: 8px 10px; border-radius: 8px; opacity: .82; }
+  .lang:hover { opacity: 1; text-decoration: none; }
+  .icon-btn { width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; border-radius: 10px; cursor: pointer; color: var(--text); }
+  .icon-btn:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+  .icon-btn :global(.icon) { width: 19px; height: 19px; }
+  /* Show the icon for the theme you'll switch TO */
+  :global(:root) .icon-btn :global(.i-moon) { display: block; }
+  :global(:root) .icon-btn :global(.i-sun) { display: none; }
+  :global(:root[data-theme='dark']) .icon-btn :global(.i-moon) { display: none; }
+  :global(:root[data-theme='dark']) .icon-btn :global(.i-sun) { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .icon-btn :global(.i-moon) { display: none; }
+    :global(:root:not([data-theme='light'])) .icon-btn :global(.i-sun) { display: block; }
+  }
+  .menu-btn { display: none; }
+  .menu-btn :global(.i-close) { display: none; }
+
+  @media (max-width: 860px) {
+    .menu-btn { display: grid; }
+    .tools { margin-inline-start: auto; }
+    .lang { display: none; }
+    .nav {
+      /* The blurred header becomes the positioning box, so size the panel explicitly. */
+      position: fixed; top: var(--header-h); left: 0; right: 0; height: calc(100dvh - var(--header-h)); background: var(--bg);
+      padding: 24px var(--gutter) 48px; overflow-y: auto;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity .3s var(--ease), transform .3s var(--ease), visibility 0s .3s;
+    }
+    .nav ul { flex-direction: column; gap: 0; }
+    .nav ul a { font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; padding: 12px 0; opacity: 1; border-bottom: 1px solid var(--line); border-radius: 0; }
+    .lang-mobile { display: inline-flex !important; align-items: center; gap: 8px; margin-top: 28px; font-weight: 600; color: var(--text); }
+    .site-header.is-open .nav { opacity: 1; visibility: visible; transform: none; transition: opacity .3s var(--ease), transform .3s var(--ease); }
+    .site-header.is-open { background: var(--bg); }
+    .site-header.is-open .menu-btn :global(.i-menu) { display: none; }
+    .site-header.is-open .menu-btn :global(.i-close) { display: block; }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const themeBtn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 4);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+  const setMenu = (open: boolean) => {
+    if (!header || !menuBtn) return;
+    header.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', (open ? menuBtn.dataset.labelClose : menuBtn.dataset.labelOpen) || '');
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  };
+  menuBtn?.addEventListener('click', () => setMenu(!header?.classList.contains('is-open')));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  window.matchMedia('(min-width: 861px)').addEventListener('change', (e) => e.matches && setMenu(false));
+
+  themeBtn?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const current = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('axyra-theme', next); } catch {}
+  });
+</script>

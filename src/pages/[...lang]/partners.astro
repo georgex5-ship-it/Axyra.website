@@ -1,0 +1,7 @@
+---
+import SimpleListPage from '../../components/SimpleListPage.astro';
+import { langPaths, type Lang } from '../../lib/content';
+export function getStaticPaths() { return langPaths('partners'); }
+const { lang } = Astro.props as { lang: Lang };
+---
+<SimpleListPage lang={lang} key="partners" />

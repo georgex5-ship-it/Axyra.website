@@ -1,0 +1,91 @@
+---
+// Internal reference page (not in menus, not indexed): shows the design system.
+import Base from '../layouts/Base.astro';
+import AnimatedLogo from '../components/AnimatedLogo.astro';
+import Icon from '../components/Icon.astro';
+import { settings } from '../lib/content';
+const swatches = [
+  ['Violet', '#8B4DF2', 'from logo'], ['Blue', '#2F7BFF', 'from logo'], ['Cyan', '#22D0F5', 'from logo'],
+  ['Indigo', '#3A5BF0', 'from logo'], ['Periwinkle', '#8493D6', 'from logo'], ['Lavender', '#9C90D8', 'from logo'],
+  ['Midnight navy', '#0A0B1E', 'from logo'], ['Mist', '#9AA6C9', 'from logo'],
+  ['Link blue', '#1D5FE0', 'derived · AA text'], ['Accent violet', '#7B3FE4', 'derived · AA text'],
+];
+---
+<Base lang="en" path="/styleguide/" title="Design system" noindex>
+  <section class="section section--tight">
+    <div class="container center">
+      <span class="eyebrow">Stage 1 · Design system</span>
+      <h1 class="display">Clarity, <span class="gradient-text">by design.</span></h1>
+      <p class="lead measure-wide" style="margin-top:24px">Large type, generous space, one idea per screen. The brand gradient is a spark, never wallpaper.</p>
+      <div class="actions">
+        <a class="btn" href="#type">Primary button</a>
+        <a class="btn btn--ghost" href="#type">Secondary</a>
+        <a class="link-arrow" href="#type">Learn more <Icon name="arrow-right" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight theme-dark">
+    <div class="container center">
+      <div style="max-width:720px;margin-inline:auto"><AnimatedLogo withSlogan slogan={settings.company.slogan} /></div>
+      <p class="muted small" style="margin-top:24px">Animated logo — your original sequence, at 0.65× duration.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <h2 class="title" style="margin-bottom:40px">Logo</h2>
+      <div class="grid grid-3">
+        <div class="tile" style="background:#fff;border:1px solid var(--line)"><img src="/brand/axyra-logo-color-tight.svg" alt="AXYRA colour logo on white" width="868" height="290" /></div>
+        <div class="tile theme-dark"><img src="/brand/axyra-logo-color-tight.svg" alt="AXYRA colour logo on navy" width="868" height="290" /></div>
+        <div class="tile" style="background:#fff;border:1px solid var(--line)"><img src="/brand/axyra-logo-mono-black.svg" alt="AXYRA one-colour logo" width="855" height="270" /></div>
+      </div>
+      <div class="x-divider" style="margin-top:64px"><img src="/brand/axyra-x-mark.svg" alt="" width="417" height="320" /></div>
+    </div>
+  </section>
+
+  <section class="section section--tight section--alt">
+    <div class="container">
+      <h2 class="title" style="margin-bottom:40px">Colour</h2>
+      <div class="grid grid-4">
+        {swatches.map(([n, hex, src]) => (
+          <div class="tile" style="padding:0">
+            <div style={`height:120px;background:${hex}`}></div>
+            <div style="padding:18px 20px"><strong>{n}</strong><br /><code>{hex}</code><br /><span class="muted small">{src}</span></div>
+          </div>
+        ))}
+      </div>
+      <div class="tile" style="margin-top:24px;height:120px;background:var(--brand-gradient)"></div>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="type">
+    <div class="container stack" style="--stack:28px">
+      <h2 class="title">Typography</h2>
+      <p class="eyebrow">Eyebrow · Montserrat 700</p>
+      <p class="display">Display 800</p>
+      <p class="headline">Headline 700</p>
+      <p class="title">Title 700</p>
+      <p class="subtitle">Subtitle 600</p>
+      <p class="lead measure-wide">Lead text, Montserrat 500. Short sentences. Calm, confident, clear.</p>
+      <p class="measure-wide">Body text, Montserrat 400 at 17px with 1.65 line height for comfortable reading on every screen.</p>
+      <p lang="ar" dir="rtl" style="font-family:var(--font-arabic);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:700;line-height:1.3">نبتكر غدًا أكثر إشراقًا</p>
+      <p lang="ar" dir="rtl" style="font-family:var(--font-arabic)" class="lead">النص العربي بخط Cairo، بمسافات أسطر أوسع لراحة القراءة.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight section--alt">
+    <div class="container">
+      <h2 class="title" style="margin-bottom:40px">Tiles</h2>
+      <div class="grid grid-3">
+        {[['layers', 'Digital Solutions'], ['sparkles', 'Technology & Innovation'], ['network', 'Business Connectivity']].map(([i, h], n) => (
+          <a class="tile tile--link reveal" style={`--delay:${n * 0.08}s`} href="#type">
+            <div class="tile-icon"><Icon name={i} /></div>
+            <h3>{h}</h3>
+            <p>Sample card text to show spacing, hierarchy and hover lift.</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

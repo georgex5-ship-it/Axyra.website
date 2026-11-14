@@ -1,0 +1,134 @@
+---
+import '@fontsource-variable/montserrat';
+import '@fontsource-variable/cairo';
+import montserratLatin from '@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url';
+import cairoArabic from '@fontsource-variable/cairo/files/cairo-arabic-wght-normal.woff2?url';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { settings, filled, siteUrl, languages, localePath, loadLocalized, type Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  /** Page path without language prefix, e.g. "/about/" */
+  path: string;
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  bodyClass?: string;
+}
+const { lang, path, title, description = '', ogImage = '/og/axyra-og.jpg', noindex = false, bodyClass = '' } = Astro.props;
+const t = loadLocalized('pages/common.yaml', lang);
+const company = settings.company.name;
+const fullTitle = title ? `${title} — ${company}` : `${company} — ${settings.company.slogan}`;
+const base = siteUrl();
+const abs = (p: string) => (base ? `${base}${p}` : p);
+const canonical = abs(localePath(lang, path));
+const indexable = settings.site?.allowIndexing === true && !noindex && !!base;
+const dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+const c = settings.contact ?? {};
+const sameAs = Object.values(settings.social ?? {}).filter((v) => filled(v));
+const org: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: company,
+  slogan: settings.company.slogan,
+  description: t.footer.tagline,
+};
+if (base) { org.url = base; org.logo = `${base}/brand/axyra-logo-color.svg`; }
+if (filled(settings.company.legalName)) org.legalName = settings.company.legalName;
+if (filled(c.email)) org.email = c.email;
+if (filled(c.phone)) org.telephone = c.phone;
+if (filled(c.city)) org.address = { '@type': 'PostalAddress', addressLocality: c.city, addressCountry: c.country, ...(filled(c.address) ? { streetAddress: c.address } : {}) };
+if (filled(settings.company.foundedYear)) org.foundingDate = String(settings.company.foundedYear);
+if (sameAs.length) org.sameAs = sameAs;
+
+const analytics = settings.analytics?.provider === 'cloudflare' && filled(settings.analytics?.cloudflareToken)
+  ? settings.analytics.cloudflareToken : null;
+const highlight = import.meta.env.DEV && settings.site?.highlightPlaceholdersInPreview;
+---
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    {base && <link rel="canonical" href={canonical} />}
+    {base && languages().map((l) => <link rel="alternate" hreflang={l} href={abs(localePath(l, path))} />)}
+    {base && <link rel="alternate" hreflang="x-default" href={abs(localePath('en', path))} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={company} />
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={abs(ogImage)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={lang === 'ar' ? 'ar_PS' : 'en_US'} />
+    {base && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0A0B1E" media="(prefers-color-scheme: dark)" />
+
+    {lang === 'ar'
+      ? <link rel="preload" href={cairoArabic} as="font" type="font/woff2" crossorigin />
+      : <link rel="preload" href={montserratLatin} as="font" type="font/woff2" crossorigin />}
+
+    <!-- Apply saved theme before paint (prevents a flash). -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement; d.classList.add('js');
+        try { var t = localStorage.getItem('axyra-theme'); if (t === 'dark' || t === 'light') d.dataset.theme = t; } catch (e) {}
+      })();
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">{t.skipToContent}</a>
+    <Header lang={lang} path={path} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      // Scroll reveal: elements with class="reveal" fade up when they enter the screen.
+      const els = document.querySelectorAll<HTMLElement>('.reveal');
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-in'));
+      }
+    </script>
+
+    {highlight && (
+      <script is:inline>
+        // PREVIEW ONLY: outline every [[EDIT ...]] placeholder so you can find it.
+        (function () {
+          var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n, hits = [];
+          while ((n = w.nextNode())) if (n.nodeValue.indexOf('[[EDIT') > -1) hits.push(n);
+          hits.forEach(function (node) {
+            var m = document.createElement('mark'); m.className = 'edit-mark'; m.textContent = node.nodeValue;
+            node.parentNode.replaceChild(m, node);
+          });
+        })();
+      </script>
+    )}
+    {analytics && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: analytics })} />
+    )}
+  </body>
+</html>

@@ -1,0 +1,107 @@
+/* ════════════════════════════════════════════════════════════════
+   AXYRA BRAND COLOURS & DESIGN TOKENS
+   ────────────────────────────────────────────────────────────────
+   This is the ONE file to change colours, fonts and corner radius.
+   Colours marked "from logo" were taken exactly from the AXYRA logo
+   files. Colours marked "derived" are darker/lighter shades of the
+   logo colours, chosen so text passes accessibility contrast (WCAG AA).
+   ════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand colours (from logo) ───────────────────────────── */
+  --brand-violet: #8B4DF2;      /* X ribbon start  */
+  --brand-blue: #2F7BFF;        /* X ribbon middle */
+  --brand-cyan: #22D0F5;        /* X ribbon end    */
+  --brand-indigo: #3A5BF0;      /* second ribbon   */
+  --brand-periwinkle: #8493D6;  /* A Y R A letters */
+  --brand-lavender: #9C90D8;    /* A Y R A letters */
+  --brand-navy: #0A0B1E;        /* midnight navy   */
+  --brand-mist: #9AA6C9;        /* slogan grey     */
+
+  /* The brand gradient — use sparingly, as an accent only. */
+  --brand-gradient: linear-gradient(100deg, var(--brand-violet) 0%, var(--brand-blue) 45%, var(--brand-cyan) 100%);
+
+  /* ── Dr. Assistant colours (from its logo) ───────────────── */
+  --dra-sky: #38BDF8;
+  --dra-emerald: #34D399;
+  --dra-slate: #64748B;
+  --dra-ink: #1E293B;
+  --dra-gradient: linear-gradient(90deg, var(--dra-sky), var(--dra-emerald));
+
+  /* ── Fonts ───────────────────────────────────────────────── */
+  --font-latin: 'Montserrat Variable', 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-arabic: 'Cairo Variable', 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+
+  /* ── Shape & spacing ─────────────────────────────────────── */
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  --container: 1120px;
+  --container-wide: 1320px;
+  --gutter: clamp(20px, 5vw, 40px);
+  --section-space: clamp(96px, 14vw, 180px);
+  --header-h: 56px;
+
+  /* ── Motion ──────────────────────────────────────────────── */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: .7s;
+  --logo-speed: .65;   /* 1 = original logo animation timing, smaller = faster */
+
+  /* ── LIGHT THEME (default) ───────────────────────────────── */
+  --bg: #FFFFFF;
+  --bg-alt: #F5F5FA;
+  --surface: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --text: #0A0B1E;
+  --text-muted: #55597A;          /* derived — 6.2:1 on --bg-alt */
+  --line: rgba(10, 11, 30, .10);
+  --link: #1D5FE0;                /* derived from brand blue — 5.1:1 */
+  --accent: #7B3FE4;              /* derived from brand violet — 5.3:1 */
+  --header-bg: rgba(255, 255, 255, .72);
+  --shadow: 0 1px 2px rgba(10, 11, 30, .04), 0 12px 40px rgba(10, 11, 30, .08);
+  --btn-bg: #0A0B1E;
+  --btn-text: #FFFFFF;
+  --focus: #1D5FE0;
+  color-scheme: light;
+}
+
+/* ── DARK THEME ─────────────────────────────────────────────── */
+:root[data-theme="dark"] {
+  --bg: #0A0B1E;
+  --bg-alt: #10122A;
+  --surface: #14162F;
+  --surface-raised: #1A1D3A;
+  --text: #F4F5FB;
+  --text-muted: #A3A9C9;          /* derived — 7.6:1 */
+  --line: rgba(244, 245, 251, .12);
+  --link: #7FB0FF;                /* derived — 8:1 */
+  --accent: #B79BFF;              /* derived — 7.7:1 */
+  --header-bg: rgba(10, 11, 30, .72);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 16px 48px rgba(0, 0, 0, .35);
+  --btn-bg: #F4F5FB;
+  --btn-text: #0A0B1E;
+  --focus: #7FB0FF;
+  color-scheme: dark;
+}
+
+/* Follow the visitor's system setting until they choose with the toggle. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A0B1E;
+    --bg-alt: #10122A;
+    --surface: #14162F;
+    --surface-raised: #1A1D3A;
+    --text: #F4F5FB;
+    --text-muted: #A3A9C9;
+    --line: rgba(244, 245, 251, .12);
+    --link: #7FB0FF;
+    --accent: #B79BFF;
+    --header-bg: rgba(10, 11, 30, .72);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 16px 48px rgba(0, 0, 0, .35);
+    --btn-bg: #F4F5FB;
+    --btn-text: #0A0B1E;
+    --focus: #7FB0FF;
+    color-scheme: dark;
+  }
+}

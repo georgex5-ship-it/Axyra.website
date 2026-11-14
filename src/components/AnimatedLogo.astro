@@ -1,0 +1,70 @@
+---
+// The AXYRA animated logo — artwork, masks and animation sequence taken unchanged
+// from the existing Dr. Assistant build (see brand-source/axyra/axyra-logo-animated.source.html).
+// Only differences: timings are scaled by --logo-speed (tokens.css), and the slogan
+// uses the site font (Montserrat Light) instead of Sora.
+interface Props { withSlogan?: boolean; label?: string; slogan?: string; class?: string }
+const { withSlogan = false, label = 'AXYRA', slogan = '', class: cls = '' } = Astro.props;
+const id = Math.random().toString(36).slice(2, 8);
+const vb = withSlogan ? '85 350 855 390' : '85 360 855 300';
+---
+<svg class={`ax-anim ${cls}`} viewBox={vb} role="img" aria-label={label} data-ax-anim>
+  <defs>
+    <linearGradient id={`gA${id}`} gradientUnits="userSpaceOnUse" x1="190" y1="632" x2="527" y2="392"><stop offset="0" stop-color="#8B4DF2"/><stop offset=".45" stop-color="#2F7BFF"/><stop offset="1" stop-color="#22D0F5"/></linearGradient>
+    <linearGradient id={`gB${id}`} gradientUnits="userSpaceOnUse" x1="218" y1="430" x2="522" y2="632"><stop offset="0" stop-color="#8B4DF2"/><stop offset=".5" stop-color="#3A5BF0"/><stop offset="1" stop-color="#1FC3F2"/></linearGradient>
+    <linearGradient id={`gs${id}`} gradientUnits="userSpaceOnUse" x1="97" y1="0" x2="927" y2="0"><stop offset="0" stop-color="#8493D6"/><stop offset="1" stop-color="#9C90D8"/></linearGradient>
+    <linearGradient id={`gsw${id}`} x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <filter id={`glow${id}`} x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <g id={`lt${id}`}><path d="M97 570 L151 468 Q172 448 193 468 L247 570 H216 L172 490 L128 570 Z"/><path d="M507 460 H541 L574 508 L607 460 H640 L588 540 V570 H560 V540 Z"/><path fill-rule="evenodd" d="M652 460 H730 Q764 460 764 493 Q764 523 738 530 L772 570 H736 L704 532 H680 V570 H652 Z M680 486 V506 H724 Q736 506 736 496 Q736 486 724 486 Z"/><path d="M777 570 L831 468 Q852 448 873 468 L927 570 H896 L852 490 L808 570 Z"/></g>
+    <path id={`pB${id}`} d="M218 430 C290 425 345 450 392 505 C440 560 470 615 522 632 C450 636 400 600 350 545 C305 495 270 445 218 430Z"/>
+    <path id={`pA${id}`} d="M190 632 C260 628 330 580 380 520 C430 460 480 405 527 392 C440 392 390 430 340 490 C290 555 250 600 190 632Z"/>
+    <mask id={`mA${id}`} maskUnits="userSpaceOnUse" x="100" y="340" width="480" height="340"><path class="ax-r1" pathLength="1" d="M190 632 L527 392" stroke="#fff" stroke-width="150" stroke-linecap="round" fill="none"/></mask>
+    <mask id={`mB${id}`} maskUnits="userSpaceOnUse" x="100" y="340" width="480" height="340"><path class="ax-r2" pathLength="1" d="M218 430 L522 632" stroke="#fff" stroke-width="150" stroke-linecap="round" fill="none"/></mask>
+    <mask id={`mX${id}`} maskUnits="userSpaceOnUse" x="100" y="340" width="480" height="340"><use href={`#pB${id}`} fill="#fff"/><use href={`#pA${id}`} fill="#fff"/></mask>
+  </defs>
+  <path class="ax-streak" pathLength="1" d="M150 668 L570 360" stroke={`url(#gA${id})`} stroke-width="4" fill="none"/>
+  <use class="ax-lt" href={`#lt${id}`} fill={`url(#gs${id})`}/>
+  <g filter={`url(#glow${id})`}>
+    <use href={`#pB${id}`} fill={`url(#gB${id})`} mask={`url(#mB${id})`}/>
+    <use href={`#pA${id}`} fill={`url(#gA${id})`} mask={`url(#mA${id})`}/>
+  </g>
+  <g mask={`url(#mX${id})`}><path class="ax-sweep" d="M165 330 H235 L195 700 H125 Z" fill={`url(#gsw${id})`}/></g>
+  {withSlogan && slogan && (
+    <text class="ax-slg" x="512" y="712" text-anchor="middle" textLength="760" lengthAdjust="spacing"
+      font-family="Montserrat Variable, Montserrat, sans-serif" font-size="26" font-weight="300" fill="#9AA6C9">{slogan}</text>
+  )}
+</svg>
+
+<style>
+  .ax-anim { display: block; width: 100%; height: auto; overflow: visible; --s: var(--logo-speed, 1); }
+  /* Hidden start state only when JavaScript runs and motion is allowed; otherwise the logo is simply shown. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .ax-anim:not(.ax-done) :global(.ax-r1),
+    :global(.js) .ax-anim:not(.ax-done) :global(.ax-r2),
+    :global(.js) .ax-anim:not(.ax-done) .ax-streak { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    :global(.js) .ax-anim:not(.ax-done) .ax-lt,
+    :global(.js) .ax-anim:not(.ax-done) .ax-slg { opacity: 0; }
+    .ax-anim.ax-play .ax-streak { animation: axStreak calc(1.1s * var(--s)) 0s ease-out forwards; }
+    .ax-anim.ax-play :global(.ax-r1) { animation: axDraw calc(1.1s * var(--s)) calc(.6s * var(--s)) ease-out forwards; }
+    .ax-anim.ax-play :global(.ax-r2) { animation: axDraw calc(1.1s * var(--s)) calc(1s * var(--s)) ease-out forwards; }
+    .ax-anim.ax-play .ax-lt { animation: axFade calc(1.3s * var(--s)) calc(2.3s * var(--s)) ease-out forwards; }
+    .ax-anim.ax-play .ax-slg { animation: axFade calc(1.3s * var(--s)) calc(3.7s * var(--s)) ease-out forwards; }
+    .ax-anim.ax-play .ax-sweep { animation: axSweep calc(1.5s * var(--s)) calc(5s * var(--s)) ease-in-out forwards; }
+  }
+  .ax-sweep, .ax-streak { opacity: 0; }
+  @keyframes axDraw { to { stroke-dashoffset: 0; } }
+  @keyframes axFade { to { opacity: 1; } }
+  @keyframes axStreak { 0% { opacity: 0; stroke-dashoffset: 1; } 40% { opacity: 1; stroke-dashoffset: 0; } to { opacity: 0; stroke-dashoffset: 0; } }
+  @keyframes axSweep { 0% { opacity: 0; transform: translate(0); } 25% { opacity: .85; } to { opacity: 0; transform: translate(420px); } }
+</style>
+
+<script>
+  // Play once when the logo first comes into view.
+  document.querySelectorAll<SVGElement>('[data-ax-anim]').forEach((el) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const play = () => { el.classList.add('ax-play'); };
+    if (!('IntersectionObserver' in window)) return play();
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { play(); io.disconnect(); } }), { threshold: 0.3 });
+    io.observe(el);
+  });
+</script>

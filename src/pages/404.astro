@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { loadLocalized, languages } from '../lib/content';
+const en = loadLocalized('pages/not-found.yaml', 'en');
+const ar = loadLocalized('pages/not-found.yaml', 'ar');
+const hasAr = languages().includes('ar');
+---
+<Base lang="en" path="/404/" title="404" noindex>
+  <section class="nf theme-dark">
+    <div class="container center">
+      <img class="x" src="/brand/axyra-x-mark.svg" alt="" width="417" height="320" />
+      <p class="code">404</p>
+      <h1 class="headline">{en.title}</h1>
+      <p class="lead measure-wide" style="margin-top:18px">{en.lead}</p>
+      {hasAr && (
+        <div lang="ar" dir="rtl" class="ar">
+          <p class="subtitle">{ar.title}</p>
+          <p class="muted" style="margin-top:8px">{ar.lead}</p>
+        </div>
+      )}
+      <div class="actions">
+        <a class="btn" href="/">{en.button}</a>
+        {hasAr && <a class="btn btn--ghost" href="/ar/" lang="ar">{ar.button}</a>}
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { min-height: calc(100svh - var(--header-h)); display: grid; align-items: center; padding-block: 80px; }
+  .x { width: clamp(120px, 20vw, 200px); margin: 0 auto 8px; filter: drop-shadow(0 0 40px rgba(47,123,255,.4)); }
+  @media (prefers-reduced-motion: no-preference) { .x { animation: float 6s ease-in-out infinite; } }
+  @keyframes float { 50% { transform: translateY(-10px) rotate(-3deg); } }
+  .code { font-size: .875rem; font-weight: 700; letter-spacing: .3em; color: var(--text-muted); margin-bottom: 20px; }
+  .ar { margin-top: 36px; font-family: var(--font-arabic); }
+  .ar .subtitle { letter-spacing: 0; line-height: 1.5; }
+</style>

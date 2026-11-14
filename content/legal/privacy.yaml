@@ -1,0 +1,88 @@
+# ════════════════════════════════════════════════════════════════
+#  PRIVACY POLICY — DRAFT TEMPLATE.
+#  ⚠ Must be reviewed by a qualified lawyer before you rely on it.
+#  Words in {curly brackets} are filled in automatically:
+#   {company} = company name   {contact} = your email (or the contact page)
+#  Keep the same number of sections in en: and ar:.
+# ════════════════════════════════════════════════════════════════
+
+lastUpdated: "2026-11-14"
+showDraftNotice: true     # Set to false only after legal review.
+
+en:
+  seo:
+    title: "Privacy Policy"
+    description: "How AXYRA collects, uses and protects personal information on this website."
+  title: "Privacy Policy"
+  updatedLabel: "Last updated"
+  intro: "This policy explains what personal information {company} collects through this website, why, and the choices you have. It covers this website only. Products such as Dr. Assistant have their own terms and privacy information."
+  sections:
+    - heading: "Information we collect"
+      paragraphs:
+        - "We collect only what you choose to send us through the contact form: your name, email address, company (optional) and your message."
+        - "We do not ask for sensitive information. Please do not send health, financial or other sensitive personal data through the form."
+    - heading: "How we use it"
+      paragraphs:
+        - "We use your information only to read and reply to your message, and to keep a record of our correspondence."
+        - "We do not sell your information and we do not use it for advertising."
+    - heading: "Service providers"
+      paragraphs:
+        - "Messages from the contact form are delivered to us through a third-party form service (Web3Forms). The website is hosted by a third-party hosting provider. These providers process data on our behalf and may store it outside your country."
+    - heading: "Cookies and analytics"
+      paragraphs:
+        - "This website does not use advertising or tracking cookies. It remembers your light/dark appearance choice in your own browser's storage; this never leaves your device."
+        - "If we turn on website analytics, we will use a privacy-friendly service that does not use cookies or identify you personally, and we will update this policy."
+    - heading: "How long we keep it"
+      paragraphs:
+        - "We keep messages only as long as needed to respond and for a reasonable period afterwards for our records, unless the law requires otherwise."
+    - heading: "Your rights"
+      paragraphs:
+        - "You can ask us to see, correct or delete the personal information we hold about you. Contact us at {contact}."
+    - heading: "Security"
+      paragraphs:
+        - "We take reasonable measures to protect your information. No method of transmission over the internet is completely secure."
+    - heading: "Changes to this policy"
+      paragraphs:
+        - "We may update this policy. The date at the top shows when it was last changed."
+    - heading: "Contact"
+      paragraphs:
+        - "Questions about this policy? Contact {company} at {contact}."
+
+ar:
+  seo:
+    title: "سياسة الخصوصية"
+    description: "كيف تجمع AXYRA المعلومات الشخصية على هذا الموقع وتستخدمها وتحميها."
+  title: "سياسة الخصوصية"
+  updatedLabel: "آخر تحديث"
+  intro: "توضّح هذه السياسة المعلومات الشخصية التي تجمعها {company} عبر هذا الموقع، وسبب جمعها، والخيارات المتاحة لك. تنطبق على هذا الموقع فقط، ولمنتجاتنا مثل Dr. Assistant شروطها ومعلومات الخصوصية الخاصة بها."
+  sections:
+    - heading: "المعلومات التي نجمعها"
+      paragraphs:
+        - "نجمع فقط ما تختار إرساله إلينا عبر نموذج التواصل: اسمك وبريدك الإلكتروني واسم شركتك (اختياري) ورسالتك."
+        - "لا نطلب معلومات حساسة. يرجى عدم إرسال بيانات صحية أو مالية أو أي بيانات شخصية حساسة عبر النموذج."
+    - heading: "كيف نستخدمها"
+      paragraphs:
+        - "نستخدم معلوماتك فقط لقراءة رسالتك والرد عليها، وللاحتفاظ بسجل لمراسلاتنا."
+        - "لا نبيع معلوماتك ولا نستخدمها لأغراض إعلانية."
+    - heading: "مزوّدو الخدمات"
+      paragraphs:
+        - "تصلنا رسائل نموذج التواصل عبر خدمة نماذج خارجية (Web3Forms)، ويُستضاف الموقع لدى مزوّد استضافة خارجي. يعالج هؤلاء المزوّدون البيانات نيابة عنا، وقد يخزّنونها خارج بلدك."
+    - heading: "ملفات تعريف الارتباط والتحليلات"
+      paragraphs:
+        - "لا يستخدم هذا الموقع ملفات تعريف ارتباط إعلانية أو للتتبّع. يتذكّر الموقع اختيارك للمظهر الفاتح أو الداكن في ذاكرة متصفحك فقط، ولا تغادر هذه المعلومة جهازك."
+        - "إذا فعّلنا تحليلات الموقع، فسنستخدم خدمة تحترم الخصوصية لا تستخدم ملفات تعريف الارتباط ولا تحدّد هويتك، وسنحدّث هذه السياسة."
+    - heading: "مدة الاحتفاظ"
+      paragraphs:
+        - "نحتفظ بالرسائل فقط للمدة اللازمة للرد عليها ولفترة معقولة بعدها لسجلاتنا، ما لم يتطلب القانون غير ذلك."
+    - heading: "حقوقك"
+      paragraphs:
+        - "يمكنك أن تطلب منا الاطلاع على معلوماتك الشخصية التي نحتفظ بها أو تصحيحها أو حذفها. تواصل معنا عبر {contact}."
+    - heading: "الأمان"
+      paragraphs:
+        - "نتخذ إجراءات معقولة لحماية معلوماتك، مع العلم بأنه لا توجد وسيلة نقل عبر الإنترنت آمنة تمامًا."
+    - heading: "التغييرات على هذه السياسة"
+      paragraphs:
+        - "قد نحدّث هذه السياسة، ويوضّح التاريخ في أعلى الصفحة آخر تعديل."
+    - heading: "التواصل"
+      paragraphs:
+        - "لديك أسئلة حول هذه السياسة؟ تواصل مع {company} عبر {contact}."

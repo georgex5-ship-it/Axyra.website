@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from './PageHero.astro';
+import Icon from './Icon.astro';
+import { loadLocalized, onlyFilled, filled, type Lang } from '../lib/content';
+interface Props { lang: Lang; key: 'news' | 'careers' | 'partners' }
+const { lang, key } = Astro.props;
+const t = loadLocalized(`optional/${key}.yaml`, lang);
+const items = onlyFilled(t.items, ['title', 'text']);
+---
+<Base lang={lang} path={`/${key}/`} title={t.seo.title} description={t.seo.description}>
+  <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} lead={t.hero.lead} />
+  <section class="section" style="padding-top:0">
+    <div class="container container--narrow">
+      {items.length === 0 ? <p class="center muted">{t.empty}</p> : (
+        <ul class="items" role="list">
+          {items.map((i: any) => (
+            <li class="reveal">
+              {filled(i.date) && <p class="small muted">{i.date}</p>}
+              <h2 class="subtitle">{i.title}</h2>
+              <p class="muted" style="margin-top:8px">{i.text}</p>
+              {filled(i.link) && <a class="link-arrow" style="margin-top:12px" href={i.link}>{i.title} <Icon name="arrow-right" /></a>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>
+<style>
+  .items { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .items li { padding: 32px 0; border-top: 1px solid var(--line); }
+</style>

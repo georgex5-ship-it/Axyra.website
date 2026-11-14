@@ -1,0 +1,115 @@
+---
+// Contact form → Web3Forms (free, no server needed). Spam protection: hidden
+// "honeypot" checkbox + minimum time-on-page check. If no access key is set in
+// settings.yaml, the form falls back to opening the visitor's email app.
+import Icon from './Icon.astro';
+import { settings, filled, localePath, pageEnabled, type Lang } from '../lib/content';
+interface Props { t: any; lang: Lang }
+const { t, lang } = Astro.props;
+const key = filled(settings.contactForm?.web3formsAccessKey);
+const email = filled(settings.contact?.email);
+---
+<form class="cform" data-contact-form novalidate
+  data-key={key ?? ''} data-email={email ?? ''} data-subject={t.subject}
+  data-msg-sending={t.sending} data-msg-success={t.success} data-msg-error={t.error}
+  data-msg-required={t.errorRequired} data-msg-fast={t.tooFast} data-msg-fallback={t.fallback}
+  data-msg-noconfig={t.notConfigured}>
+  <div class="row2">
+    <label class="field"><span>{t.name}</span><input name="name" type="text" autocomplete="name" required maxlength="120" /></label>
+    <label class="field"><span>{t.email}</span><input name="email" type="email" autocomplete="email" required maxlength="160" dir="ltr" /></label>
+  </div>
+  <label class="field"><span>{t.company}</span><input name="company" type="text" autocomplete="organization" maxlength="160" /></label>
+  <label class="field"><span>{t.message}</span><textarea name="message" rows="6" required maxlength="5000"></textarea></label>
+
+  <!-- Honeypot: humans never see or tick this. -->
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <div class="foot">
+    <button class="btn" type="submit"><span data-label>{t.submit}</span> <Icon name="send" class="icon--dir" /></button>
+    {pageEnabled('privacy') && (
+      <p class="small muted">{t.privacyNote} <a href={localePath(lang, '/privacy/')}>{t.privacyLink}</a>.</p>
+    )}
+  </div>
+  <p class="status" role="status" aria-live="polite" data-status></p>
+</form>
+
+<style>
+  .cform { display: grid; gap: 18px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 640px) { .row2 { grid-template-columns: 1fr; } }
+  .field { display: grid; gap: 8px; font-weight: 600; font-size: .9375rem; }
+  .field input, .field textarea {
+    font: inherit; font-weight: 400; font-size: 1rem; color: var(--text); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; width: 100%;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .field textarea { resize: vertical; min-height: 150px; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--link); box-shadow: 0 0 0 4px color-mix(in srgb, var(--link) 18%, transparent); }
+  .field input[aria-invalid='true'], .field textarea[aria-invalid='true'] { border-color: #D93C3C; }
+  .hp { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); opacity: 0; pointer-events: none; }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 6px; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .status { min-height: 1.5em; font-weight: 600; }
+  .status.ok { color: #12865A; }
+  .status.err { color: #C73434; }
+  :global(:root[data-theme='dark']) .status.ok { color: #4ADE9B; }
+  :global(:root[data-theme='dark']) .status.err { color: #FF8A8A; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .status.ok { color: #4ADE9B; }
+    :global(:root:not([data-theme='light'])) .status.err { color: #FF8A8A; }
+  }
+</style>
+
+<script>
+  const MIN_MS = 3000;
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const started = Date.now();
+    const d = form.dataset;
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const label = btn.querySelector<HTMLElement>('[data-label]')!;
+    const original = label.textContent;
+    const say = (msg: string, kind: 'ok' | 'err' | '' = '') => { status.textContent = msg; status.className = `status ${kind}`; };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      if (fd.get('botcheck')) return; // bot: silently ignore
+      const name = String(fd.get('name') || '').trim();
+      const email = String(fd.get('email') || '').trim();
+      const message = String(fd.get('message') || '').trim();
+      const company = String(fd.get('company') || '').trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      form.querySelector('[name=name]')!.setAttribute('aria-invalid', String(!name));
+      form.querySelector('[name=email]')!.setAttribute('aria-invalid', String(!emailOk));
+      form.querySelector('[name=message]')!.setAttribute('aria-invalid', String(!message));
+      if (!name || !emailOk || !message) { say(d.msgRequired || '', 'err'); return; }
+      if (Date.now() - started < MIN_MS) { say(d.msgFast || '', 'err'); return; }
+
+      // No form service yet → open the visitor's email app instead.
+      if (!d.key) {
+        if (!d.email) { say(d.msgNoconfig || '', 'err'); return; }
+        const body = `${message}\n\n— ${name}${company ? `, ${company}` : ''}\n${email}`;
+        say(d.msgFallback || '', 'ok');
+        window.location.href = `mailto:${d.email}?subject=${encodeURIComponent(d.subject || '')}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      btn.disabled = true; label.textContent = d.msgSending || '…'; say('');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ access_key: d.key, subject: d.subject, from_name: 'AXYRA website', name, email, company, message, botcheck: false }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.success) { form.reset(); say(d.msgSuccess || '', 'ok'); }
+        else throw new Error(json.message || res.statusText);
+      } catch {
+        say(d.msgError || '', 'err');
+      } finally {
+        btn.disabled = false; label.textContent = original;
+      }
+    });
+  });
+</script>
