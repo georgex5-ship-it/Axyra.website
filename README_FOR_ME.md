@@ -203,7 +203,7 @@ The site uses the wording I recommended. Three alternatives for each, in English
 
 Every host does the same two things: it runs `npm run build`, which creates the finished website in the `dist` folder, and it serves that folder.
 
-### Option A: Cloudflare Pages (alternative, no daily transfer limit)
+### Option A: Cloudflare Pages (alternative)
 Free plan, fast in the Middle East and worldwide, and the security headers in `public/_headers` work automatically.
 
 1. Put this folder in a GitHub repository. It can be private.
