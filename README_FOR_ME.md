@@ -203,7 +203,7 @@ The site uses the wording I recommended. Three alternatives for each, in English
 
 Every host does the same two things: it runs `npm run build`, which creates the finished website in the `dist` folder, and it serves that folder.
 
-### Option A: Cloudflare Pages (recommended)
+### Option A: Cloudflare Pages (alternative, no daily transfer limit)
 Free plan, fast in the Middle East and worldwide, and the security headers in `public/_headers` work automatically.
 
 1. Put this folder in a GitHub repository. It can be private.
@@ -218,16 +218,22 @@ Free plan, fast in the Middle East and worldwide, and the security headers in `p
 
 Free-plan limits: 500 builds a month on the official limits page (Verified). Unlimited bandwidth and commercial use are stated by third-party sources; please confirm on Cloudflare's own pricing and terms pages.
 
-### Option B: Firebase Hosting (you already use it for Dr. Assistant)
-A ready `firebase.json` is included.
+### Option B: Firebase Hosting — ✅ ALREADY SET UP (current live site)
+The website is live at **https://axyra.web.app**. It runs in its **own Firebase project, `axyra-website`**, which is completely separate from the Dr. Assistant projects.
 
-> ⚠ **Important:** create a **new, separate Firebase project** for the company website, for example `axyra-website`. If you run `firebase deploy` inside the Dr. Assistant project, you will **overwrite the Dr. Assistant app**.
+This folder is already linked to that project:
+- `.firebaserc` sets the project to `axyra-website`.
+- `firebase.json` sets the site to `axyra`.
+
+So running `firebase deploy` from **this folder** can only update the website. To publish changes:
 
 ```
 npm run build
-firebase use --add      (choose the NEW project)
-firebase deploy --only hosting
+npx firebase-tools login
+npx firebase-tools deploy --only hosting --project axyra-website
 ```
+
+> ⚠ Never run a deploy for the website from inside the Dr. Assistant app's folder, or the other way round. Each folder deploys to its own project.
 
 The free Spark plan includes 10 GB of storage and **360 MB of data transfer per day** (Verified, Firebase pricing page). The pages are light (110–150 KB on first load), so that is roughly several hundred to a thousand visits a day (Estimate). Beyond that, you'd need the paid Blaze plan.
 

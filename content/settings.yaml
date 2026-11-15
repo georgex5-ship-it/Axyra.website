@@ -44,7 +44,7 @@ products:
 site:
   # Your final website address, without a slash at the end.
   # Until you have a domain, leave the placeholder.
-  url: "[[EDIT: https://www.yourdomain.com]]"
+  url: "https://axyra.web.app"   # free Firebase address — change to your own domain later
   # Allow Google and other search engines to list the site?
   # Keep false until your real domain is connected, then set to true.
   allowIndexing: false
