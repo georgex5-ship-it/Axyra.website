@@ -7,7 +7,7 @@ import Icon from '../../../components/Icon.astro';
 import {
   loadProducts, languages, pageEnabled, localePath, productExternalUrl, onlyFilled, isFilled, type Lang,
 } from '../../../lib/content';
-import { productImage } from '../../../lib/images';
+import { productImage, isImagePath } from '../../../lib/images';
 
 export function getStaticPaths() {
   if (!pageEnabled('products')) return [];
@@ -26,7 +26,10 @@ const img = (k: string) => productImage(product.images?.[k]);
 const hero = img('desktop');
 const phone = img('phone');
 const enText = product.en ?? {};
-const showcase = (t.showcase ?? []).map((x: any, i: number) => ({ ...x, src: img(enText.showcase?.[i]?.image || x.image) }))
+const showcase = (t.showcase ?? []).map((x: any, i: number) => {
+  const ref = enText.showcase?.[i]?.image || x.image;
+  return { ...x, src: isImagePath(ref) ? productImage(ref) : img(ref) };
+})
   .filter((x: any) => x.src && isFilled(x.title));
 const faq = onlyFilled(t.faq?.items, ['q', 'a']);
 const contactHref = pageEnabled('contact') ? localePath(lang, '/contact/') : undefined;

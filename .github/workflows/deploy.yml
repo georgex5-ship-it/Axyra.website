@@ -1,0 +1,36 @@
+# Publishes the website to Firebase Hosting (https://axyra.web.app) whenever
+# content changes — including every save in the admin panel (/login).
+name: Publish website
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [sveltia-cms-publish]   # "Publish" button in the admin panel
+  workflow_dispatch:               # manual run from the GitHub "Actions" tab
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check content files
+        run: node scripts/check-content.mjs || true
+      - run: npm run build
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AXYRA_WEBSITE }}
+          projectId: axyra-website
+          channelId: live

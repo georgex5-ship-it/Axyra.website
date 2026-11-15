@@ -1,0 +1,3119 @@
+# AXYRA admin panel configuration (Sveltia CMS). Generated — edit with care.
+# Every form below edits one file in /content. Images are saved in src/assets/uploads.
+backend:
+  name: github
+  repo: Georgex5/axyra-website
+  branch: main
+  auth_methods:
+  - token
+  skip_ci: false
+  commit_messages:
+    create: 'Content: create {{collection}} “{{slug}}”'
+    update: 'Content: update {{collection}} “{{slug}}”'
+    delete: 'Content: delete {{collection}} “{{slug}}”'
+    uploadMedia: 'Content: upload “{{path}}”'
+    deleteMedia: 'Content: delete “{{path}}”'
+app_title: AXYRA Admin
+site_url: https://axyra.web.app
+logo:
+  src: /favicon.svg
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+editor:
+  preview: false
+collections:
+- name: pages
+  label: Pages & settings
+  icon: description
+  files:
+  - name: settings
+    label: ⚙️ Company settings
+    file: content/settings.yaml
+    fields:
+    - name: company
+      label: Company
+      widget: object
+      fields:
+      - name: name
+        label: Company name
+        widget: string
+        required: false
+        hint: Always AXYRA, in capitals.
+      - name: slogan
+        label: Official slogan
+        widget: string
+        required: false
+        hint: Do not change the wording.
+      - name: legalName
+        label: Registered legal name
+        widget: string
+        required: false
+        hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+      - name: foundedYear
+        label: Year founded
+        widget: string
+        required: false
+        hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+    - name: contact
+      label: Contact details
+      widget: object
+      fields:
+      - name: email
+        label: Email
+        widget: string
+        required: false
+        hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+      - name: phone
+        label: Phone (with country code)
+        widget: string
+        required: false
+        hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+      - name: whatsapp
+        label: WhatsApp (digits only, with country code)
+        widget: string
+        required: false
+        hint: 'Example: 970590000000'
+      - name: city
+        label: City (English)
+        widget: string
+        required: false
+      - name: cityAr
+        label: City (Arabic)
+        widget: string
+        required: false
+      - name: country
+        label: Country (English)
+        widget: string
+        required: false
+      - name: countryAr
+        label: Country (Arabic)
+        widget: string
+        required: false
+      - name: address
+        label: Street address (English, optional)
+        widget: string
+        required: false
+      - name: addressAr
+        label: Street address (Arabic, optional)
+        widget: string
+        required: false
+      - name: mapsUrl
+        label: Google Maps link (optional)
+        widget: string
+        required: false
+    - name: social
+      label: Social media links
+      widget: object
+      fields:
+      - name: linkedin
+        label: LinkedIn
+        widget: string
+        required: false
+        hint: Full link starting with https://. Leave the placeholder to hide the icon.
+      - name: instagram
+        label: Instagram
+        widget: string
+        required: false
+        hint: Full link starting with https://. Leave the placeholder to hide the icon.
+      - name: facebook
+        label: Facebook
+        widget: string
+        required: false
+        hint: Full link starting with https://. Leave the placeholder to hide the icon.
+      - name: x
+        label: X (Twitter)
+        widget: string
+        required: false
+        hint: Full link starting with https://. Leave the placeholder to hide the icon.
+      - name: youtube
+        label: YouTube
+        widget: string
+        required: false
+        hint: Full link starting with https://. Leave the placeholder to hide the icon.
+      - name: tiktok
+        label: TikTok
+        widget: string
+        required: false
+        hint: Full link starting with https://. Leave the placeholder to hide the icon.
+      collapsed: true
+    - name: products
+      label: Product links
+      widget: object
+      fields:
+      - name: drAssistantUrl
+        label: Dr. Assistant website / app address
+        widget: string
+        required: false
+        hint: Used by every “Visit Dr. Assistant” button.
+    - name: site
+      label: Website address & Google
+      widget: object
+      fields:
+      - name: url
+        label: Website address
+        widget: string
+        required: false
+        hint: e.g. https://axyra.web.app — change to your own domain when you have one.
+      - name: allowIndexing
+        label: Allow Google to list the site
+        widget: boolean
+        required: false
+        default: false
+        hint: Keep OFF until your real domain is connected.
+      - name: highlightPlaceholdersInPreview
+        label: Highlight placeholders in local preview
+        widget: boolean
+        required: false
+        default: true
+      collapsed: true
+    - name: languages
+      label: Languages
+      widget: object
+      fields:
+      - name: english
+        label: English
+        widget: boolean
+        required: false
+        default: true
+      - name: arabic
+        label: Arabic (العربية)
+        widget: boolean
+        required: false
+        default: true
+      collapsed: true
+    - name: pages
+      label: Pages to publish (on = visible)
+      widget: object
+      fields:
+      - name: about
+        label: About
+        widget: boolean
+        required: false
+        default: true
+      - name: solutions
+        label: Solutions
+        widget: boolean
+        required: false
+        default: true
+      - name: products
+        label: Products
+        widget: boolean
+        required: false
+        default: true
+      - name: contact
+        label: Contact
+        widget: boolean
+        required: false
+        default: true
+      - name: privacy
+        label: Privacy Policy
+        widget: boolean
+        required: false
+        default: true
+      - name: terms
+        label: Terms of Use
+        widget: boolean
+        required: false
+        default: true
+      - name: news
+        label: Insights / News
+        widget: boolean
+        required: false
+        default: false
+      - name: careers
+        label: Careers
+        widget: boolean
+        required: false
+        default: false
+      - name: partners
+        label: Partners
+        widget: boolean
+        required: false
+        default: false
+    - name: contactForm
+      label: Contact form
+      widget: object
+      fields:
+      - name: web3formsAccessKey
+        label: Web3Forms access key
+        widget: string
+        required: false
+        hint: Get a free key at web3forms.com. Until then the form opens the visitor’s email app (if an email is set above).
+    - name: analytics
+      label: Analytics
+      widget: object
+      fields:
+      - name: provider
+        label: Provider
+        widget: select
+        options:
+        - none
+        - cloudflare
+        default: none
+        required: false
+      - name: cloudflareToken
+        label: Cloudflare Web Analytics token
+        widget: string
+        required: false
+      collapsed: true
+  - name: theme
+    label: 🎨 Brand colours
+    file: content/theme.yaml
+    fields:
+    - name: violet
+      label: Brand violet (X ribbon start)
+      widget: color
+      required: false
+      hint: From the logo.
+    - name: blue
+      label: Brand blue (X ribbon middle)
+      widget: color
+      required: false
+      hint: From the logo.
+    - name: cyan
+      label: Brand cyan (X ribbon end)
+      widget: color
+      required: false
+      hint: From the logo.
+    - name: navy
+      label: Midnight navy (dark backgrounds)
+      widget: color
+      required: false
+      hint: From the logo.
+    - name: linkLight
+      label: Link colour — light theme
+      widget: color
+      required: false
+      hint: Must stay dark enough to read on white (contrast 4.5:1 or more).
+    - name: accentLight
+      label: Accent text — light theme
+      widget: color
+      required: false
+      hint: Must stay dark enough to read on white (contrast 4.5:1 or more).
+    - name: linkDark
+      label: Link colour — dark theme
+      widget: color
+      required: false
+      hint: Must stay light enough to read on navy.
+    - name: accentDark
+      label: Accent text — dark theme
+      widget: color
+      required: false
+      hint: Must stay light enough to read on navy.
+  - name: home
+    label: 🏠 Home page
+    file: content/pages/home.yaml
+    fields:
+    - name: sections
+      label: Sections to show
+      widget: object
+      fields:
+      - name: hero
+        label: Top (animated logo)
+        widget: boolean
+        required: false
+        default: true
+      - name: whatWeDo
+        label: What we do
+        widget: boolean
+        required: false
+        default: true
+      - name: productSpotlight
+        label: Featured product
+        widget: boolean
+        required: false
+        default: true
+      - name: missionVision
+        label: Mission & vision
+        widget: boolean
+        required: false
+        default: true
+      - name: whyAxyra
+        label: Why AXYRA
+        widget: boolean
+        required: false
+        default: true
+      - name: contactCta
+        label: Contact call to action
+        widget: boolean
+        required: false
+        default: true
+    - name: spotlightProduct
+      label: Featured product (file name)
+      widget: string
+      required: false
+      hint: The product file name without .yaml, e.g. dr-assistant
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+        - name: primaryButton
+          label: Main button
+          widget: string
+          required: false
+        - name: secondaryLink
+          label: Second link
+          widget: string
+          required: false
+      - name: whatWeDo
+        label: What we do
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link text
+          widget: string
+          required: false
+        hint: The three business areas come from “Solutions”.
+      - name: spotlight
+        label: Featured product
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: primaryButton
+          label: Main button
+          widget: string
+          required: false
+        - name: secondaryButton
+          label: Visit button
+          widget: string
+          required: false
+        hint: The product text comes from its product page.
+      - name: missionVision
+        label: Mission & vision
+        widget: object
+        fields:
+        - name: link
+          label: Link text
+          widget: string
+          required: false
+        hint: Mission and vision text is edited on the About page.
+      - name: whyAxyra
+        label: Why AXYRA
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: points
+          label: Points
+          widget: list
+          required: false
+          fields:
+          - name: icon
+            label: Icon
+            widget: string
+            required: false
+            hint: Icon name from lucide.dev/icons (e.g. sparkles, users, globe, shield-check).
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: text
+            label: Text
+            widget: text
+            required: false
+          label_singular: point
+          summary: '{{fields.title}}'
+      - name: contactCta
+        label: Contact call to action
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: button
+          label: Button
+          widget: string
+          required: false
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+        - name: primaryButton
+          label: Main button
+          widget: string
+          required: false
+        - name: secondaryLink
+          label: Second link
+          widget: string
+          required: false
+      - name: whatWeDo
+        label: What we do
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link text
+          widget: string
+          required: false
+        hint: The three business areas come from “Solutions”.
+      - name: spotlight
+        label: Featured product
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: primaryButton
+          label: Main button
+          widget: string
+          required: false
+        - name: secondaryButton
+          label: Visit button
+          widget: string
+          required: false
+        hint: The product text comes from its product page.
+      - name: missionVision
+        label: Mission & vision
+        widget: object
+        fields:
+        - name: link
+          label: Link text
+          widget: string
+          required: false
+        hint: Mission and vision text is edited on the About page.
+      - name: whyAxyra
+        label: Why AXYRA
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: points
+          label: Points
+          widget: list
+          required: false
+          fields:
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: text
+            label: Text
+            widget: text
+            required: false
+          label_singular: point
+          summary: '{{fields.title}}'
+      - name: contactCta
+        label: Contact call to action
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: button
+          label: Button
+          widget: string
+          required: false
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: about
+    label: ℹ️ About page
+    file: content/pages/about.yaml
+    fields:
+    - name: sections
+      label: Sections to show
+      widget: object
+      fields:
+      - name: story
+        label: Our story
+        widget: boolean
+        required: false
+        default: true
+      - name: missionVision
+        label: Mission & vision
+        widget: boolean
+        required: false
+        default: true
+      - name: values
+        label: Values
+        widget: boolean
+        required: false
+        default: true
+      - name: approach
+        label: How we work
+        widget: boolean
+        required: false
+        default: true
+      - name: facts
+        label: At a glance (facts)
+        widget: boolean
+        required: false
+        default: false
+      - name: cta
+        label: Call to action
+        widget: boolean
+        required: false
+        default: true
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: story
+        label: Our story
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: paragraphs
+          label: Paragraphs
+          widget: list
+          required: false
+          label_singular: paragraph
+      - name: mission
+        label: Mission
+        widget: object
+        fields:
+        - name: label
+          label: Label
+          widget: string
+          required: false
+        - name: text
+          label: Mission statement
+          widget: text
+          required: false
+          hint: Also shown on the Home page.
+      - name: vision
+        label: Vision
+        widget: object
+        fields:
+        - name: label
+          label: Label
+          widget: string
+          required: false
+        - name: text
+          label: Vision statement
+          widget: text
+          required: false
+          hint: Also shown on the Home page.
+      - name: values
+        label: Values
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: items
+          label: Values
+          widget: list
+          required: false
+          fields:
+          - name: icon
+            label: Icon
+            widget: string
+            required: false
+            hint: Icon name from lucide.dev/icons (e.g. sparkles, users, globe, shield-check).
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: text
+            label: Text
+            widget: text
+            required: false
+          label_singular: value
+          summary: '{{fields.title}}'
+        collapsed: true
+      - name: approach
+        label: How we work
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: steps
+          label: Steps
+          widget: list
+          required: false
+          fields:
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: text
+            label: Text
+            widget: text
+            required: false
+          label_singular: step
+          summary: '{{fields.title}}'
+        collapsed: true
+      - name: facts
+        label: At a glance (facts)
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: items
+          label: Facts
+          widget: list
+          required: false
+          fields:
+          - name: label
+            label: Label
+            widget: string
+            required: false
+          - name: value
+            label: Value
+            widget: string
+            required: false
+            hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+          label_singular: fact
+          summary: '{{fields.label}}'
+        collapsed: true
+      - name: cta
+        label: Call to action (bottom)
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: button
+          label: Button text
+          widget: string
+          required: false
+        collapsed: true
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: story
+        label: Our story
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: paragraphs
+          label: Paragraphs
+          widget: list
+          required: false
+          label_singular: paragraph
+      - name: mission
+        label: Mission
+        widget: object
+        fields:
+        - name: label
+          label: Label
+          widget: string
+          required: false
+        - name: text
+          label: Mission statement
+          widget: text
+          required: false
+          hint: Also shown on the Home page.
+      - name: vision
+        label: Vision
+        widget: object
+        fields:
+        - name: label
+          label: Label
+          widget: string
+          required: false
+        - name: text
+          label: Vision statement
+          widget: text
+          required: false
+          hint: Also shown on the Home page.
+      - name: values
+        label: Values
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: items
+          label: Values
+          widget: list
+          required: false
+          fields:
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: text
+            label: Text
+            widget: text
+            required: false
+          label_singular: value
+          summary: '{{fields.title}}'
+        collapsed: true
+      - name: approach
+        label: How we work
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: steps
+          label: Steps
+          widget: list
+          required: false
+          fields:
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: text
+            label: Text
+            widget: text
+            required: false
+          label_singular: step
+          summary: '{{fields.title}}'
+        collapsed: true
+      - name: facts
+        label: At a glance (facts)
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label
+          widget: string
+          required: false
+        - name: items
+          label: Facts
+          widget: list
+          required: false
+          fields:
+          - name: label
+            label: Label
+            widget: string
+            required: false
+          - name: value
+            label: Value
+            widget: string
+            required: false
+            hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+          label_singular: fact
+          summary: '{{fields.label}}'
+        collapsed: true
+      - name: cta
+        label: Call to action (bottom)
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: button
+          label: Button text
+          widget: string
+          required: false
+        collapsed: true
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: solutions
+    label: 🧩 Solutions page
+    file: content/pages/solutions.yaml
+    fields:
+    - name: areas
+      label: Business areas (settings)
+      widget: list
+      required: false
+      fields:
+      - name: id
+        label: Web anchor (no spaces)
+        widget: string
+        required: false
+        hint: Used in links, e.g. digital-solutions
+      - name: icon
+        label: Icon
+        widget: string
+        required: false
+        hint: Icon name from lucide.dev/icons (e.g. sparkles, users, globe, shield-check).
+      - name: show
+        label: Show
+        widget: boolean
+        required: false
+        default: true
+      label_singular: area
+      summary: '{{fields.id}}'
+      hint: Order here = order on the site. The texts for each area are below, in the same order.
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: areas
+        label: Business area texts
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: summary
+          label: Short summary (also on Home)
+          widget: text
+          required: false
+        - name: details
+          label: Longer description
+          widget: text
+          required: false
+        - name: points
+          label: Key points
+          widget: list
+          required: false
+          label_singular: point
+        label_singular: area
+        summary: '{{fields.title}}'
+        hint: Same order as the “Business areas (settings)” list above.
+      - name: cta
+        label: Call to action (bottom)
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: button
+          label: Button text
+          widget: string
+          required: false
+        collapsed: true
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: areas
+        label: Business area texts
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: summary
+          label: Short summary (also on Home)
+          widget: text
+          required: false
+        - name: details
+          label: Longer description
+          widget: text
+          required: false
+        - name: points
+          label: Key points
+          widget: list
+          required: false
+          label_singular: point
+        label_singular: area
+        summary: '{{fields.title}}'
+        hint: Same order as the “Business areas (settings)” list above.
+      - name: cta
+        label: Call to action (bottom)
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: lead
+          label: Text
+          widget: text
+          required: false
+        - name: button
+          label: Button text
+          widget: string
+          required: false
+        collapsed: true
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: productsPage
+    label: 📦 Products page (intro)
+    file: content/pages/products.yaml
+    fields:
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: card
+        label: Product cards
+        widget: object
+        fields:
+        - name: learnMore
+          label: Button text
+          widget: string
+          required: false
+        - name: comingSoon
+          label: Line under the list
+          widget: string
+          required: false
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: card
+        label: Product cards
+        widget: object
+        fields:
+        - name: learnMore
+          label: Button text
+          widget: string
+          required: false
+        - name: comingSoon
+          label: Line under the list
+          widget: string
+          required: false
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: contact
+    label: ✉️ Contact page
+    file: content/pages/contact.yaml
+    fields:
+    - name: sections
+      label: Sections to show
+      widget: object
+      fields:
+      - name: form
+        label: Contact form
+        widget: boolean
+        required: false
+        default: true
+      - name: details
+        label: Contact details
+        widget: boolean
+        required: false
+        default: true
+      - name: map
+        label: Location card
+        widget: boolean
+        required: false
+        default: true
+      hint: Your email, phone and address are edited in ⚙️ Company settings.
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: form
+        label: Form texts
+        widget: object
+        fields:
+        - name: title
+          label: Form title
+          widget: string
+          required: false
+        - name: name
+          label: Name label
+          widget: string
+          required: false
+        - name: email
+          label: Email label
+          widget: string
+          required: false
+        - name: company
+          label: Company label
+          widget: string
+          required: false
+        - name: message
+          label: Message label
+          widget: string
+          required: false
+        - name: submit
+          label: Send button
+          widget: string
+          required: false
+        - name: sending
+          label: While sending
+          widget: string
+          required: false
+        - name: success
+          label: Success message
+          widget: string
+          required: false
+        - name: error
+          label: Error message
+          widget: string
+          required: false
+        - name: errorRequired
+          label: Missing fields message
+          widget: string
+          required: false
+        - name: tooFast
+          label: Too-fast (spam) message
+          widget: string
+          required: false
+        - name: fallback
+          label: Email-app fallback message
+          widget: string
+          required: false
+        - name: notConfigured
+          label: Form not connected message
+          widget: string
+          required: false
+        - name: privacyNote
+          label: Privacy note
+          widget: string
+          required: false
+        - name: privacyLink
+          label: Privacy link text
+          widget: string
+          required: false
+        - name: subject
+          label: Email subject you receive
+          widget: string
+          required: false
+        collapsed: true
+      - name: details
+        label: Contact details labels
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: email
+          label: Email
+          widget: string
+          required: false
+        - name: phone
+          label: Phone
+          widget: string
+          required: false
+        - name: whatsapp
+          label: WhatsApp
+          widget: string
+          required: false
+        - name: location
+          label: Location
+          widget: string
+          required: false
+        - name: social
+          label: Follow us
+          widget: string
+          required: false
+        collapsed: true
+      - name: map
+        label: Location card
+        widget: object
+        fields:
+        - name: openInMaps
+          label: “Open in Maps” text
+          widget: string
+          required: false
+        collapsed: true
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: form
+        label: Form texts
+        widget: object
+        fields:
+        - name: title
+          label: Form title
+          widget: string
+          required: false
+        - name: name
+          label: Name label
+          widget: string
+          required: false
+        - name: email
+          label: Email label
+          widget: string
+          required: false
+        - name: company
+          label: Company label
+          widget: string
+          required: false
+        - name: message
+          label: Message label
+          widget: string
+          required: false
+        - name: submit
+          label: Send button
+          widget: string
+          required: false
+        - name: sending
+          label: While sending
+          widget: string
+          required: false
+        - name: success
+          label: Success message
+          widget: string
+          required: false
+        - name: error
+          label: Error message
+          widget: string
+          required: false
+        - name: errorRequired
+          label: Missing fields message
+          widget: string
+          required: false
+        - name: tooFast
+          label: Too-fast (spam) message
+          widget: string
+          required: false
+        - name: fallback
+          label: Email-app fallback message
+          widget: string
+          required: false
+        - name: notConfigured
+          label: Form not connected message
+          widget: string
+          required: false
+        - name: privacyNote
+          label: Privacy note
+          widget: string
+          required: false
+        - name: privacyLink
+          label: Privacy link text
+          widget: string
+          required: false
+        - name: subject
+          label: Email subject you receive
+          widget: string
+          required: false
+        collapsed: true
+      - name: details
+        label: Contact details labels
+        widget: object
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: email
+          label: Email
+          widget: string
+          required: false
+        - name: phone
+          label: Phone
+          widget: string
+          required: false
+        - name: whatsapp
+          label: WhatsApp
+          widget: string
+          required: false
+        - name: location
+          label: Location
+          widget: string
+          required: false
+        - name: social
+          label: Follow us
+          widget: string
+          required: false
+        collapsed: true
+      - name: map
+        label: Location card
+        widget: object
+        fields:
+        - name: openInMaps
+          label: “Open in Maps” text
+          widget: string
+          required: false
+        collapsed: true
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: common
+    label: 🧭 Menu, footer & buttons
+    file: content/pages/common.yaml
+    fields:
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: nav
+        label: Menu labels
+        widget: object
+        fields:
+        - name: home
+          label: Home
+          widget: string
+          required: false
+        - name: about
+          label: About
+          widget: string
+          required: false
+        - name: solutions
+          label: Solutions
+          widget: string
+          required: false
+        - name: products
+          label: Products
+          widget: string
+          required: false
+        - name: contact
+          label: Contact
+          widget: string
+          required: false
+        - name: news
+          label: Insights
+          widget: string
+          required: false
+        - name: careers
+          label: Careers
+          widget: string
+          required: false
+        - name: partners
+          label: Partners
+          widget: string
+          required: false
+        - name: privacy
+          label: Privacy Policy
+          widget: string
+          required: false
+        - name: terms
+          label: Terms of Use
+          widget: string
+          required: false
+      - name: footer
+        label: Footer
+        widget: object
+        fields:
+        - name: tagline
+          label: Short company description
+          widget: text
+          required: false
+        - name: columns
+          label: Column titles
+          widget: object
+          fields:
+          - name: company
+            label: Company
+            widget: string
+            required: false
+          - name: products
+            label: Products
+            widget: string
+            required: false
+          - name: connect
+            label: Connect
+            widget: string
+            required: false
+          - name: legal
+            label: Legal
+            widget: string
+            required: false
+        - name: rights
+          label: “All rights reserved” text
+          widget: string
+          required: false
+        - name: madeIn
+          label: Country name
+          widget: string
+          required: false
+      - name: buttons
+        label: Common buttons
+        widget: object
+        fields:
+        - name: learnMore
+          label: Learn more
+          widget: string
+          required: false
+        - name: getInTouch
+          label: Get in touch
+          widget: string
+          required: false
+        - name: visit
+          label: Visit
+          widget: string
+          required: false
+        - name: viewAllProducts
+          label: View all products
+          widget: string
+          required: false
+        collapsed: true
+      - name: languageSwitch
+        label: Language switch label
+        widget: string
+        required: false
+      - name: languageSwitchLabel
+        label: Language switch tooltip
+        widget: string
+        required: false
+      - name: skipToContent
+        label: “Skip to content” (keyboard users)
+        widget: string
+        required: false
+      - name: menuOpen
+        label: “Open menu” (screen readers)
+        widget: string
+        required: false
+      - name: menuClose
+        label: “Close menu” (screen readers)
+        widget: string
+        required: false
+      - name: themeToggle
+        label: Light/dark switch (screen readers)
+        widget: string
+        required: false
+      - name: legalDraftNotice
+        label: Legal draft warning text
+        widget: text
+        required: false
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: nav
+        label: Menu labels
+        widget: object
+        fields:
+        - name: home
+          label: Home
+          widget: string
+          required: false
+        - name: about
+          label: About
+          widget: string
+          required: false
+        - name: solutions
+          label: Solutions
+          widget: string
+          required: false
+        - name: products
+          label: Products
+          widget: string
+          required: false
+        - name: contact
+          label: Contact
+          widget: string
+          required: false
+        - name: news
+          label: Insights
+          widget: string
+          required: false
+        - name: careers
+          label: Careers
+          widget: string
+          required: false
+        - name: partners
+          label: Partners
+          widget: string
+          required: false
+        - name: privacy
+          label: Privacy Policy
+          widget: string
+          required: false
+        - name: terms
+          label: Terms of Use
+          widget: string
+          required: false
+      - name: footer
+        label: Footer
+        widget: object
+        fields:
+        - name: tagline
+          label: Short company description
+          widget: text
+          required: false
+        - name: columns
+          label: Column titles
+          widget: object
+          fields:
+          - name: company
+            label: Company
+            widget: string
+            required: false
+          - name: products
+            label: Products
+            widget: string
+            required: false
+          - name: connect
+            label: Connect
+            widget: string
+            required: false
+          - name: legal
+            label: Legal
+            widget: string
+            required: false
+        - name: rights
+          label: “All rights reserved” text
+          widget: string
+          required: false
+        - name: madeIn
+          label: Country name
+          widget: string
+          required: false
+      - name: buttons
+        label: Common buttons
+        widget: object
+        fields:
+        - name: learnMore
+          label: Learn more
+          widget: string
+          required: false
+        - name: getInTouch
+          label: Get in touch
+          widget: string
+          required: false
+        - name: visit
+          label: Visit
+          widget: string
+          required: false
+        - name: viewAllProducts
+          label: View all products
+          widget: string
+          required: false
+        collapsed: true
+      - name: languageSwitch
+        label: Language switch label
+        widget: string
+        required: false
+      - name: languageSwitchLabel
+        label: Language switch tooltip
+        widget: string
+        required: false
+      - name: skipToContent
+        label: “Skip to content” (keyboard users)
+        widget: string
+        required: false
+      - name: menuOpen
+        label: “Open menu” (screen readers)
+        widget: string
+        required: false
+      - name: menuClose
+        label: “Close menu” (screen readers)
+        widget: string
+        required: false
+      - name: themeToggle
+        label: Light/dark switch (screen readers)
+        widget: string
+        required: false
+      - name: legalDraftNotice
+        label: Legal draft warning text
+        widget: text
+        required: false
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: notFound
+    label: 🚫 Page not found (404)
+    file: content/pages/not-found.yaml
+    fields:
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: lead
+        label: Text
+        widget: text
+        required: false
+      - name: button
+        label: Button
+        widget: string
+        required: false
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: lead
+        label: Text
+        widget: text
+        required: false
+      - name: button
+        label: Button
+        widget: string
+        required: false
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: privacy
+    label: 🔒 Privacy Policy
+    file: content/legal/privacy.yaml
+    fields:
+    - name: lastUpdated
+      label: Last updated (YYYY-MM-DD)
+      widget: string
+      required: false
+    - name: showDraftNotice
+      label: Show “draft — needs legal review” warning
+      widget: boolean
+      required: false
+      default: true
+      hint: Turn off only after a lawyer has reviewed the text.
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: updatedLabel
+        label: “Last updated” label
+        widget: string
+        required: false
+      - name: intro
+        label: Introduction
+        widget: text
+        required: false
+        hint: '{company}, {country} and {contact} are filled in automatically.'
+      - name: sections
+        label: Sections
+        widget: list
+        required: false
+        fields:
+        - name: heading
+          label: Heading
+          widget: string
+          required: false
+        - name: paragraphs
+          label: Paragraphs
+          widget: list
+          required: false
+          label_singular: paragraph
+        label_singular: section
+        summary: '{{fields.heading}}'
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: updatedLabel
+        label: “Last updated” label
+        widget: string
+        required: false
+      - name: intro
+        label: Introduction
+        widget: text
+        required: false
+        hint: '{company}, {country} and {contact} are filled in automatically.'
+      - name: sections
+        label: Sections
+        widget: list
+        required: false
+        fields:
+        - name: heading
+          label: Heading
+          widget: string
+          required: false
+        - name: paragraphs
+          label: Paragraphs
+          widget: list
+          required: false
+          label_singular: paragraph
+        label_singular: section
+        summary: '{{fields.heading}}'
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: terms
+    label: 📄 Terms of Use
+    file: content/legal/terms.yaml
+    fields:
+    - name: lastUpdated
+      label: Last updated (YYYY-MM-DD)
+      widget: string
+      required: false
+    - name: showDraftNotice
+      label: Show “draft — needs legal review” warning
+      widget: boolean
+      required: false
+      default: true
+      hint: Turn off only after a lawyer has reviewed the text.
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: updatedLabel
+        label: “Last updated” label
+        widget: string
+        required: false
+      - name: intro
+        label: Introduction
+        widget: text
+        required: false
+        hint: '{company}, {country} and {contact} are filled in automatically.'
+      - name: sections
+        label: Sections
+        widget: list
+        required: false
+        fields:
+        - name: heading
+          label: Heading
+          widget: string
+          required: false
+        - name: paragraphs
+          label: Paragraphs
+          widget: list
+          required: false
+          label_singular: paragraph
+        label_singular: section
+        summary: '{{fields.heading}}'
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: updatedLabel
+        label: “Last updated” label
+        widget: string
+        required: false
+      - name: intro
+        label: Introduction
+        widget: text
+        required: false
+        hint: '{company}, {country} and {contact} are filled in automatically.'
+      - name: sections
+        label: Sections
+        widget: list
+        required: false
+        fields:
+        - name: heading
+          label: Heading
+          widget: string
+          required: false
+        - name: paragraphs
+          label: Paragraphs
+          widget: list
+          required: false
+          label_singular: paragraph
+        label_singular: section
+        summary: '{{fields.heading}}'
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: news
+    label: 📰 Insights / News (hidden page)
+    file: content/optional/news.yaml
+    fields:
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: empty
+        label: Message when the list is empty
+        widget: text
+        required: false
+      - name: items
+        label: Items
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: date
+          label: Date / subtitle
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link (optional)
+          widget: string
+          required: false
+        label_singular: item
+        summary: '{{fields.title}}'
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: empty
+        label: Message when the list is empty
+        widget: text
+        required: false
+      - name: items
+        label: Items
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: date
+          label: Date / subtitle
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link (optional)
+          widget: string
+          required: false
+        label_singular: item
+        summary: '{{fields.title}}'
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: careers
+    label: 💼 Careers (hidden page)
+    file: content/optional/careers.yaml
+    fields:
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: empty
+        label: Message when the list is empty
+        widget: text
+        required: false
+      - name: items
+        label: Items
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: date
+          label: Date / subtitle
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link (optional)
+          widget: string
+          required: false
+        label_singular: item
+        summary: '{{fields.title}}'
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: empty
+        label: Message when the list is empty
+        widget: text
+        required: false
+      - name: items
+        label: Items
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: date
+          label: Date / subtitle
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link (optional)
+          widget: string
+          required: false
+        label_singular: item
+        summary: '{{fields.title}}'
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+  - name: partners
+    label: 🤝 Partners (hidden page)
+    file: content/optional/partners.yaml
+    fields:
+    - name: en
+      label: 🇬🇧 English
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: empty
+        label: Message when the list is empty
+        widget: text
+        required: false
+      - name: items
+        label: Items
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: date
+          label: Date / subtitle
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link (optional)
+          widget: string
+          required: false
+        label_singular: item
+        summary: '{{fields.title}}'
+    - name: ar
+      label: 🇵🇸 العربية (Arabic)
+      widget: object
+      fields:
+      - name: seo
+        label: Search engines & sharing
+        widget: object
+        fields:
+        - name: title
+          label: Page title (browser tab / Google)
+          widget: string
+          required: false
+        - name: description
+          label: Description (Google / WhatsApp preview)
+          widget: text
+          required: false
+        collapsed: true
+      - name: hero
+        label: Top of page
+        widget: object
+        fields:
+        - name: eyebrow
+          label: Small label above title
+          widget: string
+          required: false
+        - name: title
+          label: Big title
+          widget: string
+          required: false
+        - name: lead
+          label: Intro sentence
+          widget: text
+          required: false
+      - name: empty
+        label: Message when the list is empty
+        widget: text
+        required: false
+      - name: items
+        label: Items
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: date
+          label: Date / subtitle
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        - name: link
+          label: Link (optional)
+          widget: string
+          required: false
+        label_singular: item
+        summary: '{{fields.title}}'
+      collapsed: true
+      hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.
+- name: products
+  label: Products
+  label_singular: Product
+  icon: inventory_2
+  folder: content/products
+  extension: yaml
+  format: yaml
+  create: true
+  delete: true
+  identifier_field: slug
+  slug: '{{slug}}'
+  summary: '{{slug}}'
+  description: One entry = one product. New products get their own page automatically.
+  fields:
+  - name: slug
+    label: Web address name
+    widget: string
+    required: true
+    hint: Lowercase, no spaces, e.g. my-app → /products/my-app/
+  - name: order
+    label: Position in list (1 = first)
+    widget: number
+    value_type: int
+    required: false
+    default: 9
+  - name: show
+    label: Show this product
+    widget: boolean
+    required: false
+    default: true
+  - name: hasPage
+    label: Has its own page
+    widget: boolean
+    required: false
+    default: true
+  - name: externalUrl
+    label: Product website address
+    widget: string
+    required: false
+    hint: e.g. https://… (for Dr. Assistant the address is set in ⚙️ Company settings)
+  - name: externalUrlFromSettings
+    label: Use address from settings (advanced)
+    widget: string
+    required: false
+    hint: 'Only for Dr. Assistant: drAssistantUrl. Leave empty for other products.'
+  - name: theme
+    label: Colour theme
+    widget: select
+    required: false
+    options:
+    - label: AXYRA colours
+      value: axyra
+    - label: Dr. Assistant colours (sky → emerald)
+      value: dr-assistant
+    default: axyra
+  - name: ogImage
+    label: Sharing picture path (advanced)
+    widget: string
+    required: false
+    hint: e.g. /og/dr-assistant-og.jpg (1200×630, in public/og/)
+  - name: images
+    label: Main images
+    widget: object
+    fields:
+    - name: icon
+      label: App icon (square)
+      widget: image
+      required: false
+    - name: desktop
+      label: Main screenshot (desktop)
+      widget: image
+      required: false
+    - name: phone
+      label: Phone screenshot (tall)
+      widget: image
+      required: false
+  - name: sections
+    label: Sections to show
+    widget: object
+    fields:
+    - name: showcase
+      label: Screenshot sections
+      widget: boolean
+      required: false
+      default: true
+    - name: features
+      label: Key features
+      widget: boolean
+      required: false
+      default: true
+    - name: audience
+      label: Who it’s for
+      widget: boolean
+      required: false
+      default: true
+    - name: howItWorks
+      label: How it works
+      widget: boolean
+      required: false
+      default: true
+    - name: benefits
+      label: Benefits
+      widget: boolean
+      required: false
+      default: true
+    - name: platforms
+      label: Platforms
+      widget: boolean
+      required: false
+      default: true
+    - name: faq
+      label: FAQ
+      widget: boolean
+      required: false
+      default: true
+    - name: cta
+      label: Call to action
+      widget: boolean
+      required: false
+      default: true
+  - name: en
+    label: 🇬🇧 English
+    widget: object
+    fields:
+    - name: name
+      label: Product name
+      widget: string
+      required: false
+    - name: category
+      label: Category
+      widget: string
+      required: false
+    - name: slogan
+      label: Slogan
+      widget: string
+      required: false
+    - name: summary
+      label: One-sentence summary
+      widget: text
+      required: false
+    - name: seo
+      label: Search engines & sharing
+      widget: object
+      fields:
+      - name: title
+        label: Page title (browser tab / Google)
+        widget: string
+        required: false
+      - name: description
+        label: Description (Google / WhatsApp preview)
+        widget: text
+        required: false
+      collapsed: true
+    - name: visitButton
+      label: “Visit” button text
+      widget: string
+      required: false
+    - name: screenshotNote
+      label: Small note under the main screenshot
+      widget: string
+      required: false
+    - name: hero
+      label: Top of page
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: lead
+        label: Intro sentence
+        widget: text
+        required: false
+    - name: highlights
+      label: Key features
+      widget: list
+      required: false
+      fields:
+      - &id001
+        name: icon
+        label: Icon
+        widget: string
+        required: false
+        hint: Icon name from lucide.dev/icons (e.g. sparkles, users, globe, shield-check).
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: text
+        label: Text
+        widget: text
+        required: false
+      label_singular: feature
+      summary: '{{fields.title}}'
+    - name: showcase
+      label: Screenshot sections
+      widget: list
+      required: false
+      fields:
+      - name: image
+        label: Screenshot
+        widget: image
+        required: false
+        hint: Never use screenshots with real patient or customer data.
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: text
+        label: Text
+        widget: text
+        required: false
+      label_singular: screenshot section
+      summary: '{{fields.title}}'
+    - name: features
+      label: Features section titles
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      collapsed: true
+    - name: audience
+      label: Who it’s for
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Audiences
+        widget: list
+        required: false
+        fields:
+        - *id001
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: audience
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: howItWorks
+      label: How it works
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: steps
+        label: Steps
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: step
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: benefits
+      label: Benefits
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Benefits
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: benefit
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: platforms
+      label: Platforms
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Platforms
+        widget: list
+        required: false
+        fields:
+        - *id001
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: platform
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: faq
+      label: FAQ
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Questions
+        widget: list
+        required: false
+        fields:
+        - name: q
+          label: Question
+          widget: string
+          required: false
+        - name: a
+          label: Answer
+          widget: text
+          required: false
+          hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+        label_singular: question
+        summary: '{{fields.q}}'
+      collapsed: true
+    - name: cta
+      label: Call to action (bottom)
+      widget: object
+      fields:
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: lead
+        label: Text
+        widget: text
+        required: false
+      - name: secondaryButton
+        label: Contact button text
+        widget: string
+        required: false
+      collapsed: true
+  - name: ar
+    label: 🇵🇸 العربية (Arabic)
+    widget: object
+    fields:
+    - name: name
+      label: Product name
+      widget: string
+      required: false
+    - name: category
+      label: Category
+      widget: string
+      required: false
+    - name: slogan
+      label: Slogan
+      widget: string
+      required: false
+    - name: summary
+      label: One-sentence summary
+      widget: text
+      required: false
+    - name: seo
+      label: Search engines & sharing
+      widget: object
+      fields:
+      - name: title
+        label: Page title (browser tab / Google)
+        widget: string
+        required: false
+      - name: description
+        label: Description (Google / WhatsApp preview)
+        widget: text
+        required: false
+      collapsed: true
+    - name: visitButton
+      label: “Visit” button text
+      widget: string
+      required: false
+    - name: screenshotNote
+      label: Small note under the main screenshot
+      widget: string
+      required: false
+    - name: hero
+      label: Top of page
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: lead
+        label: Intro sentence
+        widget: text
+        required: false
+    - name: highlights
+      label: Key features
+      widget: list
+      required: false
+      fields:
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: text
+        label: Text
+        widget: text
+        required: false
+      label_singular: feature
+      summary: '{{fields.title}}'
+    - name: showcase
+      label: Screenshot sections
+      widget: list
+      required: false
+      fields:
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: text
+        label: Text
+        widget: text
+        required: false
+      label_singular: screenshot section
+      summary: '{{fields.title}}'
+    - name: features
+      label: Features section titles
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      collapsed: true
+    - name: audience
+      label: Who it’s for
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Audiences
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: audience
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: howItWorks
+      label: How it works
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: steps
+        label: Steps
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: step
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: benefits
+      label: Benefits
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Benefits
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: benefit
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: platforms
+      label: Platforms
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Platforms
+        widget: list
+        required: false
+        fields:
+        - name: title
+          label: Title
+          widget: string
+          required: false
+        - name: text
+          label: Text
+          widget: text
+          required: false
+        label_singular: platform
+        summary: '{{fields.title}}'
+      collapsed: true
+    - name: faq
+      label: FAQ
+      widget: object
+      fields:
+      - name: eyebrow
+        label: Small label
+        widget: string
+        required: false
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: items
+        label: Questions
+        widget: list
+        required: false
+        fields:
+        - name: q
+          label: Question
+          widget: string
+          required: false
+        - name: a
+          label: Answer
+          widget: text
+          required: false
+          hint: 'Text that still says [[EDIT: …]] is a placeholder and is hidden on the live site.'
+        label_singular: question
+        summary: '{{fields.q}}'
+      collapsed: true
+    - name: cta
+      label: Call to action (bottom)
+      widget: object
+      fields:
+      - name: title
+        label: Title
+        widget: string
+        required: false
+      - name: lead
+        label: Text
+        widget: text
+        required: false
+      - name: secondaryButton
+        label: Contact button text
+        widget: string
+        required: false
+      collapsed: true
+    collapsed: true
+    hint: Leave a field empty to show the English text instead. Keep list items in the same order as English.

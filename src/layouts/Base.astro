@@ -6,7 +6,7 @@ import cairoArabic from '@fontsource-variable/cairo/files/cairo-arabic-wght-norm
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { settings, filled, siteUrl, languages, localePath, loadLocalized, type Lang } from '../lib/content';
+import { settings, filled, siteUrl, languages, localePath, loadLocalized, readYaml, type Lang } from '../lib/content';
 
 interface Props {
   lang: Lang;
@@ -48,6 +48,22 @@ if (sameAs.length) org.sameAs = sameAs;
 const analytics = settings.analytics?.provider === 'cloudflare' && filled(settings.analytics?.cloudflareToken)
   ? settings.analytics.cloudflareToken : null;
 const highlight = import.meta.env.DEV && settings.site?.highlightPlaceholdersInPreview;
+
+// Brand colours edited in the admin panel (content/theme.yaml) override tokens.css.
+const theme = (() => { try { return readYaml('theme.yaml') ?? {}; } catch { return {}; } })();
+const hex = (v: unknown) => (typeof v === 'string' && /^#[0-9a-fA-F]{3,8}$/.test(v.trim()) ? v.trim() : undefined);
+const light: string[] = [], dark: string[] = [];
+const map: [string, string, string[]][] = [
+  ['violet', '--brand-violet', light], ['blue', '--brand-blue', light], ['cyan', '--brand-cyan', light], ['navy', '--brand-navy', light],
+  ['linkLight', '--link', light], ['accentLight', '--accent', light], ['linkDark', '--link', dark], ['accentDark', '--accent', dark],
+];
+for (const [k, v, arr] of map) { const c = hex(theme[k]); if (c) arr.push(`${v}:${c}`); }
+const navy = hex(theme.navy);
+if (navy) dark.push(`--bg:${navy}`);
+const themeCss = [
+  light.length ? `:root{${light.join(';')}}` : '',
+  dark.length ? `:root[data-theme="dark"],.theme-dark{${dark.join(';')}}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){${dark.join(';')}}}` : '',
+].join('');
 ---
 <!doctype html>
 <html lang={lang} dir={dir}>
@@ -90,6 +106,7 @@ const highlight = import.meta.env.DEV && settings.site?.highlightPlaceholdersInP
         try { var t = localStorage.getItem('axyra-theme'); if (t === 'dark' || t === 'light') d.dataset.theme = t; } catch (e) {}
       })();
     </script>
+    {themeCss && <style is:inline set:html={themeCss} />}
     <script type="application/ld+json" set:html={JSON.stringify(org)} />
     <slot name="head" />
   </head>

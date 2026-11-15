@@ -1,0 +1,10 @@
+# Brand colours (also editable in the admin panel → 🎨 Brand colours).
+# Delete a line to fall back to the default in src/styles/tokens.css.
+violet: "#8B4DF2"
+blue: "#2F7BFF"
+cyan: "#22D0F5"
+navy: "#0A0B1E"
+linkLight: "#1D5FE0"
+accentLight: "#7B3FE4"
+linkDark: "#7FB0FF"
+accentDark: "#B79BFF"

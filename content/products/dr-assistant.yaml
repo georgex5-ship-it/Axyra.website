@@ -20,12 +20,9 @@ ogImage: "/og/dr-assistant-og.jpg"   # picture shown when the page is shared on 
 
 # Screenshots were taken from the Dr. Assistant TEST environment (fake data only).
 images:
-  icon: "dr-assistant/app-icon.png"
-  phone: "dr-assistant/screen-new-prescription-phone.png"
-  desktop: "dr-assistant/screen-new-prescription-desktop.png"
-  patients: "dr-assistant/screen-patients-desktop.png"
-  appointments: "dr-assistant/screen-appointments-desktop.png"
-  prescription: "dr-assistant/prescription-document.png"
+  icon: "/src/assets/products/dr-assistant/app-icon.png"
+  phone: "/src/assets/products/dr-assistant/screen-new-prescription-phone.png"
+  desktop: "/src/assets/products/dr-assistant/screen-new-prescription-desktop.png"
 
 # Product page sections. false = hidden until the content is ready.
 sections:
@@ -68,13 +65,13 @@ en:
       title: "Arabic & English"
       text: "Full right-to-left Arabic interface and prescriptions."
   showcase:
-    - image: prescription
+    - image: "/src/assets/products/dr-assistant/prescription-document.png"
       title: "One prescription. Everything on it."
       text: "Drugs, labs, imaging, eyeglasses and notes on one branded prescription — with a QR code pharmacies scan to confirm it's genuine."
-    - image: patients
+    - image: "/src/assets/products/dr-assistant/screen-patients-desktop.png"
       title: "Every patient, one tap away."
       text: "Allergies, history and every past prescription — ready before you prescribe."
-    - image: appointments
+    - image: "/src/assets/products/dr-assistant/screen-appointments-desktop.png"
       title: "A calmer day at the clinic."
       text: "See the day's schedule at a glance, with WhatsApp reminders for your patients."
   features:

@@ -312,3 +312,43 @@ You don't need one; editing the `.yaml` files works well. If you'd prefer to edi
 ## 17. Internal pages for reference
 
 `/styleguide/` shows the colours, fonts, logo and components. It is not in the menu and is hidden from search engines.
+
+---
+
+## 18. Your admin panel: `axyra.web.app/login`
+
+There is no link to it anywhere on the website, and Google is told not to list it. **But the hidden address is not what keeps it safe.** The protection is the login: only someone who can write to your private GitHub repository (`Georgex5/axyra-website`) can sign in and change anything. Everyone else sees only a sign-in screen and cannot edit.
+
+### What you can edit there
+- **⚙️ Company settings:** email, phone, WhatsApp, address, Maps link, social links, the Dr. Assistant address, which pages are published, the contact-form key, the website address and the Google on/off switch.
+- **🎨 Brand colours.**
+- **Every page:** Home, About, Solutions, Products, Contact, menu and footer, 404, Privacy, Terms, Insights, Careers, Partners. Each has its English text and an Arabic tab (leave an Arabic field empty to show the English text), plus on/off switches for every section.
+- **Products:** edit Dr. Assistant, or click **New Product** to add another one. It gets its own page automatically. Upload screenshots by dragging them in.
+
+### Sign in (first time on a new computer or phone)
+You sign in with a **GitHub access key** (a "token"). You create it once and paste it once per browser.
+
+1. On GitHub, open **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
+2. Fill in:
+   - **Name:** `AXYRA admin`
+   - **Expiration:** 1 year. Put a reminder in your calendar.
+   - **Repository access:** *Only select repositories* → `axyra-website`
+   - **Permissions → Repository permissions → Contents:** **Read and write**
+   - Leave everything else as it is.
+3. Click **Generate token** and copy it. It starts with `github_pat_`.
+4. Open **https://axyra.web.app/login**, click **Sign In Using Access Token**, and paste it.
+
+Keep the token private, like a password. If you lose it or think someone saw it, delete it on GitHub (same page) and create a new one.
+
+### How publishing works
+1. Edit, then click **Save**.
+2. GitHub rebuilds the website automatically and publishes it to axyra.web.app. This takes about **2–3 minutes**. You can watch it on GitHub under **Actions**.
+3. Refresh the website to see the change. If you still see the old version, do a hard refresh with `Ctrl + Shift + R`.
+
+**Undo a mistake:** every save is kept in GitHub's history. On github.com, open the file, then **History**, then pick the previous version. Or ask a developer, or me.
+
+### Good to know
+- When the panel saves a file, it removes the explanatory `#` comments inside that file. That's normal; the explanations are shown as hints in the panel instead.
+- Screenshots you upload are stored in `src/assets/uploads/` and are automatically made lighter and faster for the website.
+- **Never upload screenshots that show real patient or customer data.**
+- The logo files are deliberately not editable in the panel, so the brand can't be broken by accident. Replace them through GitHub (`public/brand/`) if you ever need to.
