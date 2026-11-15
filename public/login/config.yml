@@ -2,7 +2,7 @@
 # Every form below edits one file in /content. Images are saved in src/assets/uploads.
 backend:
   name: github
-  repo: Georgex5/axyra-website
+  repo: georgex5-ship-it/Axyra.website
   branch: main
   auth_methods:
   - token

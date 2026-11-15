@@ -317,7 +317,7 @@ You don't need one; editing the `.yaml` files works well. If you'd prefer to edi
 
 ## 18. Your admin panel: `axyra.web.app/login`
 
-There is no link to it anywhere on the website, and Google is told not to list it. **But the hidden address is not what keeps it safe.** The protection is the login: only someone who can write to your private GitHub repository (`Georgex5/axyra-website`) can sign in and change anything. Everyone else sees only a sign-in screen and cannot edit.
+There is no link to it anywhere on the website, and Google is told not to list it. **But the hidden address is not what keeps it safe.** The protection is the login: only someone who can write to your GitHub repository (`georgex5-ship-it/Axyra.website`) can sign in and change anything. Everyone else sees only a sign-in screen and cannot edit.
 
 ### What you can edit there
 - **⚙️ Company settings:** email, phone, WhatsApp, address, Maps link, social links, the Dr. Assistant address, which pages are published, the contact-form key, the website address and the Google on/off switch.
@@ -332,7 +332,7 @@ You sign in with a **GitHub access key** (a "token"). You create it once and pas
 2. Fill in:
    - **Name:** `AXYRA admin`
    - **Expiration:** 1 year. Put a reminder in your calendar.
-   - **Repository access:** *Only select repositories* → `axyra-website`
+   - **Repository access:** *Only select repositories* → `Axyra.website`
    - **Permissions → Repository permissions → Contents:** **Read and write**
    - Leave everything else as it is.
 3. Click **Generate token** and copy it. It starts with `github_pat_`.
