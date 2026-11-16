@@ -1,5 +1,8 @@
 # Publishes the website to Firebase Hosting (https://axyra.web.app) whenever
 # content changes — including every save in the admin panel (/login).
+# Keyless: GitHub proves its identity to Google (Workload Identity Federation).
+# Only this repository may use the "github-deployer" account, which can only
+# publish the axyra-website project. No passwords or keys are stored anywhere.
 name: Publish website
 
 on:
@@ -12,6 +15,10 @@ on:
 concurrency:
   group: deploy
   cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   deploy:
@@ -27,10 +34,10 @@ jobs:
       - name: Check content files
         run: node scripts/check-content.mjs || true
       - run: npm run build
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Sign in to Google (keyless)
+        uses: google-github-actions/auth@v2
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AXYRA_WEBSITE }}
-          projectId: axyra-website
-          channelId: live
+          workload_identity_provider: projects/1041828139681/locations/global/workloadIdentityPools/github/providers/github-oidc
+          service_account: github-deployer@axyra-website.iam.gserviceaccount.com
+      - name: Deploy to Firebase Hosting
+        run: npx --yes firebase-tools@15.36.0 deploy --only hosting --project axyra-website --non-interactive
