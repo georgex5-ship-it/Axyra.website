@@ -41,4 +41,4 @@ jobs:
           service_account: github-deployer@axyra-website.iam.gserviceaccount.com
           token_format: access_token
       - name: Deploy to Firebase Hosting
-        run: npx --yes firebase-tools@15.36.0 deploy --only hosting --project axyra-website --non-interactive --debug 2>&1 | grep -v -i token | tail -80; exit ${PIPESTATUS[0]}
+        run: npx --yes firebase-tools@15.36.0 deploy --only hosting --project axyra-website --non-interactive
