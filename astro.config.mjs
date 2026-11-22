@@ -18,7 +18,7 @@ export default defineConfig({
   // The sitemap is only created once a real domain is set in settings.yaml.
   integrations: hasDomain ? [
     sitemap({
-      filter: (page) => !page.includes('/styleguide/'),
+      filter: (page) => !page.includes('/styleguide/') && !page.includes('/question/'),
       i18n: { defaultLocale: 'en', locales: { en: 'en', ar: 'ar' } },
     }),
   ] : [],

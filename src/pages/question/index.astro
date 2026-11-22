@@ -1,0 +1,25 @@
+---
+// Doctor survey for Dr. Assistant field visits (axyra.web.app/question/).
+// Private tool: not linked from the site, not in the sitemap, noindex.
+// Answers are stored in Firestore (project axyra-website) under survey/<passphrase>/responses;
+// see firestore.rules at the repo root. The page markup is generated — edit the source in the
+// survey kit (survey_template.html + content_v2.py), not the _survey-*.html files.
+import '@fontsource-variable/cairo';
+import '@fontsource-variable/plus-jakarta-sans';
+import head from './_survey-head.html?raw';
+import body from './_survey-body.html?raw';
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0B1E" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <Fragment set:html={head} />
+  </head>
+  <body>
+    <Fragment set:html={body} />
+  </body>
+</html>
