@@ -1,21 +1,17 @@
 rules_version = '2';
 // Firestore rules for the doctor survey at https://axyra.web.app/question/
-// The survey page stores answers under survey/<passphrase>/responses/<id>.
-// Only someone who knows the passphrase can read or write them: the rule compares the
-// SHA-256 of the path segment with the hash below (the passphrase itself is never in this repo).
-// To change the passphrase: put the lowercase SHA-256 hex of the new one (typed in lowercase) below, publish the
-// rules, then enter the new passphrase on each device. Old answers stay under the old path.
+// The page stores answers under survey/<password>/responses/<id> in the database "default".
+// Only someone who knows the password can read or write them.
 //
-// Not deployed by GitHub Actions: paste this file into Firebase Console ->
-// project axyra-website -> Firestore Database (database ID "default") -> Rules -> Publish.
+// The real password is NOT in this public repo: replace YOUR_PASSWORD with it (lowercase)
+// only in Firebase Console -> project axyra-website -> Firestore Database (database "default")
+// -> Rules -> Publish. These rules are not deployed by GitHub Actions.
 service cloud.firestore {
   match /databases/{database}/documents {
     match /survey/{key}/responses/{id} {
-      allow read, write: if hashing.sha256(key).toHexString().lower() == '8c69fa456feb2f3edf846118c2a1ed0433ddfcf23bd1d30fa3f6b5c18d75a429'
-        && (request.method == 'delete' || request.method == 'get' || request.method == 'list'
-            || (request.resource.data.keys().hasOnly(['a', 'createdAt', 'updatedAt', 'v'])
-                && request.resource.data.a is map
-                && request.resource.size() < 200000));
+      allow read, delete: if key == 'YOUR_PASSWORD';
+      allow create, update: if key == 'YOUR_PASSWORD'
+        && request.resource.data.keys().hasOnly(['a', 'createdAt', 'updatedAt', 'v']);
     }
   }
 }
