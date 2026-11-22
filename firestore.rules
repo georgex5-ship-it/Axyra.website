@@ -1,10 +1,10 @@
 rules_version = '2';
 // Firestore rules for the doctor survey at https://axyra.web.app/question/
-// The page stores answers under survey/<password>/responses/<id> in the database "default".
+// The page stores answers under survey/<password>/responses/<id> in the "(default)" database.
 // Only someone who knows the password can read or write them.
 //
 // The real password is NOT in this public repo: replace YOUR_PASSWORD with it (lowercase)
-// only in Firebase Console -> project axyra-website -> Firestore Database (database "default")
+// only in Firebase Console -> project axyra-website -> Firestore Database (database "(default)")
 // -> Rules -> Publish. These rules are not deployed by GitHub Actions.
 service cloud.firestore {
   match /databases/{database}/documents {
