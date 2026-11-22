@@ -286,13 +286,14 @@ function fsDec(x){
 async function fsFetch(path, opts = {}){
   const r = await fetch(FS_BASE + path, { ...opts, headers: { "Content-Type": "application/json" } });
   if(r.ok){ const t = await r.text(); return t ? JSON.parse(t) : null; }
-  let reason = "";
-  try{ const j = await r.json(); reason = (j.error?.details || []).map(d => d.reason).filter(Boolean)[0] || j.error?.status || ""; }catch(e){}
-  const err = new Error(reason || ("HTTP " + r.status)); err.status = r.status; err.reason = reason; throw err;
+  let reason = "", msg = "";
+  try{ const j = await r.json(); reason = (j.error?.details || []).map(d => d.reason).filter(Boolean)[0] || j.error?.status || ""; msg = j.error?.message || ""; }catch(e){}
+  const err = new Error(reason || ("HTTP " + r.status)); err.status = r.status; err.reason = reason; err.msg = msg; throw err;
 }
 function classify(e){
   if(e.reason === "SERVICE_DISABLED" || e.status === 404 || e.reason === "NOT_FOUND" || e.reason === "FAILED_PRECONDITION") return "setup";
-  if(e.status === 403) return "badkey";
+  // Only a rules rejection means a wrong passphrase. Anything else (network, blocked request, unknown 403) is not the user's fault.
+  if(e.status === 403 && /insufficient permissions/i.test(e.msg || "")) return "badkey";
   return "local";
 }
 function newId(){ const a = crypto.getRandomValues(new Uint8Array(8)); return Date.now().toString(36) + [...a].map(x => (x % 36).toString(36)).join(""); }
@@ -372,8 +373,9 @@ function showGate(msg){
     e.preventDefault();
     const key = normKey($("#gKey").value); if(!key) return;
     $("#gMsg").className = "status"; $("#gMsg").textContent = "جارٍ التحقق…";
-    let res = "ok";
-    try{ await fsFetch(`/${encodeURIComponent(key)}/responses?pageSize=1`); }catch(err){ res = classify(err); }
+    let res = "ok", diag = "";
+    try{ await fsFetch(`/${encodeURIComponent(key)}/responses?pageSize=1`); }catch(err){ res = classify(err); diag = ` (${err.status || "net"} · ${err.reason || err.message || "?"})`; }
+    try{ sessionStorage.setItem("axyra-survey-diag", res + diag); }catch(x){}
     if(res === "badkey"){ $("#gMsg").textContent = "كلمة السر غير صحيحة. إذا كنت متأكداً منها، فقواعد Firestore لم تُنشر بعد (ملف firestore.rules)."; $("#gMsg").className = "status err"; return; }
     try{ localStorage.setItem(KEY_LS, key); }catch(x){}
     location.reload();
