@@ -7,7 +7,7 @@ rules_version = '2';
 // rules, then enter the new passphrase on each device. Old answers stay under the old path.
 //
 // Not deployed by GitHub Actions: paste this file into Firebase Console ->
-// project axyra-website -> Firestore Database -> Rules -> Publish.
+// project axyra-website -> Firestore Database (database ID "default") -> Rules -> Publish.
 service cloud.firestore {
   match /databases/{database}/documents {
     match /survey/{key}/responses/{id} {
