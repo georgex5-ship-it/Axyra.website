@@ -3,7 +3,7 @@ rules_version = '2';
 // The survey page stores answers under survey/<passphrase>/responses/<id>.
 // Only someone who knows the passphrase can read or write them: the rule compares the
 // SHA-256 of the path segment with the hash below (the passphrase itself is never in this repo).
-// To change the passphrase: put the uppercase SHA-256 hex of the new one below, publish the
+// To change the passphrase: put the lowercase SHA-256 hex of the new one (typed in lowercase) below, publish the
 // rules, then enter the new passphrase on each device. Old answers stay under the old path.
 //
 // Not deployed by GitHub Actions: paste this file into Firebase Console ->
@@ -11,7 +11,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /survey/{key}/responses/{id} {
-      allow read, write: if hashing.sha256(key).toHexString() == '23DCB5359FD49D8D6E535D33DDC7F86D7A90747CE64570BB138E43CB786B8580'
+      allow read, write: if hashing.sha256(key).toHexString().lower() == '8c69fa456feb2f3edf846118c2a1ed0433ddfcf23bd1d30fa3f6b5c18d75a429'
         && (request.method == 'delete' || request.method == 'get' || request.method == 'list'
             || (request.resource.data.keys().hasOnly(['a', 'createdAt', 'updatedAt', 'v'])
                 && request.resource.data.a is map

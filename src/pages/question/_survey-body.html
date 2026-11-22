@@ -296,7 +296,8 @@ function classify(e){
   return "local";
 }
 function newId(){ const a = crypto.getRandomValues(new Uint8Array(8)); return Date.now().toString(36) + [...a].map(x => (x % 36).toString(36)).join(""); }
-function getKey(){ try{ return localStorage.getItem(KEY_LS) || ""; }catch(e){ return ""; } }
+function normKey(k){ return String(k || "").replace(/[\u0660-\u0669]/g, c => c.charCodeAt(0) - 0x660).replace(/[\u06F0-\u06F9]/g, c => c.charCodeAt(0) - 0x6F0).replace(/\s+/g, "").toLowerCase(); }
+function getKey(){ try{ return normKey(localStorage.getItem(KEY_LS)); }catch(e){ return ""; } }
 
 const Stores = {
   async claude(){
@@ -362,16 +363,18 @@ function showGate(msg){
   const el = $("#v-login"); el.hidden = false;
   el.innerHTML = `<form class="card gate" id="gateForm"><h2>كلمة سر الاستبيان</h2>
     <p class="meta">تُطلب مرة واحدة على كل جهاز. بدونها لا يمكن لأحد قراءة بيانات الأطباء حتى لو وصل للرابط.</p>
-    <label for="gKey">كلمة السر</label><input type="password" id="gKey" autocomplete="current-password" required dir="ltr">
+    <label for="gKey">كلمة السر</label><input type="password" id="gKey" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" required dir="ltr">
+    <label class="toggle"><input type="checkbox" id="gShow"> إظهار كلمة السر</label>
     <button class="btn primary" type="submit">دخول</button><p class="status" id="gMsg">${esc(msg || "")}</p></form>`;
   if(msg) $("#gMsg").className = "status err";
+  $("#gShow").addEventListener("change", e => { $("#gKey").type = e.target.checked ? "text" : "password"; });
   $("#gateForm").addEventListener("submit", async e => {
     e.preventDefault();
-    const key = $("#gKey").value.trim(); if(!key) return;
+    const key = normKey($("#gKey").value); if(!key) return;
     $("#gMsg").className = "status"; $("#gMsg").textContent = "جارٍ التحقق…";
     let res = "ok";
     try{ await fsFetch(`/${encodeURIComponent(key)}/responses?pageSize=1`); }catch(err){ res = classify(err); }
-    if(res === "badkey"){ $("#gMsg").textContent = "كلمة السر غير صحيحة."; $("#gMsg").className = "status err"; return; }
+    if(res === "badkey"){ $("#gMsg").textContent = "كلمة السر غير صحيحة. إذا كنت متأكداً منها، فقواعد Firestore لم تُنشر بعد (ملف firestore.rules)."; $("#gMsg").className = "status err"; return; }
     try{ localStorage.setItem(KEY_LS, key); }catch(x){}
     location.reload();
   });
